@@ -383,3 +383,20 @@ body.has-sticky{padding-bottom:78px}
   .header-actions{gap:0}
   .header-actions .icon-btn{padding-inline:.35rem}
 }
+
+/* Department navigation */
+.nav{align-items:center;gap:clamp(.65rem,1.8vw,1.6rem)}
+.shop-group summary{display:flex;align-items:center;justify-content:space-between;gap:.55rem;cursor:pointer;list-style:none;font-weight:500}
+.shop-group summary::-webkit-details-marker{display:none}
+.shop-group summary::after{content:"";width:.5em;height:.5em;border-right:1.5px solid;border-bottom:1.5px solid;transform:rotate(45deg);margin-top:-.2em}
+.shop-group[open] summary::after{transform:rotate(225deg);margin-top:.2em}
+.nav .shop-group summary{min-height:76px;white-space:nowrap}
+.nav .shop-submenu{position:absolute;inset:100% 0 auto;display:flex;flex-wrap:wrap;gap:1rem 2rem;padding:1.4rem max(1.5rem,calc((100vw - 1150px)/2));background:var(--paper,#f7f2ea);border-bottom:1px solid var(--line);box-shadow:0 14px 20px #24160e14}
+.shop-group:not([open]) .shop-submenu{display:none}
+.menu-links summary{min-height:52px;border-bottom:1px solid var(--line);font:500 1.3rem var(--display)}
+.menu-links .shop-submenu a{font:inherit;padding:.7rem 0 .7rem 1rem}
+@media (min-width:900px) and (max-width:1023px){
+  .nav.only-desktop{display:none}
+  .header button.only-mobile[data-act="open-menu"]{display:inline-flex!important}
+  .header .wordmark{margin-right:auto}
+}

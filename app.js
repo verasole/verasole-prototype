@@ -109,6 +109,15 @@ function render(keepScroll) {
   else if (a === 'p' && byId(b)) { html = pdp(byId(b), r.q); title = byId(b).name; }
   else if (a === 'cart') { html = cart(); title = 'Your bag'; }
   else if (a === 'checkout') { html = checkout(); title = 'Checkout'; }
+  else if (a === 'account') {
+    const order = S.order;
+    title = 'My account';
+    html = `<div class="shell prose"><h1>My account</h1>
+      <p>This preview shows the latest demo order from this browser.</p>
+      <h2>Orders</h2>
+      ${order ? `<p><a class="link" href="#/done">View demo order #${esc(order.no)}</a> · ${rs(order.total)}</p>` : '<p>You have no demo orders yet.</p>'}
+      <a class="btn" href="#/c/all">Shop all footwear</a></div>`;
+  }
   else if (a === 'done') { html = done(); title = 'Order received'; }
   else if (a === 'page') { html = page(b); title = 'Help'; }
   else html = `<div class="shell prose"><h1>Page not found</h1><p>That page doesn’t exist.</p><a class="btn" href="#/c/all">Shop all footwear</a></div>`;
@@ -121,12 +130,59 @@ function render(keepScroll) {
   lastPath = r.path;
   slideI = 0;
 }
+const shopGroups = [
+  ['Men', 'Men', ['chappals', 'sandals', 'shoes']],
+  ['Women', 'Women', ['chappals', 'sandals']],
+  ['Kids', 'Kids', ['school-shoes']],
+  ['School shoes', '', ['all']],
+];
+
 function navs(r) {
-  const cur = r.parts[0] === 'c' ? r.parts[1] : null;
-  const links = ['chappals', 'sandals', 'shoes', 'school-shoes', 'all'].map(s => `<a href="#/c/${s}" ${cur === s ? 'aria-current="page"' : ''}>${CATS[s].name}${''}</a>`).join('');
-  $('#nav').innerHTML = links;
-  $('#menu-links').innerHTML = links.replace(/<\/a>/g, '<span aria-hidden="true">→</span></a>') + '<a href="#/page/size-guide">Size guide<span aria-hidden="true">→</span></a><a href="#/page/delivery">Delivery<span aria-hidden="true">→</span></a>';
+  const [routeType, category] = r.parts;
+  const link = (label, slug, who = '') => {
+    const href = `#/c/${slug}${who ? '?who=' + who : ''}`;
+    const current = routeType === 'c' && category === slug && (r.q.get('who') || '') === who;
+    return `<a href="${href}" ${current ? 'aria-current="page"' : ''}>${label}</a>`;
+  };
+  const groups = shopGroups.map(([label, who, categories]) => {
+    const items = who
+      ? [link('All ' + label.toLowerCase() + ' footwear', 'all', who), ...categories.map(slug => link(CATS[slug].name, slug, who))]
+      : [link('All school shoes', 'school-shoes'), '<a href="#/page/size-guide">School shoe size guide</a>'];
+    return `<details class="shop-group"><summary>${label}</summary><div class="shop-submenu">${items.join('')}</div></details>`;
+  }).join('');
+  $('#nav').innerHTML = groups + link('All footwear', 'all');
+  $('#menu-links').innerHTML = groups + link('All footwear', 'all') + '<a href="#/page/size-guide">Size guide</a><a href="#/page/delivery">Delivery</a>';
 }
+
+const desktopNav = $('#nav');
+desktopNav.addEventListener('pointerover', event => {
+  if (event.pointerType !== 'mouse') return;
+  const group = event.target.closest('.shop-group');
+  if (!group || group.contains(event.relatedTarget)) return;
+  desktopNav.querySelectorAll('.shop-group[open]').forEach(other => {
+    if (other !== group) other.open = false;
+  });
+  group.open = true;
+});
+desktopNav.addEventListener('pointerout', event => {
+  if (event.pointerType !== 'mouse') return;
+  const group = event.target.closest('.shop-group');
+  if (group && !group.contains(event.relatedTarget) && !group.contains(document.activeElement)) group.open = false;
+});
+desktopNav.addEventListener('focusout', event => {
+  const group = event.target.closest('.shop-group');
+  if (group && !group.contains(event.relatedTarget) && !group.matches(':hover')) group.open = false;
+});
+desktopNav.addEventListener('keydown', event => {
+  const group = event.target.closest('.shop-group[open]');
+  if (event.key === 'Escape' && group) {
+    group.open = false;
+    group.querySelector('summary').focus();
+  }
+});
+document.addEventListener('click', event => {
+  if (!desktopNav.contains(event.target)) desktopNav.querySelectorAll('.shop-group[open]').forEach(group => { group.open = false; });
+});
 
 /* ---------- shared pieces ---------- */
 const media = (p, c = p.colors[0], which = 'card') => c.imgs[0]
@@ -254,7 +310,14 @@ function toggleSearch(open) {
 /* ---------- listing (category + search results) ---------- */
 function listing({ kind, slug, q }) {
   const query = (q.get('q') || '').trim();
-  const base = kind === 'cat' ? P.filter(p => slug === 'all' || p.cat === slug) : searchProducts(query);
+  const who = q.get('who');
+  const audience = ['Men', 'Women', 'Kids'].includes(who) ? who : '';
+  const categoryTitle = audience
+    ? slug === 'all' ? audience + ' footwear' : audience + ' · ' + CATS[slug].name
+    : CATS[slug]?.name;
+  const base = kind === 'cat'
+    ? P.filter(p => (slug === 'all' || p.cat === slug) && (!audience || p.who === audience))
+    : searchProducts(query);
   const sel = { size: (q.get('size') || '').split(',').filter(Boolean), color: (q.get('color') || '').split(',').filter(Boolean), price: (q.get('price') || '').split(',').filter(Boolean) };
   const sort = SORTS[q.get('sort')] ? q.get('sort') : 'featured';
   const match = (p, skip) =>
@@ -277,11 +340,11 @@ function listing({ kind, slug, q }) {
   const chips = active.length ? `<div class="active-filters" aria-label="Active filters">${active.map(([k, v, l]) => `<button class="chip active" data-act="rm-filter" data-k="${k}" data-v="${v}" aria-label="Remove filter: ${l}">${l} <span aria-hidden="true">✕</span></button>`).join('')}<button class="link" data-act="clear-filters" data-key="clear">Clear all</button></div>` : '';
   const cnt = `${items.length} style${items.length === 1 ? '' : 's'}`;
   const head = kind === 'cat'
-    ? `<nav class="crumb" aria-label="Breadcrumb"><a href="#/">Home</a><span aria-hidden="true">/</span><span>${CATS[slug].name}</span></nav>
-       <header class="list-head"><h1>${CATS[slug].name}</h1><p>${CATS[slug].note}</p></header>`
+    ? `<nav class="crumb" aria-label="Breadcrumb"><a href="#/">Home</a><span aria-hidden="true">/</span><span>${categoryTitle}</span></nav>
+       <header class="list-head"><h1>${categoryTitle}</h1><p>${CATS[slug].note}</p></header>`
     : `<header class="list-head" style="padding-top:1.5rem"><p class="eyebrow">Search results</p><h1>${query ? `“${esc(query)}”` : 'Search'}</h1>
        <form class="q-inline" data-search-inline role="search"><label class="sr" for="q2">Search footwear</label><input id="q2" type="search" value="${esc(query)}" placeholder="Search footwear"><button class="btn">Search</button></form></header>`;
-  const cats = `<div class="chips">${Object.entries(CATS).filter(([s]) => s !== 'all').map(([s, c]) => `<a class="chip" href="#/c/${s}">${c.name}</a>`).join('')}</div>`;
+  const cats = `<div class="chips">${Object.entries(CATS).filter(([s]) => s !== 'all').map(([s, c]) => `<a class="chip" href="#/c/${s}${audience ? '?who=' + audience : ''}">${c.name}</a>`).join('')}</div>`;
   if (kind === 'search' && !base.length) {
     return `<div class="shell">${head}<div class="empty" style="margin:1rem 0 3rem">
       <h2>${query ? `No results for “${esc(query)}”` : 'What are you looking for?'}</h2>
