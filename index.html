@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
 <title>VeraSole — storefront prototype</title>
-<link rel="icon" type="image/svg+xml" href="img/mark.svg">
+<link rel="icon" type="image/svg+xml" href="img/logo-mark.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=20261116-7">
+<link rel="stylesheet" href="styles.css?v=20261116-9">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -20,7 +20,7 @@
     <button class="icon-btn only-mobile" data-act="open-menu" aria-label="Open menu">
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
     </button>
-    <a class="wordmark" href="#/" aria-label="VeraSole home"><img src="img/wordmark.webp" width="480" height="208" alt="VeraSole"></a>
+    <a class="wordmark" href="#/" aria-label="VeraSole home"><img src="img/logo.svg" width="560" height="160" alt="VeraSole"></a>
     <nav class="nav only-desktop" aria-label="Shop" id="nav"></nav>
     <div class="header-actions">
       <button class="icon-btn" data-act="open-search" aria-label="Search footwear" aria-expanded="false" aria-controls="searchbar">
@@ -29,6 +29,10 @@
       <button class="icon-btn" type="button" data-act="signin" aria-label="My account" aria-haspopup="dialog">
         <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></svg>
       </button>
+      <a class="icon-btn wish-link" href="#/account/wishlist" id="wish-link">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 20.3s-7.6-4.6-9.2-9.4C1.6 7.2 4 4 7.4 4c2 0 3.6 1.1 4.6 2.7C13 5.1 14.6 4 16.6 4 20 4 22.4 7.2 21.2 10.9c-1.6 4.8-9.2 9.4-9.2 9.4Z"/></svg>
+        <span class="bag-count" id="wish-count" hidden></span>
+      </a>
       <a class="icon-btn bag" href="#/cart" id="bag-link">
         <svg width="21" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8Z M9 9V6a3 3 0 0 1 6 0v3"/></svg>
         <span class="bag-count" id="bag-count" hidden></span>
@@ -53,7 +57,7 @@
 <footer class="footer">
   <div class="shell footer-in">
     <div>
-      <img class="footer-mark" src="img/wordmark-light.webp" width="480" height="208" alt="VeraSole">
+      <img class="footer-mark" src="img/logo-light.svg" width="560" height="160" alt="VeraSole">
       <p>Everyday footwear for Pakistan.</p>
     </div>
     <nav aria-label="Shop categories">
@@ -86,12 +90,12 @@
 <dialog id="signin" class="modal" aria-labelledby="si-title">
   <div class="drawer-head"><h2 id="si-title">Sign in</h2><button class="icon-btn" data-act="close-dialog" aria-label="Close">✕</button></div>
   <p>In the live store this opens Bagisto’s customer sign-in, then returns you to checkout with saved addresses.</p>
-  <p class="muted">Open the demo panel to see how customers will find their orders.</p>
-  <a class="btn" href="#/account" data-act="close-dialog">Open demo account</a>
+  <p class="muted">Open the demo account to see orders, wishlist, saved addresses and profile.</p>
+  <a class="btn" href="#/account">Open demo account</a>
 </dialog>
 
 <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
 
-<script src="app.js?v=20261116-7"></script>
+<script src="app.js?v=20261116-9"></script>
 </body>
 </html>

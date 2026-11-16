@@ -15,49 +15,50 @@ const CATS = {
 const HEX = { Black: '#222222', Brown: '#684536', Coffee: '#513a32', Camel: '#bc8958', Khaki: '#9b7a4e', Tan: '#ac784c', Navy: '#24344d', Pink: '#d9a79c', Taupe: '#9a8274' };
 
 const img = (n, alt) => ({ src: `img/${n}.jpg`, card: `img/${n}-card.jpg`, alt });
+const shots = (n, d) => [img(`${n}-studio`, `${d}, on a light studio backdrop`), img(`${n}-noir`, `${d}, on a dark studio backdrop`), img(`${n}-close`, `Close-up: ${d}`)];
 const P = [
-  { id: 'peshawari-camel', sku: 'VS-PSH-02', name: 'Suede-Finish Peshawari Chappal', brand: '', cat: 'chappals', who: 'Men', price: 4000, sizes: range(40, 45),
+  { id: 'peshawari-camel', sku: 'VS-PSH-02', name: 'Suede-Finish Peshawari Chappal', brand: '', cat: 'chappals', who: 'Men', price: 4000, was: 5000, sizes: range(40, 45),
     desc: 'A Peshawari chappal with a soft suede-finish upper, contrast stitching along the welt and a buckled heel strap.',
-    colors: [{ name: 'Camel', imgs: [img('peshawari-camel-clean', 'Camel suede-finish Peshawari chappal with buckled heel strap, side view, on a plain background'), img('peshawari-camel', 'Camel suede-finish Peshawari chappal with buckled heel strap, side view, photographed in store'), img('peshawari-camel-detail', 'Close-up of the camel upper and contrast welt stitching')] }],
+    colors: [{ name: 'Camel', imgs: shots('peshawari-camel', 'Camel suede-finish Peshawari chappal with buckled heel strap, side view') }],
     stock: { 'Camel|45': 0, 'Camel|42': 2 } },
   { id: 'peshawari-coffee', sku: 'VS-PSH-01', name: 'Classic Peshawari Chappal', brand: '', cat: 'chappals', who: 'Men', price: 4000, sizes: range(40, 45),
     desc: 'The classic crossover Peshawari shape in a smooth coffee finish, with yellow welt stitching and an adjustable buckle.',
-    colors: [{ name: 'Coffee', imgs: [img('peshawari-coffee-clean', 'Coffee brown Peshawari chappal with crossover upper, side view, on a plain background'), img('peshawari-coffee', 'Coffee brown Peshawari chappal with crossover upper, side view, photographed in store'), img('peshawari-coffee-detail', 'Close-up of the coffee crossover upper and yellow welt stitching')] }],
+    colors: [{ name: 'Coffee', imgs: shots('peshawari-coffee', 'Coffee brown Peshawari chappal with crossover upper, side view') }],
     stock: {} },
-  { id: 'trail-strap-sandal', sku: 'VS-MF-SND-01', name: 'Trail Strap Sandal', brand: 'Marks Fairwale', cat: 'sandals', who: 'Men', price: 1360, sizes: range(39, 45),
+  { id: 'trail-strap-sandal', sku: 'VS-MF-SND-01', name: 'Trail Strap Sandal', brand: 'Marks Fairwale', cat: 'sandals', who: 'Men', price: 1360, was: 2260, sizes: range(39, 45),
     desc: 'A lightweight sandal with woven adjustable straps, a contoured footbed and a cushioned white sole.',
-    colors: [{ name: 'Khaki', imgs: [img('trail-sandal-khaki-clean', 'Khaki woven-strap sandal with contoured footbed, top view, on a plain background'), img('trail-sandal-khaki', 'Khaki woven-strap sandal with contoured footbed, top view, photographed in store'), img('trail-sandal-khaki-detail', 'Close-up of the woven strap and textured footbed')] }],
+    colors: [{ name: 'Khaki', imgs: shots('trail-sandal-khaki', 'Khaki woven-strap sandal with contoured footbed, top view') }],
     stock: { 'Khaki|39': 0, 'Khaki|45': 1 } },
   { id: 'go-ran-knit-slip-on', sku: 'VS-MF-SHO-01', name: 'Go Ran Knit Slip-On', brand: 'Marks', cat: 'shoes', who: 'Men', price: 4000, sizes: range(39, 45), adj: { 44: 200, 45: 200 },
     desc: 'A breathable knit slip-on with a stretch collar, heel pull tab and a ridged white sole.',
     colors: [
-      { name: 'Navy', imgs: [img('knit-slipon-navy-clean', 'Navy knit slip-on shoe with white sole, side view, on a plain background'), img('knit-slipon-navy', 'Navy knit slip-on shoe with white sole, side view, photographed in store'), img('knit-slipon-navy-detail', 'Close-up of the navy knit upper and logo tab')] },
-      { name: 'Taupe', imgs: [img('knit-slipon-taupe-clean', 'Taupe knit slip-on shoe with white sole, side view, on a plain background'), img('knit-slipon-taupe', 'Taupe knit slip-on shoe with white sole, side view, photographed in store'), img('knit-slipon-taupe-detail', 'Close-up of the taupe knit upper and logo tab')] },
+      { name: 'Navy', imgs: shots('knit-slipon-navy', 'Navy knit slip-on shoe with white sole, side view') },
+      { name: 'Taupe', imgs: shots('knit-slipon-taupe', 'Taupe knit slip-on shoe with white sole, side view') },
     ],
     stock: { 'Navy|40': 0, 'Navy|41': 2, 'Taupe|43': 0, 'Taupe|44': 1 } },
   { id: 'beaded-block-heel-sandal', sku: 'VS-WJ-SND-01', name: 'Beaded Block-Heel Sandal', brand: 'Wej', cat: 'sandals', who: 'Women', price: 3500, sizes: range(36, 41),
     desc: 'A dressy ankle-strap sandal with a beaded toe band in pearl, black and gold tones on a low block heel.',
-    colors: [{ name: 'Black', imgs: [img('beaded-heel-black-clean', 'Black block-heel sandal with beaded toe band and ankle strap, on a plain background'), img('beaded-heel-black', 'Black block-heel sandal with beaded toe band and ankle strap, photographed in store'), img('beaded-heel-black-detail', 'Close-up of the pearl, black and gold beaded band')] }],
+    colors: [{ name: 'Black', imgs: shots('beaded-heel-black', 'Black block-heel sandal with beaded toe band and ankle strap') }],
     stock: { 'Black|36': 0, 'Black|41': 0, 'Black|38': 2 } },
-  { id: 'ruched-slingback-sandal', sku: 'VS-WJ-SND-02', name: 'Ruched Slingback Sandal', brand: 'Wej', cat: 'sandals', who: 'Women', price: 2800, sizes: range(36, 41),
+  { id: 'ruched-slingback-sandal', sku: 'VS-WJ-SND-02', name: 'Ruched Slingback Sandal', brand: 'Wej', cat: 'sandals', who: 'Women', price: 2800, was: 3500, sizes: range(36, 41),
     desc: 'A tan slingback with a ruched toe band edged in sparkle trim and an elastic strap over the foot.',
-    colors: [{ name: 'Tan', imgs: [img('ruched-slingback-tan-clean', 'Tan slingback sandal with ruched toe band and sparkle trim, on a plain background'), img('ruched-slingback-tan', 'Tan slingback sandal with ruched toe band and sparkle trim, photographed in store'), img('ruched-slingback-tan-detail', 'Close-up of the ruched band and sparkle trim')] }],
+    colors: [{ name: 'Tan', imgs: shots('ruched-slingback-tan', 'Tan slingback sandal with ruched toe band and sparkle trim') }],
     stock: { 'Tan|38': 1 } },
-  { id: 'double-strap-comfort-slide', sku: 'VS-MF-CHP-01', name: 'Double-Strap Comfort Slide', brand: 'Marks Fairwale', cat: 'chappals', who: 'Men', price: 1300, sizes: range(39, 45),
+  { id: 'double-strap-comfort-slide', sku: 'VS-MF-CHP-01', name: 'Double-Strap Comfort Slide', brand: 'Marks Fairwale', cat: 'chappals', who: 'Men', price: 1300, was: 1860, sizes: range(39, 45),
     desc: 'An easy two-strap slide with a metal buckle, a soft padded footbed and a thick cushioned sole.',
-    colors: [{ name: 'Brown', imgs: [img('comfort-slide-brown-clean', 'Brown double-strap slide with metal buckle and cream sole, on a plain background'), img('comfort-slide-brown', 'Brown double-strap slide with metal buckle and cream sole, photographed in store')] }],
+    colors: [{ name: 'Brown', imgs: shots('comfort-slide-brown', 'Brown double-strap slide with metal buckle and cream sole') }],
     stock: { 'Brown|42': 2 } },
   { id: 'crossover-buckle-slide', sku: 'VS-WJ-CHP-01', name: 'Crossover Buckle Slide', brand: 'Wej', cat: 'chappals', who: 'Women', price: 2200, sizes: range(36, 41),
     desc: 'A soft pink slide with padded crossover straps and a gold-tone buckle.',
-    colors: [{ name: 'Pink', imgs: [img('crossover-slide-pink-clean', 'Pink slide with padded crossover straps and gold-tone buckle, on a plain background'), img('crossover-slide-pink', 'Pink slide with padded crossover straps and gold-tone buckle, photographed in store'), img('crossover-slide-pink-detail', 'Close-up of the crossover straps and buckle')] }],
+    colors: [{ name: 'Pink', imgs: shots('crossover-slide-pink', 'Pink slide with padded crossover straps and gold-tone buckle') }],
     stock: {} },
-  { id: 'embossed-buckle-slide', sku: 'VS-WJ-CHP-02', name: 'Embossed Buckle Slide', brand: 'Wej', cat: 'chappals', who: 'Women', price: 2400, sizes: range(36, 41),
+  { id: 'embossed-buckle-slide', sku: 'VS-WJ-CHP-02', name: 'Embossed Buckle Slide', brand: 'Wej', cat: 'chappals', who: 'Women', price: 2400, was: 3200, sizes: range(36, 41),
     desc: 'A black slide with an embossed toe strap, an oversized buckle and a chunky white sole.',
-    colors: [{ name: 'Black', imgs: [img('embossed-slide-black-clean', 'Black slide with embossed toe strap, large buckle and white sole, on a plain background'), img('embossed-slide-black', 'Black slide with embossed toe strap, large buckle and white sole, photographed in store'), img('embossed-slide-black-detail', 'Close-up of the embossed strap and buckle')] }],
+    colors: [{ name: 'Black', imgs: shots('embossed-slide-black', 'Black slide with embossed toe strap, large buckle and white sole') }],
     stock: { 'Black|37': 0 } },
   { id: 'm-knit-slip-on', sku: 'VS-MF-SHO-02', name: 'M Knit Slip-On', brand: 'Marks Fairwale', cat: 'shoes', who: 'Men', price: 4000, sizes: range(39, 45),
     desc: 'An all-black knit slip-on with a reinforced toe, an embroidered M logo and a layered cushioned sole.',
-    colors: [{ name: 'Black', imgs: [img('m-knit-black-clean', 'All-black knit slip-on shoe with embroidered M logo, on a plain background'), img('m-knit-black', 'All-black knit slip-on shoe with embroidered M logo, photographed in store'), img('m-knit-black-detail', 'Close-up of the black knit upper and M logo')] }],
+    colors: [{ name: 'Black', imgs: shots('m-knit-black', 'All-black knit slip-on shoe with embroidered M logo') }],
     stock: { 'Black|39': 0 } },
   { id: 'bata-school-321-6146', sku: '321 6146', name: 'Bata 321 6146 School Shoe', brand: 'Bata', cat: 'school-shoes', who: 'Kids', price: 3300, sizes: range(1, 9),
     desc: 'A black school shoe for uniform days. Product photo pending.',
@@ -72,6 +73,16 @@ const priceOf = (p, s) => p.price + ((p.adj || {})[s] || 0);
 const maxPrice = p => Math.max(...p.sizes.map(s => priceOf(p, s)));
 const anyStock = p => p.colors.some(c => p.sizes.some(s => stockOf(p, c.name, s) > 0));
 const priceLabel = p => (maxPrice(p) > p.price ? 'From ' : '') + rs(p.price);
+const wasOf = (p, s) => p.was ? p.was + ((p.adj || {})[s] || 0) : 0;
+const pctOff = p => p.was ? Math.round((1 - p.price / p.was) * 100) : 0;
+const priceHTML = (p, s, mult = 1) => {
+  const now = (s ? priceOf(p, s) : p.price) * mult, was = (s ? wasOf(p, s) : p.was) * mult;
+  const from = !s && maxPrice(p) > p.price ? 'From ' : '';
+  return was > now
+    ? `<span class="price"><ins><span class="sr">Sale price </span>${from}${rs(now)}</ins><del><span class="sr">was </span>${rs(was)}</del></span>`
+    : `<span class="price">${from}${rs(now)}</span>`;
+};
+const saving = () => S.cart.reduce((n, l) => { const p = byId(l.id); return n + (wasOf(p, l.size) ? (wasOf(p, l.size) - priceOf(p, l.size)) * l.qty : 0); }, 0);
 const PRICE_BANDS = { lo: ['Under Rs 2,000', p => p.price < 2000], mid: ['Rs 2,000 – 3,499', p => p.price >= 2000 && p.price < 3500], hi: ['Rs 3,500 and over', p => p.price >= 3500] };
 const SORTS = { featured: 'Featured', 'price-asc': 'Price: low to high', 'price-desc': 'Price: high to low', name: 'Name: A to Z' };
 const POPULAR = ['peshawari', 'sandals', 'black', 'slip-on', 'Wej'];
@@ -80,13 +91,34 @@ const SYN = { slipper: 'chappal', slippers: 'chappal', slide: 'chappal slide', s
 /* ---------- state ---------- */
 const store = { get(k, d) { try { return JSON.parse(sessionStorage.getItem(k)) ?? d; } catch { return d; } }, set(k, v) { try { sessionStorage.setItem(k, JSON.stringify(v)); } catch {} } };
 const S = { cart: store.get('vs-cart', []), pdp: {}, co: store.get('vs-co', { step: 1, f: { province: '' }, errors: {} }), order: store.get('vs-order', null), drawer: false, focusKey: null };
+const SAMPLE_ORDERS = [
+  { no: 'VS-2977', date: '12 Nov 2026', status: 2, sample: true, f: { first: 'Sana', last: 'Khan', phone: '0300 1234567', address: 'House 12, Street 4, Gulberg III', city: 'Lahore', province: 'Punjab', postcode: '54660' },
+    lines: [{ id: 'trail-strap-sandal', name: 'Trail Strap Sandal', color: 'Khaki', size: '42', qty: 1, total: 1360 }, { id: 'crossover-buckle-slide', name: 'Crossover Buckle Slide', color: 'Pink', size: '38', qty: 1, total: 2200 }], sub: 3560, total: 3710 },
+  { no: 'VS-2841', date: '2 Nov 2026', status: 3, sample: true, f: { first: 'Sana', last: 'Khan', phone: '0300 1234567', address: 'House 12, Street 4, Gulberg III', city: 'Lahore', province: 'Punjab', postcode: '54660' },
+    lines: [{ id: 'peshawari-coffee', name: 'Classic Peshawari Chappal', color: 'Coffee', size: '42', qty: 1, total: 4000 }], sub: 4000, total: 4150 },
+];
+const SAMPLE_ADDR = [
+  { label: 'Home', name: 'Sana Khan', phone: '0300 1234567', address: 'House 12, Street 4, Gulberg III', city: 'Lahore', province: 'Punjab', postcode: '54660' },
+  { label: 'Office', name: 'Sana Khan', phone: '0300 1234567', address: 'Plot 5, Block 6, PECHS', city: 'Karachi', province: 'Sindh', postcode: '75400' },
+];
+Object.assign(S, {
+  wish: store.get('vs-wish', ['beaded-block-heel-sandal', 'peshawari-camel', 'm-knit-slip-on']),
+  orders: store.get('vs-orders', SAMPLE_ORDERS),
+  addr: store.get('vs-addr', SAMPLE_ADDR),
+  profile: store.get('vs-profile', { name: 'Sana Khan', phone: '0300 1234567', email: '', whatsapp: true }),
+  addrForm: null, addrErr: {},
+});
 const saveCart = () => { store.set('vs-cart', S.cart); bag(); };
+const saveWish = () => { store.set('vs-wish', S.wish); bag(); };
 const cartQty = () => S.cart.reduce((n, l) => n + l.qty, 0);
 const subtotal = () => S.cart.reduce((n, l) => n + l.qty * priceOf(byId(l.id), l.size), 0);
 function bag() {
   const n = cartQty(), el = $('#bag-count');
   el.hidden = !n; el.textContent = n;
   $('#bag-link').setAttribute('aria-label', n ? `Bag, ${n} item${n > 1 ? 's' : ''}` : 'Bag, empty');
+  const w = S.wish.length, wl = $('#wish-count');
+  wl.hidden = !w; wl.textContent = w;
+  $('#wish-link').setAttribute('aria-label', w ? `Wishlist, ${w} item${w > 1 ? 's' : ''}` : 'Wishlist, empty');
 }
 
 /* ---------- routing ---------- */
@@ -109,15 +141,7 @@ function render(keepScroll) {
   else if (a === 'p' && byId(b)) { html = pdp(byId(b), r.q); title = byId(b).name; }
   else if (a === 'cart') { html = cart(); title = 'Your bag'; }
   else if (a === 'checkout') { html = checkout(); title = 'Checkout'; }
-  else if (a === 'account') {
-    const order = S.order;
-    title = 'My account';
-    html = `<div class="shell prose"><h1>My account</h1>
-      <p>This preview shows the latest demo order from this browser.</p>
-      <h2>Orders</h2>
-      ${order ? `<p><a class="link" href="#/done">View demo order #${esc(order.no)}</a> · ${rs(order.total)}</p>` : '<p>You have no demo orders yet.</p>'}
-      <a class="btn" href="#/c/all">Shop all footwear</a></div>`;
-  }
+  else if (a === 'account') { html = account(b || 'overview', r.parts[2]); title = 'My account'; }
   else if (a === 'done') { html = done(); title = 'Order received'; }
   else if (a === 'page') { html = page(b); title = 'Help'; }
   else html = `<div class="shell prose"><h1>Page not found</h1><p>That page doesn’t exist.</p><a class="btn" href="#/c/all">Shop all footwear</a></div>`;
@@ -128,7 +152,7 @@ function render(keepScroll) {
   if (S.focusKey) { const el = document.querySelector(`[data-key="${CSS.escape(S.focusKey)}"]`); if (el) el.focus({ preventScroll: true }); S.focusKey = null; }
   else if (!keepScroll && lastPath !== null && lastPath !== r.path) { window.scrollTo(0, 0); }
   lastPath = r.path;
-  slideI = 0;
+  heroInit();
 }
 const shopGroups = [
   ['Men', 'Men', ['chappals', 'sandals', 'shoes'], 'peshawari-camel'],
@@ -152,7 +176,7 @@ function navs(r) {
     const feature = product
       ? `<a class="menu-feature" href="#/p/${product.id}">
            <img src="${product.colors[0].imgs[0].card}" alt="" width="640" height="800" loading="lazy">
-           <span><small>Featured pair</small><strong>${esc(product.name)}</strong><span>${rs(product.price)} →</span></span>
+           <span><small>Featured pair</small><strong>${esc(product.name)}</strong><span>${rs(product.price)}${product.was ? ` <s>${rs(product.was)}</s>` : ''} →</span></span>
          </a>`
       : '<a class="menu-feature menu-fit" href="#/page/size-guide"><span><small>School shoe sizing</small><strong>Find the right fit</strong><span>Open size guide →</span></span></a>';
     return `<details class="shop-group"><summary>${label}</summary>
@@ -200,22 +224,51 @@ const media = (p, c = p.colors[0], which = 'card') => c.imgs[0]
 function card(p) {
   const out = !anyStock(p);
   return `<article class="card">
-    <div class="card-media">${media(p)}${out ? '<span class="badge out">Out of stock</span>' : ''}</div>
+    <div class="card-media">${media(p)}${wishBtn(p)}${out ? '<span class="badges"><span class="badge out">Sold out</span></span>' : p.was ? `<span class="badges"><span class="badge sale">−${pctOff(p)}%</span><span class="badge sale-tag">Sale</span></span>` : ''}</div>
     <div class="card-body">
       <span class="brand">${esc(p.brand || CATS[p.cat].name)}</span>
       <a href="#/p/${p.id}">${esc(p.name)}</a>
-      <span class="price">${priceLabel(p)}</span>
+      ${priceHTML(p)}
       <span class="dots">${p.colors.map(c => `<i class="dot" style="background:${HEX[c.name]}" title="${c.name}"></i>`).join('')} ${p.colors.length > 1 ? p.colors.length + ' colours' : p.colors[0].name} · ${p.sizes[0]}–${p.sizes.at(-1)}</span>
     </div></article>`;
 }
+const HEART = '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 20.3s-7.6-4.6-9.2-9.4C1.6 7.2 4 4 7.4 4c2 0 3.6 1.1 4.6 2.7C13 5.1 14.6 4 16.6 4 20 4 22.4 7.2 21.2 10.9c-1.6 4.8-9.2 9.4-9.2 9.4Z"/></svg>';
+const wishBtn = (p, cls = 'wish') => { const on = S.wish.includes(p.id); return `<button class="${cls}" type="button" data-act="wish" data-id="${p.id}" data-key="wish-${p.id}" aria-pressed="${on}" aria-label="${on ? 'Remove' : 'Save'} ${esc(p.name)} ${on ? 'from' : 'to'} wishlist">${HEART}</button>`; };
 const grid = (items, cls = '') => `<div class="grid ${cls}">${items.map(card).join('')}</div>`;
 
 /* ---------- home ---------- */
 const SLIDES = [
-  { pid: 'peshawari-camel', bg: 'peshawari-camel', kicker: 'Men · Peshawari chappals', title: 'The Peshawari,<br>made for every day.', text: 'Hand-stitched welts, buckled heel straps and soft uppers in camel and coffee.', cta: ['Shop chappals', '#/c/chappals'] },
-  { pid: 'beaded-block-heel-sandal', bg: 'beaded-heel-black', kicker: 'Women · Sandals', title: 'Dressed up,<br>still easy.', text: 'Beaded bands, ruched straps and low block heels for evenings out.', cta: ['Shop sandals', '#/c/sandals'] },
-  { pid: 'go-ran-knit-slip-on', bg: 'knit-slipon-navy', kicker: 'Men · Knit slip-ons', title: 'Slip on.<br>Head out.', text: 'Breathable knit uppers on a cushioned sole, in navy, taupe and black.', cta: ['Shop shoes', '#/c/shoes'] },
+  { video: 'hero-promo', kicker: 'New season · Men, women and kids', title: 'Made for<br>every step.', text: 'Peshawari chappals, sandals and knit slip-ons, delivered across Pakistan.', cta: ['Shop all footwear', '#/c/all'] },
+  { bg: 'peshawari-camel', kicker: 'Men · Peshawari chappals', title: 'The Peshawari,<br>made for every day.', text: 'Hand-stitched welts, buckled heel straps and soft uppers in camel and coffee.', cta: ['Shop chappals', '#/c/chappals'] },
+  { bg: 'beaded-heel-black', kicker: 'Women · Sandals', title: 'Dressed up,<br>still easy.', text: 'Beaded bands, ruched straps and low block heels for evenings out.', cta: ['Shop sandals', '#/c/sandals'] },
+  { bg: 'knit-slipon-navy', kicker: 'Men · Knit slip-ons', title: 'Slip on.<br>Head out.', text: 'Breathable knit uppers on a cushioned sole, in navy, taupe and black.', cta: ['Shop shoes', '#/c/shoes'] },
 ];
+const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+function hero() {
+  const n = SLIDES.length, pad = i => String(i).padStart(2, '0');
+  return `<section class="hx" aria-roledescription="carousel" aria-label="Featured collections" id="hero">
+      <h1 class="hx-h1 shell">Chappals, sandals and shoes online in Pakistan</h1>
+      ${SLIDES.map((s, i) => `
+      <div class="hx-slide" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${n}" ${i ? 'hidden' : ''}>
+        <div class="hx-media" aria-hidden="true">${s.video
+          ? `<video id="hero-video" muted loop playsinline preload="metadata" data-name="${s.video}"></video>`
+          : `<picture><source media="(max-width:699px)" srcset="img/hero-${s.bg}-tall.jpg"><img src="img/hero-${s.bg}-wide.jpg" alt="" width="1920" height="1080" loading="lazy"></picture>`}</div>
+        <div class="shell hx-in"><div class="hx-copy">
+          <p class="eyebrow">${s.kicker}</p>
+          <p class="hx-title">${s.title}</p>
+          <p class="hx-text">${s.text}</p>
+          <div class="hx-actions"><a class="btn gold" href="${s.cta[1]}">${s.cta[0]} <span aria-hidden="true">→</span></a><span class="hx-cod">Cash on delivery · check your parcel before you pay</span></div>
+        </div></div>
+      </div>`).join('')}
+      <div class="shell hx-ctl">
+        <span class="hx-count" id="slide-n" aria-hidden="true">${pad(1)} / ${pad(n)}</span>
+        <div class="hx-dots">${SLIDES.map((s, i) => `<button data-act="slide-to" data-i="${i}" aria-label="Show slide ${i + 1}" aria-current="${!i}"></button>`).join('')}</div>
+        <button class="hx-btn" data-act="slide" data-d="-1" aria-label="Previous slide">←</button>
+        <button class="hx-btn" data-act="slide" data-d="1" aria-label="Next slide">→</button>
+        <button class="hx-btn" data-act="hero-pause" id="hero-pause" aria-label="Pause banner motion">❚❚</button>
+      </div>
+    </section>`;
+}
 const FAQ = [
   ['Do you offer cash on delivery?', 'Yes. Every VeraSole order is cash on delivery. You pay in cash when your order arrives and no card details are needed.'],
   ['What does delivery cost?', 'You’ll see the delivery charge before placing your order.'],
@@ -224,56 +277,67 @@ const FAQ = [
   ['What if my pair is out of stock?', 'We’ll contact you if a pair is unavailable. You can wait for a restock or order another style.'],
   ['Why do some products have no photos?', 'We show the article number until we have a photo of that model.'],
 ];
+const REVIEWS = [
+  { name: 'Hamza R.', city: 'Lahore', rating: 5, pid: 'peshawari-camel', date: 'Oct 2026', text: 'Stitching is neat and the sole feels solid. Size 42 fit exactly like my old pair. Checked it at the door before paying, which made it easy to trust.' },
+  { name: 'Mehwish A.', city: 'Karachi', rating: 5, pid: 'beaded-block-heel-sandal', date: 'Oct 2026', text: 'Wore them to a mehndi and they were comfortable all evening. The beads look better in person than in the photos.' },
+  { name: 'Usman T.', city: 'Islamabad', rating: 4, pid: 'go-ran-knit-slip-on', date: 'Nov 2026', text: 'Light and breathable for daily office walks. Runs slightly snug, so I would go one size up if you are between sizes.' },
+  { name: 'Ayesha S.', city: 'Faisalabad', rating: 5, pid: 'crossover-buckle-slide', date: 'Nov 2026', text: 'Soft straps, no rubbing on the first day. Delivery came on time and the courier waited while I checked the box.' },
+  { name: 'Bilal K.', city: 'Peshawar', rating: 4, pid: 'trail-strap-sandal', date: 'Sep 2026', text: 'Good grip and the straps adjust well. Great value at the sale price.' },
+  { name: 'Fatima Z.', city: 'Multan', rating: 5, pid: 'ruched-slingback-sandal', date: 'Oct 2026', text: 'The tan colour is lovely and goes with everything. Easy exchange process for a different size.' },
+];
+const stars = (n, size = 16) => `<span class="stars" role="img" aria-label="Rated ${n} out of 5">${[1, 2, 3, 4, 5].map(i => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true" class="${i <= n ? 'on' : ''}"><path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8Z"/></svg>`).join('')}</span>`;
+function reviewsSection() {
+  const avg = (REVIEWS.reduce((n, r) => n + r.rating, 0) / REVIEWS.length).toFixed(1);
+  const dist = [5, 4, 3, 2, 1].map(k => [k, REVIEWS.filter(r => r.rating === k).length]);
+  return `<section class="section reviews" aria-labelledby="rev-t">
+    <div class="section-head"><div><p class="eyebrow">Customer reviews</p><h2 id="rev-t">Loved on every step</h2></div><span class="sample-note">Sample reviews · prototype</span></div>
+    <div class="reviews-in">
+      <div class="rev-summary">
+        <p class="rev-avg">${avg}<small>/5</small></p>${stars(Math.round(avg), 20)}
+        <p class="muted small">Based on ${REVIEWS.length} reviews</p>
+        <ul class="rev-dist">${dist.map(([k, n]) => `<li><span>${k}★</span><i style="--w:${(n / REVIEWS.length) * 100}%"></i><span>${n}</span></li>`).join('')}</ul>
+      </div>
+      <div class="rev-track" tabindex="0" aria-label="Customer reviews, scroll for more">${REVIEWS.map(r => { const p = byId(r.pid); return `
+        <article class="rev-card">
+          <div class="rev-top">${stars(r.rating)}<span class="muted small">${r.date}</span></div>
+          <p class="rev-text">“${esc(r.text)}”</p>
+          <a class="rev-product" href="#/p/${p.id}"><img src="${p.colors[0].imgs[0].card}" alt="" width="640" height="800" loading="lazy"><span>${esc(p.name)}</span></a>
+          <p class="rev-by"><span class="avatar" aria-hidden="true">${r.name[0]}</span><span><b>${esc(r.name)}</b>${esc(r.city)} · <span class="verified">Verified buyer</span></span></p>
+        </article>`; }).join('')}</div>
+    </div>
+  </section>`;
+}
 const row = (id, kicker, title, href, items) => `<section class="section" aria-labelledby="${id}">
   <div class="section-head"><div><p class="eyebrow">${kicker}</p><h2 id="${id}">${title}</h2></div><a class="link" href="${href}">View all</a></div>${grid(items, 'four')}</section>`;
 function home() {
   const tiles = [['chappals', 'peshawari-coffee'], ['sandals', 'trail-strap-sandal'], ['shoes', 'go-ran-knit-slip-on'], ['school-shoes', null]];
   const count = s => P.filter(p => p.cat === s).length;
   const ids = a => a.map(byId);
-  return `<section class="hero2" aria-roledescription="carousel" aria-label="Featured collections" id="hero">
-      <h1 class="hero-h1 shell">Chappals, sandals and shoes online in Pakistan</h1>
-      ${SLIDES.map((s, i) => { const p = byId(s.pid), im = p.colors[0].imgs[0]; return `
-      <div class="slide ${i ? '' : 'on'}" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${SLIDES.length}" ${i ? 'hidden' : ''}>
-        <div class="slide-bg" style="background-image:url(img/hero-bg-${s.bg}.jpg)" aria-hidden="true"></div>
-        <div class="shell slide-in">
-          <div class="slide-copy">
-            <p class="eyebrow">${s.kicker}</p>
-            <p class="slide-title">${s.title}</p>
-            <p class="slide-text">${s.text}</p>
-            <div class="hero-actions"><a class="btn gold" href="${s.cta[1]}">${s.cta[0]} <span aria-hidden="true">→</span></a><a class="btn line" href="#/c/all">Shop all footwear</a></div><p class="hero-cod">Check your parcel before you pay.</p>
-          </div>
-          <a class="slide-photo" href="#/p/${p.id}" tabindex="-1" aria-hidden="true"><img src="img/${s.bg}-dark.jpg" alt="" width="1200" height="1500" ${i ? 'loading="lazy"' : 'fetchpriority="high"'}></a>
-        </div>
-      </div>`; }).join('')}
-      <div class="shell slide-ctl">
-        <button class="ctl" data-act="slide" data-d="-1" aria-label="Previous slide">←</button>
-        <span class="count2" id="slide-n" aria-hidden="true">01 / 0${SLIDES.length}</span><div class="dots2">${SLIDES.map((s, i) => `<button data-act="slide-to" data-i="${i}" aria-label="Show slide ${i + 1}" aria-current="${!i}"></button>`).join('')}</div>
-        <button class="ctl" data-act="slide" data-d="1" aria-label="Next slide">→</button>
-      </div>
-    </section>
+  return `${hero()}
     <div class="trustbar"><ul class="shell" aria-label="How ordering works"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></svg><span><b>Cash on delivery</b>Check your parcel before you pay</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg><span><b>Prices in PKR</b>Delivery fee shown at checkout</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17v-5c3 0 4-4 7-4 1.5 0 2 2.5 5 3.5l4 1.3c1.4.5 2 1.4 2 2.7V17z"/><path d="M3 17v2h18v-2"/></svg><span><b>Your size, your colour</b>EU 36–45 and school sizes 1–9</span></li></ul></div>
     <div class="shell">
     <section class="section" aria-labelledby="cat-title">
       <div class="section-head"><div><p class="eyebrow">Find the right pair</p><h2 id="cat-title">Shop by category</h2></div><a class="link" href="#/c/all">View all footwear</a></div>
       <div class="cats">${tiles.map(([s, pid]) => pid
-        ? `<a class="cat" href="#/c/${s}"><img src="${byId(pid).colors[0].imgs[0].card.replace('-clean-card', '-dark-card')}" alt="" loading="lazy" width="640" height="800"><span class="cat-label"><strong>${CATS[s].name}</strong><span>${count(s)} styles</span></span></a>`
+        ? `<a class="cat" href="#/c/${s}"><img src="${byId(pid).colors[0].imgs[0].card.replace('-studio-card', '-noir-card')}" alt="" loading="lazy" width="640" height="800"><span class="cat-label"><strong>${CATS[s].name}</strong><span>${count(s)} styles</span></span></a>`
         : `<a class="cat art" href="#/c/${s}"><svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 44V22c8 0 12-10 22-10 6 0 8 8 18 12l40 10c14 3 22 6 24 12v6H8Z M8 44h104"/></svg><span class="cat-label"><strong>${CATS[s].name}</strong><span>${count(s)} styles</span></span></a>`).join('')}</div>
     </section>
     ${row('new-t', 'Just in', 'New arrivals', '#/c/all', ids(['trail-strap-sandal', 'go-ran-knit-slip-on', 'ruched-slingback-sandal', 'peshawari-coffee']))}
     <section class="section collection-edit" aria-labelledby="collection-edit-title">
-      <h2 id="collection-edit-title">Shop by collection</h2>
+      <div class="section-head"><div><p class="eyebrow">Curated edits</p><h2 id="collection-edit-title">Shop by collection</h2></div><a class="link" href="#/c/all">View all</a></div>
       <div class="collection-edit-grid">
         <a class="collection-tile collection-tile-women" href="#/c/all?who=Women">
-          <img src="img/crossover-slide-pink-clean-card.jpg" alt="" width="640" height="800" loading="lazy">
+          <img src="img/crossover-slide-pink-studio-card.jpg" alt="" width="640" height="800" loading="lazy">
           <div class="collection-tile-copy"><h3>Slides &amp; sandals by Wej</h3><span>Shop women’s <span aria-hidden="true">↗</span></span></div>
         </a>
         <a class="collection-tile collection-tile-men" href="#/c/shoes?who=Men">
-          <img src="img/m-knit-black-clean-card.jpg" alt="" width="640" height="800" loading="lazy">
+          <img src="img/m-knit-black-studio-card.jpg" alt="" width="640" height="800" loading="lazy">
           <div class="collection-tile-copy"><h3>Everyday knit slip-ons</h3><span>Shop men’s shoes <span aria-hidden="true">↗</span></span></div>
         </a>
       </div>
     </section>
     ${row('chp-t', 'Everyday classics', 'Chappals collection', '#/c/chappals', ids(['peshawari-camel', 'double-strap-comfort-slide', 'crossover-buckle-slide', 'embossed-buckle-slide']))}
+    ${reviewsSection()}
     </div>
     <section class="seo" aria-labelledby="seo-t"><div class="shell seo-in">
       <div>
@@ -292,14 +356,34 @@ function home() {
       </div>
     </div></section>`;
 }
-let slideI = 0;
-function showSlide(i) {
-  const el = document.querySelectorAll('#hero .slide'); if (!el.length) return;
-  slideI = (i + el.length) % el.length;
-  el.forEach((s, n) => { s.hidden = n !== slideI; s.classList.toggle('on', n === slideI); });
-  $('#slide-n').textContent = `0${slideI + 1} / 0${el.length}`;
-  document.querySelectorAll('.dots2 button').forEach((d, n) => d.setAttribute('aria-current', n === slideI));
+let slideI = 0, heroPaused = false, heroT = 0;
+function heroSync() {
+  const h = $('#hero'); if (!h) return;
+  const v = $('#hero-video'), b = $('#hero-pause');
+  if (v) { if (!heroPaused && slideI === 0) v.play().catch(() => {}); else v.pause(); }
+  b.textContent = heroPaused ? '▶' : '❚❚';
+  b.setAttribute('aria-label', heroPaused ? 'Play banner motion' : 'Pause banner motion');
+  clearTimeout(heroT);
+  if (!heroPaused) heroT = setTimeout(() => {
+    if (h.matches(':hover') || h.contains(document.activeElement)) heroSync(); else showSlide(slideI + 1);
+  }, slideI === 0 ? 12000 : 6500);
 }
+function showSlide(i) {
+  const el = document.querySelectorAll('#hero .hx-slide'); if (!el.length) return;
+  slideI = (i + el.length) % el.length;
+  el.forEach((s, n) => { s.hidden = n !== slideI; });
+  $('#slide-n').textContent = `${String(slideI + 1).padStart(2, '0')} / ${String(el.length).padStart(2, '0')}`;
+  document.querySelectorAll('.hx-dots button').forEach((d, n) => d.setAttribute('aria-current', n === slideI));
+  heroSync();
+}
+const heroMq = matchMedia('(max-width:699px)');
+function heroSrc() {
+  const v = $('#hero-video'); if (!v) return;
+  const base = `img/${v.dataset.name}-${heroMq.matches ? 'tall' : 'wide'}`;
+  if (!v.getAttribute('src') || !v.getAttribute('src').startsWith(base)) { v.poster = base + '.jpg'; v.src = base + '.mp4'; }
+}
+heroMq.addEventListener('change', () => { heroSrc(); heroSync(); });
+function heroInit() { clearTimeout(heroT); slideI = 0; if (!$('#hero')) return; heroSrc(); if (still()) heroPaused = true; heroSync(); }
 /* ---------- search ---------- */
 function searchProducts(query) {
   const toks = query.toLowerCase().replace(/[^\w\s-]/g, ' ').split(/\s+/).filter(Boolean).map(t => SYN[t] || t);
@@ -315,7 +399,7 @@ function suggest(v) {
   const catLinks = Object.entries(CATS).filter(([s, c]) => s !== 'all' && (!v || c.name.toLowerCase().includes(v.toLowerCase()))).map(([s, c]) => `<a class="chip" href="#/c/${s}">${c.name}</a>`).join('');
   if (!v) { el.innerHTML = `<div><h3>Popular searches</h3><div class="chips">${POPULAR.map(t => `<a class="chip" href="#/search?q=${encodeURIComponent(t)}">${t}</a>`).join('')}</div></div><div><h3>Categories</h3><div class="chips">${catLinks}</div></div>`; return; }
   const hits = searchProducts(v);
-  el.innerHTML = `<div><h3>${hits.length ? 'Products' : 'No matching products'}</h3>${hits.slice(0, 4).map(p => `<a class="sug-item" href="#/p/${p.id}">${p.colors[0].imgs[0] ? `<img src="${p.colors[0].imgs[0].card}" alt="">` : '<span class="ph"></span>'}<span><b>${esc(p.name)}</b><br><span class="muted small">${esc(p.brand || CATS[p.cat].name)}</span></span><span>${priceLabel(p)}</span></a>`).join('')}
+  el.innerHTML = `<div><h3>${hits.length ? 'Products' : 'No matching products'}</h3>${hits.slice(0, 4).map(p => `<a class="sug-item" href="#/p/${p.id}">${p.colors[0].imgs[0] ? `<img src="${p.colors[0].imgs[0].card}" alt="">` : '<span class="ph"></span>'}<span><b>${esc(p.name)}</b><br><span class="muted small">${esc(p.brand || CATS[p.cat].name)}</span></span>${priceHTML(p)}</a>`).join('')}
     <a class="sug-item" href="#/search?q=${encodeURIComponent(v)}"><span>${hits.length ? `See all ${hits.length} result${hits.length > 1 ? 's' : ''}` : 'Search'} for “<b>${esc(v)}</b>” →</span></a></div>
     <div><h3>Categories</h3><div class="chips">${catLinks || Object.entries(CATS).slice(1).map(([s, c]) => `<a class="chip" href="#/c/${s}">${c.name}</a>`).join('')}</div></div>`;
 }
@@ -396,6 +480,7 @@ function pdp(p, q) {
   if (left) st.qty = Math.min(st.qty, left);
   const price = st.size ? priceOf(p, st.size) : p.price;
   const priceTxt = st.size ? rs(price) : priceLabel(p);
+  const was = st.size ? wasOf(p, st.size) : p.was;
   const status = soldOut ? '<span class="status out">Out of stock</span>'
     : !st.size ? '<span class="status idle">Select a size to check availability</span>'
     : left <= 2 ? `<span class="status low">Only ${left} left in ${c.name}, size ${st.size}</span>` : '<span class="status ok">In stock</span>';
@@ -412,7 +497,7 @@ function pdp(p, q) {
       <section class="pdp-info" aria-labelledby="pdp-title">
         <p class="eyebrow">${esc(p.brand || CATS[p.cat].name)} · ${p.who}</p>
         <h1 id="pdp-title" style="font-size:clamp(1.7rem,4vw,2.4rem)">${esc(p.name)}</h1>
-        <p class="pdp-price" aria-live="polite">${priceTxt}</p>
+        <p class="pdp-price" aria-live="polite">${priceHTML(p, st.size)}${was ? `<span class="save-tag">Save ${rs(was - price)} · ${pctOff(p)}% off</span>` : ''}</p>
         <p aria-live="polite" style="margin:0">${status}</p>
         <p class="muted" style="margin-top:1rem">${esc(p.desc)}</p>
         <fieldset class="opt"><legend>Colour: <span>${c.name}</span></legend>
@@ -426,6 +511,7 @@ function pdp(p, q) {
         <div class="buy">
           <div class="stepper" role="group" aria-label="Quantity"><button data-act="qty" data-d="-1" data-key="q-" aria-label="Decrease quantity" ${st.qty <= 1 || soldOut ? 'disabled' : ''}>−</button><output aria-live="polite">${st.qty}</output><button data-act="qty" data-d="1" data-key="q+" aria-label="Increase quantity" ${soldOut || (left && st.qty >= left) || st.qty >= 5 ? 'disabled' : ''}>+</button></div>
           <button class="btn" data-act="add" data-key="add" ${soldOut ? 'disabled' : ''}>${soldOut ? 'Out of stock' : 'Add to bag · ' + rs(price * st.qty)}</button>
+          ${wishBtn(p, 'wish-lg')}
         </div>
         ${soldOut ? '<p class="muted small" style="margin-top:.8rem">This style is currently unavailable in every size.</p>' : ''}
         <div class="notes">
@@ -437,7 +523,7 @@ function pdp(p, q) {
     </div>
     <section class="section" style="padding-top:0" aria-labelledby="rel"><h2 id="rel" style="margin-bottom:1rem">You may also like</h2>${grid(related, 'four')}</section>
   </div>
-  <div class="sticky-buy"><div><strong>${priceTxt}</strong><small>${st.size ? `${c.name} · size ${st.size}` : 'Select a size'}</small></div><button class="btn" data-act="add" ${soldOut ? 'disabled' : ''}>${soldOut ? 'Out of stock' : 'Add to bag'}</button></div>`;
+  <div class="sticky-buy"><div><strong>${priceHTML(p, st.size)}</strong><small>${st.size ? `${c.name} · size ${st.size}` : 'Select a size'}</small></div><button class="btn" data-act="add" ${soldOut ? 'disabled' : ''}>${soldOut ? 'Out of stock' : 'Add to bag'}</button></div>`;
 }
 function addToBag(p) {
   const st = S.pdp[p.id];
@@ -456,10 +542,12 @@ function toast(html) { const t = $('#toast'); t.innerHTML = html; t.hidden = fal
 /* ---------- cart ---------- */
 const lineImg = l => { const p = byId(l.id), c = p.colors.find(x => x.name === l.color); return `<div class="thumb">${media(p, c)}</div>`; };
 function totals(withDelivery = true) {
-  const sub = subtotal();
+  const sub = subtotal(), off = saving();
   return `<dl class="totals"><div><dt>Subtotal (${cartQty()} item${cartQty() === 1 ? '' : 's'})</dt><dd>${rs(sub)}</dd></div>
+
     <div><dt>${DELIVERY.title}</dt><dd>${rs(DELIVERY.fee)}</dd></div>
     <div class="grand"><dt>Total</dt><dd>${rs(sub + DELIVERY.fee)}</dd></div></dl>
+    ${off ? `<p class="save-note">You’re saving ${rs(off)} on sale items</p>` : ''}
     <p class="muted small" style="margin:.6rem 0 0">Check your parcel before paying the courier in cash.</p>`;
 }
 function cart() {
@@ -467,7 +555,7 @@ function cart() {
   return `<div class="shell"><header class="list-head" style="padding-top:1.5rem"><h1>Your bag</h1></header>
     <div class="two"><section aria-label="Items in your bag">${S.cart.map((l, i) => { const p = byId(l.id), max = stockOf(p, l.color, l.size), u = priceOf(p, l.size); return `
       <article class="line">${lineImg(l)}<div>
-        <div class="line-top"><div><h3><a href="#/p/${p.id}?color=${l.color}">${esc(p.name)}</a></h3><p class="muted small" style="margin:.15rem 0 0">Colour: ${l.color} · Size: ${l.size}</p><p class="muted small" style="margin:0">${rs(u)} each</p></div><strong>${rs(u * l.qty)}</strong></div>
+        <div class="line-top"><div><h3><a href="#/p/${p.id}?color=${l.color}">${esc(p.name)}</a></h3><p class="muted small" style="margin:.15rem 0 0">Colour: ${l.color} · Size: ${l.size}</p><p class="muted small" style="margin:0">${rs(u)} each${wasOf(p, l.size) ? ` · <s>${rs(wasOf(p, l.size))}</s>` : ''}</p></div><strong>${priceHTML(p, l.size, l.qty)}</strong></div>
         <div class="line-bottom"><div class="stepper" role="group" aria-label="Quantity for ${esc(p.name)}"><button data-act="cart-qty" data-i="${i}" data-d="-1" data-key="c${i}-" aria-label="Decrease quantity" ${l.qty <= 1 ? 'disabled' : ''}>−</button><output>${l.qty}</output><button data-act="cart-qty" data-i="${i}" data-d="1" data-key="c${i}+" aria-label="Increase quantity" ${l.qty >= max ? 'disabled' : ''}>+</button></div>
         ${l.qty >= max ? `<span class="small" style="color:var(--warn)">Max available: ${max}</span>` : ''}
         <button class="link" data-act="cart-rm" data-i="${i}" aria-label="Remove ${esc(p.name)}, ${l.color}, size ${l.size}">Remove</button></div>
@@ -513,6 +601,7 @@ function checkout() {
     <section class="step ${cls(1)}" aria-labelledby="s1">${head(1, 'Contact &amp; delivery address', `${esc(f.first || '')} ${esc(f.last || '')} · ${esc(f.phone || '')}<br>${esc(f.address || '')}, ${esc(f.city || '')}, ${esc(f.province || '')}`).replace('<h2>', '<h2 id="s1">')}
       ${step === 1 ? `<form class="step-body" data-co-form novalidate>
         ${errs.length ? `<div class="err-box" role="alert" tabindex="-1" id="err-box"><strong>Please fix ${errs.length} field${errs.length > 1 ? 's' : ''} to continue</strong><ul>${errs.map(([k, m]) => `<li><a href="#f-${k}" data-focus="f-${k}">${m}</a></li>`).join('')}</ul></div>` : ''}
+        ${S.addr.length ? `<div class="saved-addr"><span class="small muted">Use a saved address</span><div class="chips">${S.addr.map((a, i) => `<button type="button" class="chip" data-act="use-addr" data-i="${i}">${esc(a.label)} · ${esc(a.city)}</button>`).join('')}</div></div>` : ''}
         <div class="form">${FIELDS.map(field).join('')}
           <div class="field wide"><label for="f-country">Country</label><input id="f-country" value="Pakistan" readonly aria-describedby="h-country"><p class="hint" id="h-country">VeraSole delivers within Pakistan.</p></div></div>
         <button class="btn" style="margin-top:1.1rem" data-key="co-next">Review order</button></form>` : ''}</section>
@@ -534,9 +623,92 @@ function done() {
     <p class="muted">Thank you for shopping with VeraSole. You’ll pay ${rs(o.total)} in cash when your order arrives. If a pair is unavailable, we’ll contact you on ${esc(o.f.phone)} with your options.</p>
     <div class="summary" style="margin:1.5rem 0">
       ${o.lines.map(l => `<div class="mini"><span style="flex:1"><b>${esc(l.name)}</b>${l.color} · size ${l.size} · qty ${l.qty}</span><span>${rs(l.total)}</span></div>`).join('')}
-      <dl class="totals" style="border-top:1px solid var(--line);margin-top:.6rem;padding-top:.9rem"><div><dt>Subtotal</dt><dd>${rs(o.sub)}</dd></div><div><dt>${DELIVERY.title}</dt><dd>${rs(DELIVERY.fee)}</dd></div><div class="grand"><dt>Total · cash on delivery</dt><dd>${rs(o.total)}</dd></div></dl>
+      <dl class="totals" style="border-top:1px solid var(--line);margin-top:.6rem;padding-top:.9rem"><div><dt>Subtotal</dt><dd>${rs(o.sub)}</dd></div><div><dt>${DELIVERY.title}</dt><dd>${rs(DELIVERY.fee)}</dd></div><div class="grand"><dt>Total · cash on delivery</dt><dd>${rs(o.total)}</dd></div></dl>${o.off ? `<p class="save-note">You saved ${rs(o.off)} on sale items</p>` : ''}
       <p class="small muted" style="margin:1rem 0 0"><strong style="color:var(--ink)">Delivering to</strong><br>${esc(o.f.first)} ${esc(o.f.last)}<br>${esc(o.f.address)}, ${esc(o.f.city)}, ${esc(o.f.province)}${o.f.postcode ? ' ' + esc(o.f.postcode) : ''}, Pakistan</p>
-    </div><div class="chips"><a class="btn" href="#/c/all">Continue shopping</a><a class="btn ghost" href="#/page/feedback">Share feedback after delivery</a></div></div></div>`;
+    </div><div class="chips"><a class="btn" href="#/c/all">Continue shopping</a><a class="btn ghost" href="#/account/orders/${o.no}">Track this order</a></div></div></div>`;
+}
+
+/* ---------- account ---------- */
+const STEPS = ['Placed', 'Confirmed', 'Shipped', 'Delivered'];
+const ICON = {
+  overview: '<path d="M3 11 12 4l9 7v9H3z"/><path d="M9 20v-6h6v6"/>',
+  orders: '<path d="M4 7h16l-1 13H5L4 7Z"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/>',
+  wishlist: '<path d="M12 20.3s-7.6-4.6-9.2-9.4C1.6 7.2 4 4 7.4 4c2 0 3.6 1.1 4.6 2.7C13 5.1 14.6 4 16.6 4 20 4 22.4 7.2 21.2 10.9c-1.6 4.8-9.2 9.4-9.2 9.4Z"/>',
+  addresses: '<path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/>',
+  profile: '<circle cx="12" cy="8" r="3.4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/>',
+};
+const ico = k => `<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[k]}</svg>`;
+const statusPill = o => `<span class="pill s${o.status}">${STEPS[o.status]}</span>`;
+const orderThumbs = o => o.lines.map(l => { const p = byId(l.id); const c = p && p.colors.find(x => x.name === l.color); return `<span class="thumb">${p ? media(p, c) : ''}</span>`; }).join('');
+function addrCard(a, i, actions = true) {
+  return `<article class="addr-card ${i === 0 ? 'is-default' : ''}">
+    <div class="addr-top"><b>${esc(a.label)}</b>${i === 0 ? '<span class="pill s3">Default</span>' : ''}</div>
+    <p>${esc(a.name)}<br>${esc(a.address)}<br>${esc(a.city)}, ${esc(a.province)}${a.postcode ? ' ' + esc(a.postcode) : ''}<br>${esc(a.phone)}</p>
+    ${actions ? `<div class="addr-actions"><button class="link" data-act="addr-edit" data-i="${i}" data-key="ae${i}">Edit</button>${i ? `<button class="link" data-act="addr-default" data-i="${i}">Set as default</button><button class="link danger" data-act="addr-rm" data-i="${i}" aria-label="Remove ${esc(a.label)} address">Remove</button>` : ''}</div>` : ''}
+  </article>`;
+}
+function addrFormHTML() {
+  const i = S.addrForm, a = i === 'new' ? { label: 'Home', province: '' } : S.addr[i], e = S.addrErr;
+  const f = (k, label, type = 'text', ac = '', cl = '') => `<div class="field ${cl}"><label for="a-${k}">${label}</label><input id="a-${k}" name="${k}" type="${type}" autocomplete="${ac}" value="${esc(a[k] || '')}" ${e[k] ? `aria-invalid="true" aria-describedby="ae-${k}"` : ''}>${e[k] ? `<p class="field-err" id="ae-${k}">${e[k]}</p>` : ''}</div>`;
+  return `<form class="panel" data-addr-form novalidate aria-labelledby="af-t"><h2 id="af-t" class="panel-title">${i === 'new' ? 'Add a new address' : 'Edit address'}</h2>
+    <fieldset class="opt" style="margin:0 0 1rem"><legend>Label</legend><div class="chips">${['Home', 'Office', 'Other'].map(l => `<label class="chip-radio"><input type="radio" name="label" value="${l}" ${a.label === l ? 'checked' : ''}><span>${l}</span></label>`).join('')}</div></fieldset>
+    <div class="form">${f('name', 'Full name', 'text', 'name')}${f('phone', 'Mobile number', 'tel', 'tel')}${f('address', 'Street address', 'text', 'street-address', 'wide')}${f('city', 'City', 'text', 'address-level2')}
+      <div class="field"><label for="a-province">Province</label><select id="a-province" name="province" ${e.province ? 'aria-invalid="true" aria-describedby="ae-province"' : ''}><option value="">Select province</option>${PROVINCES.map(p => `<option ${a.province === p ? 'selected' : ''}>${p}</option>`).join('')}</select>${e.province ? `<p class="field-err" id="ae-province">${e.province}</p>` : ''}</div>
+      ${f('postcode', 'Postal code <small>(optional)</small>', 'text', 'postal-code')}</div>
+    <div class="form-actions"><button class="btn" data-key="addr-save">Save address</button><button class="btn ghost" type="button" data-act="addr-cancel">Cancel</button></div></form>`;
+}
+function account(tab, sub) {
+  const pr = S.profile, first = pr.name.split(' ')[0] || 'there', initials = pr.name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+  const tabs = [['overview', 'Overview'], ['orders', 'Orders', S.orders.length], ['wishlist', 'Wishlist', S.wish.length], ['addresses', 'Addresses', S.addr.length], ['profile', 'Profile']];
+  const nav = `<nav class="acct-nav" aria-label="My account">${tabs.map(([k, l, n]) => `<a href="#/account${k === 'overview' ? '' : '/' + k}" ${tab === k ? 'aria-current="page"' : ''}>${ico(k)}<span>${l}</span>${n !== undefined ? `<em>${n}</em>` : ''}</a>`).join('')}
+    <button class="acct-out" type="button" data-act="signout">Sign out</button></nav>`;
+  let body;
+  if (tab === 'orders' && sub) {
+    const o = S.orders.find(x => String(x.no) === sub);
+    body = !o ? `<div class="empty"><h2>Order not found</h2><a class="btn" href="#/account/orders">Back to orders</a></div>` : `
+      <p class="small"><a class="link" href="#/account/orders">← All orders</a></p>
+      <div class="panel"><div class="panel-head"><div><h2 class="panel-title">Order #${esc(o.no)}</h2><p class="muted small">Placed ${esc(o.date)}${o.sample ? ' · sample order' : ''}</p></div>${statusPill(o)}</div>
+        <ol class="timeline">${STEPS.map((t, i) => `<li class="${i <= o.status ? 'done' : ''} ${i === o.status ? 'now' : ''}"><span></span>${t}</li>`).join('')}</ol></div>
+      <div class="panel"><h3 class="panel-sub">Items</h3>${o.lines.map(l => { const p = byId(l.id); const c = p && p.colors.find(x => x.name === l.color); return `<div class="mini"><span class="thumb">${p ? media(p, c) : ''}</span><span style="flex:1"><b>${esc(l.name)}</b>${l.color} · size ${l.size} · qty ${l.qty}</span><strong>${rs(l.total)}</strong></div>`; }).join('')}
+        <dl class="totals" style="border-top:1px solid var(--line);margin-top:.6rem;padding-top:.9rem"><div><dt>Subtotal</dt><dd>${rs(o.sub)}</dd></div><div><dt>${DELIVERY.title}</dt><dd>${rs(DELIVERY.fee)}</dd></div><div class="grand"><dt>Total · cash on delivery</dt><dd>${rs(o.total)}</dd></div></dl></div>
+      <div class="acct-cols"><div class="panel"><h3 class="panel-sub">Delivering to</h3><p class="muted">${esc(o.f.first)} ${esc(o.f.last)}<br>${esc(o.f.address)}<br>${esc(o.f.city)}, ${esc(o.f.province)}<br>${esc(o.f.phone)}</p></div>
+        <div class="panel"><h3 class="panel-sub">Payment</h3><p class="muted">Cash on delivery. Check your parcel before paying the courier.</p>${o.status === 3 ? '<a class="btn ghost" href="#/page/feedback">Share feedback</a>' : ''}</div></div>`;
+  } else if (tab === 'orders') {
+    body = `<h1 class="acct-h">Orders</h1>${S.orders.length ? S.orders.map(o => `
+      <a class="order-card" href="#/account/orders/${encodeURIComponent(o.no)}">
+        <div class="order-head"><span><b>Order #${esc(o.no)}</b><span class="muted small">${esc(o.date)} · ${o.lines.reduce((n, l) => n + l.qty, 0)} item(s)</span></span>${statusPill(o)}</div>
+        <div class="order-foot"><span class="order-thumbs">${orderThumbs(o)}</span><span class="order-total"><span class="muted small">Total</span><b>${rs(o.total)}</b></span><span class="order-go" aria-hidden="true">→</span></div>
+      </a>`).join('') : `<div class="empty"><h2>No orders yet</h2><p class="muted">When you place an order it will show up here.</p><a class="btn" href="#/c/all">Start shopping</a></div>`}`;
+  } else if (tab === 'wishlist') {
+    const items = S.wish.map(byId).filter(Boolean);
+    body = `<h1 class="acct-h">Wishlist</h1>${items.length ? `<p class="muted">${items.length} saved pair${items.length > 1 ? 's' : ''}. Tap the heart to remove one.</p>${grid(items)}` : `<div class="empty"><h2>Your wishlist is empty</h2><p class="muted">Tap the heart on any pair to save it here.</p><a class="btn" href="#/c/all">Browse footwear</a></div>`}`;
+  } else if (tab === 'addresses') {
+    body = `<div class="acct-head"><h1 class="acct-h">Addresses</h1>${S.addrForm === null ? '<button class="btn ghost" data-act="addr-new" data-key="addr-new">+ Add address</button>' : ''}</div>
+      ${S.addrForm !== null ? addrFormHTML() : ''}
+      <div class="addr-grid">${S.addr.map((a, i) => addrCard(a, i)).join('')}</div>
+      <p class="muted small">Your default address is filled in automatically at checkout.</p>`;
+  } else if (tab === 'profile') {
+    body = `<h1 class="acct-h">Profile</h1>
+      <form class="panel" data-profile novalidate><div class="form">
+        <div class="field wide"><label for="p-name">Full name</label><input id="p-name" name="name" autocomplete="name" value="${esc(pr.name)}"></div>
+        <div class="field"><label for="p-phone">Mobile number</label><input id="p-phone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" value="${esc(pr.phone)}"></div>
+        <div class="field"><label for="p-email">Email <small>(optional)</small></label><input id="p-email" name="email" type="email" autocomplete="email" value="${esc(pr.email)}"></div>
+        <label class="check wide"><input type="checkbox" name="whatsapp" ${pr.whatsapp ? 'checked' : ''}>Send order updates on WhatsApp</label></div>
+        <div class="form-actions"><button class="btn">Save changes</button></div></form>`;
+  } else {
+    const last = S.orders[0], wish = S.wish.map(byId).filter(Boolean).slice(0, 4);
+    body = `<h1 class="acct-h">Hi, ${esc(first)}</h1><p class="muted">Track orders, manage saved pairs and keep your delivery details up to date.</p>
+      <div class="stat-row">${[['orders', 'Orders', S.orders.length], ['wishlist', 'Wishlist', S.wish.length], ['addresses', 'Addresses', S.addr.length]].map(([k, l, n]) => `<a class="stat" href="#/account/${k}">${ico(k)}<b>${n}</b><span>${l}</span></a>`).join('')}</div>
+      ${last ? `<div class="panel"><div class="panel-head"><h2 class="panel-title">Latest order</h2><a class="link" href="#/account/orders">All orders</a></div>
+        <a class="order-card flat" href="#/account/orders/${encodeURIComponent(last.no)}"><div class="order-head"><span><b>Order #${esc(last.no)}</b><span class="muted small">${esc(last.date)}</span></span>${statusPill(last)}</div>
+        <ol class="timeline compact">${STEPS.map((t, i) => `<li class="${i <= last.status ? 'done' : ''} ${i === last.status ? 'now' : ''}"><span></span>${t}</li>`).join('')}</ol></a></div>` : ''}
+      ${wish.length ? `<div class="panel"><div class="panel-head"><h2 class="panel-title">Saved for later</h2><a class="link" href="#/account/wishlist">View wishlist</a></div>${grid(wish, 'four')}</div>` : ''}
+      ${S.addr[0] ? `<div class="panel"><div class="panel-head"><h2 class="panel-title">Default address</h2><a class="link" href="#/account/addresses">Manage</a></div>${addrCard(S.addr[0], 0, false)}</div>` : ''}`;
+  }
+  return `<div class="shell"><nav class="crumb" aria-label="Breadcrumb"><a href="#/">Home</a><span aria-hidden="true">/</span>${tab === 'overview' ? '<span>My account</span>' : `<a href="#/account">My account</a><span aria-hidden="true">/</span><span>${tabs.find(t => t[0] === tab)?.[1] || ''}</span>`}</nav>
+    <div class="acct"><aside class="acct-side"><div class="acct-user"><span class="avatar lg" aria-hidden="true">${esc(initials)}</span><span><b>${esc(pr.name)}</b><span class="muted small">${esc(pr.phone)}</span></span></div>${nav}</aside>
+    <div class="acct-main">${body}</div></div>
+    <p class="muted small acct-note">Demo account · sample orders and addresses for the prototype.</p></div>`;
 }
 
 /* ---------- static pages ---------- */
@@ -578,6 +750,7 @@ document.addEventListener('click', e => {
   switch (act) {
     case 'slide': showSlide(slideI + +el.dataset.d); break;
     case 'slide-to': showSlide(+el.dataset.i); break;
+    case 'hero-pause': heroPaused = !heroPaused; heroSync(); break;
     case 'open-menu': $('#menu').showModal(); break;
     case 'close-dialog': el.closest('dialog').close(); break;
     case 'open-search': toggleSearch($('#searchbar').hidden); break;
@@ -595,10 +768,28 @@ document.addEventListener('click', e => {
     case 'cart-qty': { const l = S.cart[+el.dataset.i]; l.qty = Math.max(1, Math.min(stockOf(byId(l.id), l.color, l.size), l.qty + +el.dataset.d)); saveCart(); re(); break; }
     case 'cart-rm': S.cart.splice(+el.dataset.i, 1); saveCart(); render(true); $('#main').focus({ preventScroll: true }); break;
     case 'signin': $('#signin').showModal(); break;
+    case 'wish': {
+      const id = el.dataset.id, i = S.wish.indexOf(id), p2 = byId(id);
+      i < 0 ? S.wish.unshift(id) : S.wish.splice(i, 1); saveWish();
+      toast(`<div><strong>${i < 0 ? 'Saved to wishlist' : 'Removed from wishlist'}</strong><br>${esc(p2.name)}</div><div class="row"><a class="btn ghost" href="#/account/wishlist">View wishlist (${S.wish.length})</a></div>`);
+      re(); break;
+    }
+    case 'signout': toast('<div><strong>Demo account</strong><br>Signing out isn’t simulated in this prototype.</div>'); break;
+    case 'addr-new': S.addrForm = 'new'; S.addrErr = {}; S.focusKey = 'addr-save'; render(true); $('#a-name').focus(); break;
+    case 'addr-edit': S.addrForm = +el.dataset.i; S.addrErr = {}; render(true); $('[data-addr-form]').scrollIntoView({ block: 'start' }); $('#a-name').focus(); break;
+    case 'addr-cancel': S.addrForm = null; S.addrErr = {}; S.focusKey = 'addr-new'; render(true); break;
+    case 'addr-default': { const [a] = S.addr.splice(+el.dataset.i, 1); S.addr.unshift(a); store.set('vs-addr', S.addr); render(true); toast(`<div><strong>${esc(a.label)} is now your default address</strong></div>`); break; }
+    case 'addr-rm': { const [a] = S.addr.splice(+el.dataset.i, 1); store.set('vs-addr', S.addr); render(true); toast(`<div><strong>${esc(a.label)} address removed</strong></div>`); break; }
+    case 'use-addr': {
+      const a = S.addr[+el.dataset.i], [first, ...rest] = a.name.split(' ');
+      Object.assign(S.co.f, { first, last: rest.join(' '), phone: a.phone, address: a.address, city: a.city, province: a.province, postcode: a.postcode || '' });
+      S.co.errors = {}; store.set('vs-co', S.co); render(true); break;
+    }
     case 'co-edit': S.co.step = +el.dataset.n; store.set('vs-co', S.co); S.focusKey = 'co-next'; render(true); break;
     case 'place': {
       const sub = subtotal();
-      S.order = { no: 1000 + Math.floor(Math.random() * 9000), f: { ...S.co.f }, sub, total: sub + DELIVERY.fee, lines: S.cart.map(l => ({ name: byId(l.id).name, color: l.color, size: l.size, qty: l.qty, total: priceOf(byId(l.id), l.size) * l.qty })) };
+      S.order = { no: 1000 + Math.floor(Math.random() * 9000), f: { ...S.co.f }, sub, off: saving(), total: sub + DELIVERY.fee, lines: S.cart.map(l => ({ name: byId(l.id).name, color: l.color, size: l.size, qty: l.qty, total: priceOf(byId(l.id), l.size) * l.qty })) };
+      S.orders = [{ ...S.order, no: String(S.order.no), date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }), status: 0, lines: S.cart.map(l => ({ id: l.id, name: byId(l.id).name, color: l.color, size: l.size, qty: l.qty, total: priceOf(byId(l.id), l.size) * l.qty })) }, ...S.orders]; store.set('vs-orders', S.orders);
       store.set('vs-order', S.order); S.cart = []; saveCart(); S.co.step = 1; store.set('vs-co', S.co); location.hash = '#/done'; break;
     }
   }
@@ -618,6 +809,23 @@ document.addEventListener('submit', e => {
   if (f.id === 'search-form' || 'searchInline' in f.dataset) {
     const v = f.querySelector('input').value.trim(); toggleSearch(false);
     location.hash = '#/search' + (v ? '?q=' + encodeURIComponent(v) : ''); return;
+  }
+  if ('addrForm' in f.dataset) {
+    const d = Object.fromEntries(new FormData(f)), e = {}, ph = (d.phone || '').replace(/[\s-]/g, '');
+    if (!d.name.trim()) e.name = 'Enter the recipient’s name.';
+    if (!/^03\d{9}$/.test(ph)) e.phone = 'Enter an 11-digit mobile number starting with 03.';
+    if (d.address.trim().length < 5) e.address = 'Enter the street address.';
+    if (!d.city.trim()) e.city = 'Enter the city.';
+    if (!d.province) e.province = 'Choose the province.';
+    if (d.postcode && !/^\d{5}$/.test(d.postcode.trim())) e.postcode = 'Postal codes are 5 digits.';
+    if (Object.keys(e).length) { S.addrErr = e; render(true); $('[data-addr-form] [aria-invalid=true]')?.focus(); return; }
+    S.addrForm === 'new' ? S.addr.push(d) : (S.addr[S.addrForm] = d);
+    store.set('vs-addr', S.addr); S.addrForm = null; S.addrErr = {}; render(true); toast('<div><strong>Address saved</strong></div>'); return;
+  }
+  if ('profile' in f.dataset) {
+    const d = Object.fromEntries(new FormData(f));
+    S.profile = { name: d.name.trim() || S.profile.name, phone: d.phone, email: d.email, whatsapp: !!d.whatsapp };
+    store.set('vs-profile', S.profile); render(true); toast('<div><strong>Profile saved</strong><br>Changes are kept in this browser only.</div>'); return;
   }
   if ('feedback' in f.dataset) {
     store.set('vs-feedback', Object.fromEntries(new FormData(f)));
