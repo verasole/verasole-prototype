@@ -363,17 +363,18 @@ function home() {
       </div>
     </div></section>`;
 }
+const HERO_RATE = 0.65, HERO_STILL_MS = 8000;
 let slideI = 0, heroPaused = false, heroT = 0;
 function heroSync() {
   const h = $('#hero'); if (!h) return;
   const v = $('#hero-video'), b = $('#hero-pause');
-  if (v) { if (!heroPaused && slideI === 0) v.play().catch(() => {}); else v.pause(); }
+  if (v) { v.defaultPlaybackRate = v.playbackRate = HERO_RATE; if (!heroPaused && slideI === 0) v.play().catch(() => {}); else v.pause(); }
   b.textContent = heroPaused ? '▶' : '❚❚';
   b.setAttribute('aria-label', heroPaused ? 'Play banner motion' : 'Pause banner motion');
   clearTimeout(heroT);
   if (!heroPaused) heroT = setTimeout(() => {
     if (h.matches(':hover') || h.contains(document.activeElement)) heroSync(); else showSlide(slideI + 1);
-  }, slideI === 0 ? 12000 : 6500);
+  }, slideI === 0 ? Math.round(12000 / HERO_RATE) : HERO_STILL_MS);
 }
 function showSlide(i) {
   const el = document.querySelectorAll('#hero .hx-slide'); if (!el.length) return;
