@@ -131,10 +131,10 @@ function render(keepScroll) {
   slideI = 0;
 }
 const shopGroups = [
-  ['Men', 'Men', ['chappals', 'sandals', 'shoes']],
-  ['Women', 'Women', ['chappals', 'sandals']],
+  ['Men', 'Men', ['chappals', 'sandals', 'shoes'], 'peshawari-camel'],
+  ['Women', 'Women', ['chappals', 'sandals'], 'ruched-slingback-sandal'],
   ['Kids', 'Kids', ['school-shoes']],
-  ['School shoes', '', ['all']],
+  ['School shoes', '', []],
 ];
 
 function navs(r) {
@@ -144,11 +144,20 @@ function navs(r) {
     const current = routeType === 'c' && category === slug && (r.q.get('who') || '') === who;
     return `<a href="${href}" ${current ? 'aria-current="page"' : ''}>${label}</a>`;
   };
-  const groups = shopGroups.map(([label, who, categories]) => {
+  const groups = shopGroups.map(([label, who, categories, featuredId]) => {
     const items = who
       ? [link('All ' + label.toLowerCase() + ' footwear', 'all', who), ...categories.map(slug => link(CATS[slug].name, slug, who))]
       : [link('All school shoes', 'school-shoes'), '<a href="#/page/size-guide">School shoe size guide</a>'];
-    return `<details class="shop-group"><summary>${label}</summary><div class="shop-submenu">${items.join('')}</div></details>`;
+    const product = featuredId && byId(featuredId);
+    const feature = product
+      ? `<a class="menu-feature" href="#/p/${product.id}">
+           <img src="${product.colors[0].imgs[0].card}" alt="" width="640" height="800" loading="lazy">
+           <span><small>Featured pair</small><strong>${esc(product.name)}</strong><span>${rs(product.price)} →</span></span>
+         </a>`
+      : '<a class="menu-feature menu-fit" href="#/page/size-guide"><span><small>School shoe sizing</small><strong>Find the right fit</strong><span>Open size guide →</span></span></a>';
+    return `<details class="shop-group"><summary>${label}</summary>
+      <div class="shop-submenu"><div class="shop-submenu-inner shell"><div class="submenu-categories"><span class="submenu-title">Shop ${label.toLowerCase()}</span>${items.join('')}</div>${feature}</div></div>
+    </details>`;
   }).join('');
   $('#nav').innerHTML = groups + link('All footwear', 'all');
   $('#menu-links').innerHTML = groups + link('All footwear', 'all') + '<a href="#/page/size-guide">Size guide</a><a href="#/page/delivery">Delivery</a>';
@@ -251,9 +260,18 @@ function home() {
         : `<a class="cat art" href="#/c/${s}"><svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 44V22c8 0 12-10 22-10 6 0 8 8 18 12l40 10c14 3 22 6 24 12v6H8Z M8 44h104"/></svg><span class="cat-label"><strong>${CATS[s].name}</strong><span>${count(s)} styles</span></span></a>`).join('')}</div>
     </section>
     ${row('new-t', 'Just in', 'New arrivals', '#/c/all', ids(['trail-strap-sandal', 'go-ran-knit-slip-on', 'ruched-slingback-sandal', 'peshawari-coffee']))}
-    <section class="section duo" aria-label="Shop by collection" style="padding-top:0">
-      <a class="promo" href="#/search?q=wej"><img src="img/crossover-slide-pink-dark.jpg" alt="" loading="lazy"><span><em>For her</em><strong>Slides and sandals by Wej</strong><u>Shop women’s</u></span></a>
-      <a class="promo" href="#/c/shoes"><img src="img/m-knit-black-dark.jpg" alt="" loading="lazy"><span><em>For him</em><strong>Knit slip-ons for all-day wear</strong><u>Shop men’s shoes</u></span></a>
+    <section class="section collection-edit" aria-labelledby="collection-edit-title">
+      <h2 id="collection-edit-title">Shop by collection</h2>
+      <div class="collection-edit-grid">
+        <a class="collection-tile collection-tile-women" href="#/c/all?who=Women">
+          <img src="img/crossover-slide-pink-clean-card.jpg" alt="" width="640" height="800" loading="lazy">
+          <div class="collection-tile-copy"><h3>Slides &amp; sandals by Wej</h3><span>Shop women’s <span aria-hidden="true">↗</span></span></div>
+        </a>
+        <a class="collection-tile collection-tile-men" href="#/c/shoes?who=Men">
+          <img src="img/m-knit-black-clean-card.jpg" alt="" width="640" height="800" loading="lazy">
+          <div class="collection-tile-copy"><h3>Everyday knit slip-ons</h3><span>Shop men’s shoes <span aria-hidden="true">↗</span></span></div>
+        </a>
+      </div>
     </section>
     ${row('chp-t', 'Everyday classics', 'Chappals collection', '#/c/chappals', ids(['peshawari-camel', 'double-strap-comfort-slide', 'crossover-buckle-slide', 'embossed-buckle-slide']))}
     </div>
