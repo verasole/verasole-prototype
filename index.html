@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>VeraSole — storefront prototype</title>
+<link rel="icon" type="image/svg+xml" href="img/mark.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=1794753766">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<p class="ribbon">Design prototype · sample prices and policies · no real orders</p>
+
+<header class="header">
+  <div class="shell header-in">
+    <button class="icon-btn only-mobile" data-act="open-menu" aria-label="Open menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 7h18M3 12h18M3 17h18"/></svg>
+    </button>
+    <a class="wordmark" href="#/" aria-label="VeraSole home"><img src="img/wordmark.webp" width="480" height="208" alt="VeraSole"></a>
+    <nav class="nav only-desktop" aria-label="Shop" id="nav"></nav>
+    <div class="header-actions">
+      <button class="icon-btn" data-act="open-search" aria-label="Search footwear" aria-expanded="false" aria-controls="searchbar">
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+      </button>
+      <a class="icon-btn bag" href="#/cart" id="bag-link">
+        <svg width="21" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8Z M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+        <span class="bag-count" id="bag-count" hidden></span>
+      </a>
+    </div>
+  </div>
+  <div class="searchbar" id="searchbar" hidden>
+    <div class="shell">
+      <form role="search" id="search-form" class="search-form">
+        <label class="sr" for="q">Search footwear</label>
+        <input id="q" type="search" name="q" autocomplete="off" placeholder="Try “peshawari”, “black sandal” or “Bata”" aria-controls="suggest" aria-autocomplete="list">
+        <button class="btn" type="submit">Search</button>
+        <button class="icon-btn" type="button" data-act="close-search" aria-label="Close search">✕</button>
+      </form>
+      <div id="suggest" class="suggest" aria-live="polite"></div>
+    </div>
+  </div>
+</header>
+
+<main id="main" tabindex="-1"></main>
+
+<footer class="footer">
+  <div class="shell footer-in">
+    <div>
+      <img class="footer-mark" src="img/wordmark-light.webp" width="480" height="208" alt="VeraSole">
+      <p>Everyday footwear for Pakistan.</p>
+    </div>
+    <nav aria-label="Shop categories">
+      <h2>Shop</h2>
+      <a href="#/c/all">All footwear</a><a href="#/c/chappals">Chappals</a><a href="#/c/sandals">Sandals</a><a href="#/c/shoes">Shoes</a><a href="#/c/school-shoes">School shoes</a>
+    </nav>
+    <nav aria-label="Help and policies">
+      <h2>Help</h2>
+      <a href="#/page/delivery">Delivery</a><a href="#/page/exchanges">Exchanges &amp; returns</a><a href="#/page/payment">Cash on delivery</a><a href="#/page/size-guide">Size guide</a>
+    </nav>
+    <nav aria-label="Contact">
+      <h2>Contact</h2>
+      <a href="#/page/contact">Contact us</a><a href="#/page/contact">Ask on WhatsApp</a>
+      <p class="muted small">Phone, WhatsApp and address to be added once confirmed.</p>
+    </nav>
+  </div>
+  <p class="shell legal">© 2026 VeraSole · Prices in PKR</p>
+</footer>
+
+<dialog id="menu" class="drawer drawer-left" aria-label="Menu">
+  <div class="drawer-head"><strong>Shop</strong><button class="icon-btn" data-act="close-dialog" aria-label="Close menu">✕</button></div>
+  <nav class="menu-links" id="menu-links" aria-label="Shop"></nav>
+</dialog>
+
+<dialog id="sizeguide" class="modal" aria-labelledby="sg-title">
+  <div class="drawer-head"><h2 id="sg-title">Size guide</h2><button class="icon-btn" data-act="close-dialog" aria-label="Close size guide">✕</button></div>
+  <div id="sg-body"></div>
+</dialog>
+
+<dialog id="signin" class="modal" aria-labelledby="si-title">
+  <div class="drawer-head"><h2 id="si-title">Sign in</h2><button class="icon-btn" data-act="close-dialog" aria-label="Close">✕</button></div>
+  <p>In the live store this opens Bagisto’s customer sign-in, then returns you to checkout with saved addresses.</p>
+  <p class="muted">Sign-in isn’t simulated in this prototype. Continue as a guest to test the flow.</p>
+  <button class="btn" data-act="close-dialog">Continue as guest</button>
+</dialog>
+
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="app.js?v=1794753766"></script>
+</body>
+</html>
