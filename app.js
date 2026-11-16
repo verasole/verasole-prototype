@@ -119,7 +119,7 @@ function render(keepScroll) {
   if (S.focusKey) { const el = document.querySelector(`[data-key="${CSS.escape(S.focusKey)}"]`); if (el) el.focus({ preventScroll: true }); S.focusKey = null; }
   else if (!keepScroll && lastPath !== null && lastPath !== r.path) { window.scrollTo(0, 0); }
   lastPath = r.path;
-  slider();
+  slideI = 0;
 }
 function navs(r) {
   const cur = r.parts[0] === 'c' ? r.parts[1] : null;
@@ -175,7 +175,7 @@ function home() {
             <p class="eyebrow">${s.kicker}</p>
             <p class="slide-title">${s.title}</p>
             <p class="slide-text">${s.text}</p>
-            <div class="hero-actions"><a class="btn gold" href="${s.cta[1]}">${s.cta[0]} <span aria-hidden="true">→</span></a><a class="btn line" href="#/p/${p.id}">${p.name} · ${rs(p.price)}</a></div>
+            <div class="hero-actions"><a class="btn gold" href="${s.cta[1]}">${s.cta[0]} <span aria-hidden="true">→</span></a><a class="btn line" href="#/c/all">Shop all footwear</a></div><p class="hero-cod">Check your parcel before you pay.</p>
           </div>
           <a class="slide-photo" href="#/p/${p.id}" tabindex="-1" aria-hidden="true"><img src="img/${s.bg}-dark.jpg" alt="" width="1200" height="1500" ${i ? 'loading="lazy"' : 'fetchpriority="high"'}></a>
         </div>
@@ -184,16 +184,15 @@ function home() {
         <button class="ctl" data-act="slide" data-d="-1" aria-label="Previous slide">←</button>
         <span class="count2" id="slide-n" aria-hidden="true">01 / 0${SLIDES.length}</span><div class="dots2">${SLIDES.map((s, i) => `<button data-act="slide-to" data-i="${i}" aria-label="Show slide ${i + 1}" aria-current="${!i}"></button>`).join('')}</div>
         <button class="ctl" data-act="slide" data-d="1" aria-label="Next slide">→</button>
-        <button class="ctl" data-act="slide-pause" aria-label="Pause slideshow" id="slide-pause">❚❚</button>
       </div>
     </section>
-    <div class="trustbar"><ul class="shell" aria-label="How ordering works"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></svg><span><b>Cash on delivery</b>Pay when your order arrives</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg><span><b>Prices in PKR</b>Delivery fee shown at checkout</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17v-5c3 0 4-4 7-4 1.5 0 2 2.5 5 3.5l4 1.3c1.4.5 2 1.4 2 2.7V17z"/><path d="M3 17v2h18v-2"/></svg><span><b>Your size, your colour</b>EU 36–45 and school sizes 1–9</span></li></ul></div>
+    <div class="trustbar"><ul class="shell" aria-label="How ordering works"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></svg><span><b>Cash on delivery</b>Check your parcel before you pay</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg><span><b>Prices in PKR</b>Delivery fee shown at checkout</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17v-5c3 0 4-4 7-4 1.5 0 2 2.5 5 3.5l4 1.3c1.4.5 2 1.4 2 2.7V17z"/><path d="M3 17v2h18v-2"/></svg><span><b>Your size, your colour</b>EU 36–45 and school sizes 1–9</span></li></ul></div>
     <div class="shell">
     <section class="section" aria-labelledby="cat-title">
       <div class="section-head"><div><p class="eyebrow">Find the right pair</p><h2 id="cat-title">Shop by category</h2></div><a class="link" href="#/c/all">View all footwear</a></div>
       <div class="cats">${tiles.map(([s, pid]) => pid
         ? `<a class="cat" href="#/c/${s}"><img src="${byId(pid).colors[0].imgs[0].card.replace('-clean-card', '-dark-card')}" alt="" loading="lazy" width="640" height="800"><span class="cat-label"><strong>${CATS[s].name}</strong><span>${count(s)} styles</span></span></a>`
-        : `<a class="cat art" href="#/c/${s}"><svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 44V22c8 0 12-10 22-10 6 0 8 8 18 12l40 10c14 3 22 6 24 12v6H8Z M8 44h104"/></svg><span class="cat-label"><strong>${CATS[s].name}</strong><span>${count(s)} styles · photos pending</span></span></a>`).join('')}</div>
+        : `<a class="cat art" href="#/c/${s}"><svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 44V22c8 0 12-10 22-10 6 0 8 8 18 12l40 10c14 3 22 6 24 12v6H8Z M8 44h104"/></svg><span class="cat-label"><strong>${CATS[s].name}</strong><span>${count(s)} styles</span></span></a>`).join('')}</div>
     </section>
     ${row('new-t', 'Just in', 'New arrivals', '#/c/all', ids(['trail-strap-sandal', 'go-ran-knit-slip-on', 'ruched-slingback-sandal', 'peshawari-coffee']))}
     <section class="section duo" aria-label="Shop by collection" style="padding-top:0">
@@ -219,7 +218,7 @@ function home() {
       </div>
     </div></section>`;
 }
-let slideT, slideI = 0, slidePaused = false;
+let slideI = 0;
 function showSlide(i) {
   const el = document.querySelectorAll('#hero .slide'); if (!el.length) return;
   slideI = (i + el.length) % el.length;
@@ -227,15 +226,6 @@ function showSlide(i) {
   $('#slide-n').textContent = `0${slideI + 1} / 0${el.length}`;
   document.querySelectorAll('.dots2 button').forEach((d, n) => d.setAttribute('aria-current', n === slideI));
 }
-function slider() {
-  clearInterval(slideT); const h = $('#hero'); if (!h) return;
-  slideI = 0;
-  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (still) slidePaused = true;
-  const b = $('#slide-pause'); b.textContent = slidePaused ? '▶' : '❚❚'; b.setAttribute('aria-label', slidePaused ? 'Play slideshow' : 'Pause slideshow');
-  slideT = setInterval(() => { if (!slidePaused && !h.matches(':hover') && !h.contains(document.activeElement)) showSlide(slideI + 1); }, 6000);
-}
-
 /* ---------- search ---------- */
 function searchProducts(query) {
   const toks = query.toLowerCase().replace(/[^\w\s-]/g, ' ').split(/\s+/).filter(Boolean).map(t => SYN[t] || t);
@@ -358,7 +348,7 @@ function pdp(p, q) {
         </div>
         ${soldOut ? '<p class="muted small" style="margin-top:.8rem">This style is currently unavailable in every size.</p>' : ''}
         <div class="notes">
-          <details open><summary>Delivery &amp; payment</summary><p>Pay cash on delivery. ${DELIVERY.title} is ${rs(DELIVERY.fee)} per order, shown again at checkout.</p></details>
+          <details open><summary>Delivery &amp; payment</summary><p>Check your parcel before paying in cash. ${DELIVERY.title} is ${rs(DELIVERY.fee)} per order, shown again at checkout.</p></details>
           <details><summary>Exchanges</summary><p>Exchange terms will be listed here once confirmed.</p></details>
           <details><summary>Product details</summary><p>Article ${esc(p.sku)} · ${CATS[p.cat].name} · ${p.who} · Sizes ${p.sizes[0]}–${p.sizes.at(-1)}</p></details>
         </div>
@@ -389,7 +379,7 @@ function totals(withDelivery = true) {
   return `<dl class="totals"><div><dt>Subtotal (${cartQty()} item${cartQty() === 1 ? '' : 's'})</dt><dd>${rs(sub)}</dd></div>
     <div><dt>${DELIVERY.title}</dt><dd>${rs(DELIVERY.fee)}</dd></div>
     <div class="grand"><dt>Total</dt><dd>${rs(sub + DELIVERY.fee)}</dd></div></dl>
-    <p class="muted small" style="margin:.6rem 0 0">Pay in cash when your order arrives.</p>`;
+    <p class="muted small" style="margin:.6rem 0 0">Check your parcel before paying the courier in cash.</p>`;
 }
 function cart() {
   if (!S.cart.length) return `<div class="shell"><div class="empty" style="margin:2rem 0 3rem"><h1 style="font-size:2rem">Your bag is empty</h1><p class="muted">Pick a pair and it will show up here.</p><div class="chips"><a class="btn" href="#/c/all">Shop all footwear</a></div></div></div>`;
@@ -408,16 +398,16 @@ function cart() {
 /* ---------- checkout ---------- */
 const PROVINCES = ['Punjab', 'Sindh', 'Khyber Pakhtunkhwa', 'Balochistan', 'Islamabad Capital Territory', 'Gilgit-Baltistan', 'Azad Jammu & Kashmir'];
 const FIELDS = [
-  ['email', 'Email', 'email', 'email', '', 'For your order confirmation.'],
   ['phone', 'Mobile number', 'tel', 'tel', '', 'Format 03XX XXXXXXX. The courier calls this number.'],
   ['first', 'First name', 'text', 'given-name'], ['last', 'Last name', 'text', 'family-name'],
   ['address', 'Street address', 'text', 'street-address', 'wide', 'House number, street, area or sector.'],
   ['city', 'City', 'text', 'address-level2'], ['province', 'Province', 'select', 'address-level1'],
+  ['email', 'Email <small>(optional)</small>', 'email', 'email'],
   ['postcode', 'Postal code <small>(optional)</small>', 'text', 'postal-code'],
 ];
 function validate(f) {
   const e = {}, ph = (f.phone || '').replace(/[\s-]/g, '').replace(/^\+?92/, '0');
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email || '')) e.email = f.email ? 'Enter a valid email, like name@example.com.' : 'Enter your email address.';
+  if (f.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim())) e.email = 'Enter a valid email address or leave this blank.';
   if (!/^03\d{9}$/.test(ph)) e.phone = f.phone ? 'Enter an 11-digit mobile number starting with 03.' : 'Enter your mobile number.';
   if (!(f.first || '').trim()) e.first = 'Enter your first name.';
   if (!(f.last || '').trim()) e.last = 'Enter your last name.';
@@ -429,7 +419,7 @@ function validate(f) {
 }
 function checkout() {
   if (!S.cart.length) return `<div class="shell"><div class="empty" style="margin:2rem 0 3rem"><h1 style="font-size:2rem">Nothing to check out yet</h1><p class="muted">Your bag is empty.</p><div class="chips"><a class="btn" href="#/c/all">Shop all footwear</a></div></div></div>`;
-  const { step, f, errors } = S.co, errs = Object.entries(errors);
+  const { f, errors } = S.co, step = S.co.step > 1 ? 2 : 1, errs = Object.entries(errors);
   const cls = n => n === step ? 'current' : n < step ? 'done' : 'todo';
   const head = (n, t, sum) => `<div class="step-head"><span class="step-n" aria-hidden="true">${n < step ? '✓' : n}</span><h2>${t}</h2>${n < step ? `<button class="link" data-act="co-edit" data-n="${n}" data-key="edit-${n}" aria-label="Edit ${t.toLowerCase()}">Edit</button>` : ''}</div>${n < step ? `<p class="muted small" style="margin:.5rem 0 0 2.4rem">${sum}</p>` : ''}`;
   const field = ([k, label, type, ac, cl = '', hint]) => `<div class="field ${cl}"><label for="f-${k}">${label}</label>${type === 'select'
@@ -438,22 +428,16 @@ function checkout() {
     ${errors[k] ? `<p class="field-err" id="e-${k}">${errors[k]}</p>` : hint ? `<p class="hint" id="h-${k}">${hint}</p>` : ''}</div>`;
   return `<div class="shell"><header class="list-head" style="padding-top:1.5rem"><p class="small"><a class="link" href="#/cart">← Back to bag</a></p><h1>Checkout</h1></header>
   <div class="two"><div>
-    <div class="guest-note"><span>You’re checking out as a guest.</span><button class="link" data-act="signin">Have an account? Sign in</button></div>
+    <p class="checkout-cod"><strong>${rs(subtotal() + DELIVERY.fee)} due on delivery</strong><br>${DELIVERY.title} · ${rs(DELIVERY.fee)}. Inspect your parcel before paying in cash.</p>
     <section class="step ${cls(1)}" aria-labelledby="s1">${head(1, 'Contact &amp; delivery address', `${esc(f.first || '')} ${esc(f.last || '')} · ${esc(f.phone || '')}<br>${esc(f.address || '')}, ${esc(f.city || '')}, ${esc(f.province || '')}`).replace('<h2>', '<h2 id="s1">')}
       ${step === 1 ? `<form class="step-body" data-co-form novalidate>
         ${errs.length ? `<div class="err-box" role="alert" tabindex="-1" id="err-box"><strong>Please fix ${errs.length} field${errs.length > 1 ? 's' : ''} to continue</strong><ul>${errs.map(([k, m]) => `<li><a href="#f-${k}" data-focus="f-${k}">${m}</a></li>`).join('')}</ul></div>` : ''}
         <div class="form">${FIELDS.map(field).join('')}
           <div class="field wide"><label for="f-country">Country</label><input id="f-country" value="Pakistan" readonly aria-describedby="h-country"><p class="hint" id="h-country">VeraSole delivers within Pakistan.</p></div></div>
-        <button class="btn" style="margin-top:1.1rem" data-key="co-next">Continue to delivery</button></form>` : ''}</section>
-    <section class="step ${cls(2)}" aria-labelledby="s2">${head(2, 'Delivery', `${DELIVERY.title} · ${rs(DELIVERY.fee)}`).replace('<h2>', '<h2 id="s2">')}
-      ${step === 2 ? `<div class="step-body"><label class="radio-card"><input type="radio" name="ship" checked><span><strong>${DELIVERY.title}</strong><small>${DELIVERY.note}</small></span><strong>${rs(DELIVERY.fee)}</strong></label>
-        <button class="btn" style="margin-top:1.1rem" data-act="co-next" data-key="co-next">Continue to payment</button></div>` : ''}</section>
-    <section class="step ${cls(3)}" aria-labelledby="s3">${head(3, 'Payment', 'Cash on delivery').replace('<h2>', '<h2 id="s3">')}
-      ${step === 3 ? `<div class="step-body"><label class="radio-card"><input type="radio" name="pay" checked><span><strong>Cash on delivery</strong><small>Pay in cash when your order arrives. No card details needed.</small></span></label>
-        <button class="btn" style="margin-top:1.1rem" data-act="co-next" data-key="co-next">Review order</button></div>` : ''}</section>
-    <section class="step ${cls(4)}" aria-labelledby="s4">${head(4, 'Review &amp; place order', '').replace('<h2>', '<h2 id="s4">')}
-      ${step === 4 ? `<div class="step-body">${S.cart.map(l => { const p = byId(l.id); return `<div class="mini">${lineImg(l)}<span style="flex:1"><b>${esc(p.name)}</b>${l.color} · size ${l.size} · qty ${l.qty}</span><strong>${rs(priceOf(p, l.size) * l.qty)}</strong></div>`; }).join('')}
-        <p class="muted small" style="margin:.8rem 0">You’ll pay <strong>${rs(subtotal() + DELIVERY.fee)}</strong> in cash on delivery. If a pair turns out to be unavailable, we’ll contact you with your options.</p>
+        <button class="btn" style="margin-top:1.1rem" data-key="co-next">Review order</button></form>` : ''}</section>
+    <section class="step ${cls(2)}" aria-labelledby="s2">${head(2, 'Review &amp; place order', '').replace('<h2>', '<h2 id="s2">')}
+      ${step === 2 ? `<div class="step-body">${S.cart.map(l => { const p = byId(l.id); return `<div class="mini">${lineImg(l)}<span style="flex:1"><b>${esc(p.name)}</b>${l.color} · size ${l.size} · qty ${l.qty}</span><strong>${rs(priceOf(p, l.size) * l.qty)}</strong></div>`; }).join('')}
+        <p class="muted small" style="margin:.8rem 0">Check your parcel before paying <strong>${rs(subtotal() + DELIVERY.fee)}</strong> in cash. If a pair turns out to be unavailable, we’ll contact you with your options.</p>
         <button class="btn block" data-act="place" data-key="co-next">Place order · ${rs(subtotal() + DELIVERY.fee)}</button></div>` : ''}</section>
   </div>
   <aside class="summary" aria-labelledby="sum-t"><h2 id="sum-t">Order summary</h2>
@@ -465,13 +449,13 @@ function done() {
   if (!o) return `<div class="shell prose"><h1>No recent order</h1><a class="btn" href="#/c/all">Shop all footwear</a></div>`;
   return `<div class="shell"><div class="confirm"><div class="tick" aria-hidden="true">✓</div>
     <p class="eyebrow">Order placed</p><h1>Order received.</h1>
-    <p style="font-size:1.1rem;margin-top:.8rem">Order <strong>#${o.no}</strong> · confirmation sent to ${esc(o.f.email)}</p>
+    <p style="font-size:1.1rem;margin-top:.8rem">Order <strong>#${o.no}</strong> · simulated order</p>
     <p class="muted">Thank you for shopping with VeraSole. You’ll pay ${rs(o.total)} in cash when your order arrives. If a pair is unavailable, we’ll contact you on ${esc(o.f.phone)} with your options.</p>
     <div class="summary" style="margin:1.5rem 0">
       ${o.lines.map(l => `<div class="mini"><span style="flex:1"><b>${esc(l.name)}</b>${l.color} · size ${l.size} · qty ${l.qty}</span><span>${rs(l.total)}</span></div>`).join('')}
       <dl class="totals" style="border-top:1px solid var(--line);margin-top:.6rem;padding-top:.9rem"><div><dt>Subtotal</dt><dd>${rs(o.sub)}</dd></div><div><dt>${DELIVERY.title}</dt><dd>${rs(DELIVERY.fee)}</dd></div><div class="grand"><dt>Total · cash on delivery</dt><dd>${rs(o.total)}</dd></div></dl>
       <p class="small muted" style="margin:1rem 0 0"><strong style="color:var(--ink)">Delivering to</strong><br>${esc(o.f.first)} ${esc(o.f.last)}<br>${esc(o.f.address)}, ${esc(o.f.city)}, ${esc(o.f.province)}${o.f.postcode ? ' ' + esc(o.f.postcode) : ''}, Pakistan</p>
-    </div><a class="btn" href="#/c/all">Continue shopping</a></div></div>`;
+    </div><div class="chips"><a class="btn" href="#/c/all">Continue shopping</a><a class="btn ghost" href="#/page/feedback">Share feedback after delivery</a></div></div></div>`;
 }
 
 /* ---------- static pages ---------- */
@@ -485,8 +469,13 @@ function page(slug) {
   const pages = {
     delivery: ['Delivery', `<p>${DELIVERY.title}: ${rs(DELIVERY.fee)} per order across Pakistan. You’ll see the charge before placing your order.</p><p class="tbc">Delivery times, courier and coverage will be published here once confirmed.</p>`],
     exchanges: ['Exchanges & returns', '<p class="tbc">Exchange and return terms will be published here once confirmed.</p>'],
-    payment: ['Cash on delivery', '<p>Pay in cash when your order arrives. No card or bank details are needed to order.</p><p>If a pair is out of stock we’ll contact you. You can wait for a restock or choose another style.</p>'],
+    payment: ['Cash on delivery', '<p>Check your parcel before paying the courier in cash. Check the style, size, and condition. If the pair is wrong or damaged, tell the courier before paying and contact VeraSole for help.</p><p>If a pair is out of stock we’ll contact you. You can wait for a restock or choose another style.</p>'],
     'size-guide': ['Size guide', sizeGuide()],
+    feedback: ['Share feedback', `<p>After delivery, tell us how the shoes fit and how your delivery went.</p>
+      <p class="muted small">Prototype feedback stays on this device.</p>
+      <form data-feedback><div class="field"><label for="fit-feedback">How did the shoes fit?</label><select id="fit-feedback" name="fit" required><option value="">Select an answer</option><option>Too small</option><option>Just right</option><option>Too large</option></select></div>
+      <div class="field"><label for="delivery-feedback">How was delivery?</label><select id="delivery-feedback" name="delivery" required><option value="">Select an answer</option><option>Good</option><option>Okay</option><option>Poor</option></select></div>
+      <div class="field"><label for="feedback-note">Comments (optional)</label><textarea id="feedback-note" name="comment" maxlength="500" rows="3"></textarea></div><button class="btn" type="submit">Save feedback</button></form><p role="status" id="feedback-status"></p>`],
     contact: ['Contact us', '<p class="tbc">Phone, WhatsApp number, email and shop address will be listed here once confirmed.</p>'],
   };
   const [t, body] = pages[slug] || ['Help', '<p>Page not found.</p>'];
@@ -508,7 +497,6 @@ document.addEventListener('click', e => {
   switch (act) {
     case 'slide': showSlide(slideI + +el.dataset.d); break;
     case 'slide-to': showSlide(+el.dataset.i); break;
-    case 'slide-pause': slidePaused = !slidePaused; el.textContent = slidePaused ? '▶' : '❚❚'; el.setAttribute('aria-label', slidePaused ? 'Play slideshow' : 'Pause slideshow'); break;
     case 'open-menu': $('#menu').showModal(); break;
     case 'close-dialog': el.closest('dialog').close(); break;
     case 'open-search': toggleSearch($('#searchbar').hidden); break;
@@ -527,7 +515,6 @@ document.addEventListener('click', e => {
     case 'cart-rm': S.cart.splice(+el.dataset.i, 1); saveCart(); render(true); $('#main').focus({ preventScroll: true }); break;
     case 'signin': $('#signin').showModal(); break;
     case 'co-edit': S.co.step = +el.dataset.n; store.set('vs-co', S.co); S.focusKey = 'co-next'; render(true); break;
-    case 'co-next': S.co.step++; store.set('vs-co', S.co); S.focusKey = 'co-next'; render(true); break;
     case 'place': {
       const sub = subtotal();
       S.order = { no: 1000 + Math.floor(Math.random() * 9000), f: { ...S.co.f }, sub, total: sub + DELIVERY.fee, lines: S.cart.map(l => ({ name: byId(l.id).name, color: l.color, size: l.size, qty: l.qty, total: priceOf(byId(l.id), l.size) * l.qty })) };
@@ -550,6 +537,12 @@ document.addEventListener('submit', e => {
   if (f.id === 'search-form' || 'searchInline' in f.dataset) {
     const v = f.querySelector('input').value.trim(); toggleSearch(false);
     location.hash = '#/search' + (v ? '?q=' + encodeURIComponent(v) : ''); return;
+  }
+  if ('feedback' in f.dataset) {
+    store.set('vs-feedback', Object.fromEntries(new FormData(f)));
+    f.reset();
+    $('#feedback-status').textContent = 'Thanks. Your feedback was saved on this device.';
+    return;
   }
   if ('coForm' in f.dataset) {
     S.co.errors = validate(S.co.f); const bad = Object.keys(S.co.errors);

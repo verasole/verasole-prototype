@@ -312,7 +312,6 @@ body.has-sticky{padding-bottom:78px}
   .hero2 .hero-actions .btn.line{display:inline-flex}
   .slide-ctl{bottom:22px}
 }
-}
 .trustbar{background:var(--surface);border-bottom:1px solid var(--line)}
 .trustbar ul{list-style:none;margin:0 auto;display:grid;gap:0;padding-top:.4rem;padding-bottom:.4rem}
 .trustbar li{display:flex;align-items:center;gap:.9rem;padding:.9rem 0;border-bottom:1px solid var(--line)}
@@ -360,3 +359,27 @@ body.has-sticky{padding-bottom:78px}
 .footer :focus-visible{outline-color:var(--gold)}
 .legal{margin-top:2rem;padding-top:1rem;border-top:1px solid rgba(247,238,226,.2);font-size:.85rem;color:rgba(247,238,226,.6)!important}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+.hero-cod{margin:.75rem 0 0;color:var(--cream);font-size:.88rem}
+.hero2 .hero-actions .btn.line{display:inline-flex}
+.hero2 .hero-actions{gap:.5rem}
+.checkout-cod{padding:.85rem 1rem;margin:0 0 1rem;background:var(--accent-soft);border-radius:var(--r-sm)}
+[data-feedback] .field{margin-bottom:1rem}
+[data-feedback] textarea{width:100%;padding:.65rem;border:1px solid var(--line);border-radius:var(--r-sm);font:inherit}
+.duo{grid-template-columns:minmax(0,1fr);gap:16px}
+.duo .promo{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:stretch;aspect-ratio:auto;min-height:190px}
+.duo .promo img{display:block;aspect-ratio:4/5;object-fit:contain;object-position:center}
+.duo .promo::after{content:none}
+.duo .promo span{position:static;align-content:center;padding:clamp(.65rem,2.5vw,1.5rem)}
+.duo .promo strong{font-size:clamp(1.15rem,2.8vw,1.85rem)}
+.duo .promo u{font-size:.85rem}
+@media(min-width:800px){.duo{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}}
+@media(max-width:519px){
+  .slide-in{min-height:clamp(430px,61svh,510px)}
+  .slide-copy{padding:0 0 64px}
+  .slide-title{font-size:clamp(1.95rem,8vw,2.6rem)}
+  .slide-text{margin-bottom:.7rem}
+  .hero2 .hero-actions .btn{font-size:.83rem;padding-inline:.65rem}
+  .header-actions{gap:0}
+  .header-actions .icon-btn{padding-inline:.35rem}
+}
