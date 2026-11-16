@@ -321,10 +321,11 @@ body.has-sticky{padding-bottom:78px}
 .trustbar span{color:var(--muted);font-size:.9rem;line-height:1.35}
 .trustbar b{display:block;color:var(--ink);font-size:1rem}
 @media(min-width:768px){
-  .trustbar ul{grid-template-columns:repeat(3,1fr);padding-top:1.4rem;padding-bottom:1.4rem}
-  .trustbar li{border-bottom:0;padding:0 1.5rem;border-left:1px solid var(--line);justify-content:center}
-  .trustbar li:first-child{border-left:0;padding-left:0;justify-content:flex-start}
-  .trustbar li:last-child{padding-right:0;justify-content:flex-end}
+  .trustbar ul{grid-template-columns:repeat(3,1fr);padding-top:1.5rem;padding-bottom:1.5rem}
+  .trustbar li{border-bottom:0;padding:.2rem 1.25rem;border-left:1px solid var(--line);justify-content:center}
+  .trustbar li:first-child{border-left:0}
+}
+@media(min-width:1100px){.trustbar svg{width:48px;height:48px;padding:11px}.trustbar li{gap:1.1rem}.trustbar b{font-size:1.05rem}}
 }
 .duo{display:grid;gap:12px}
 @media(min-width:800px){.duo{grid-template-columns:1fr 1fr;gap:20px}}
