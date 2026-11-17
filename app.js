@@ -248,7 +248,7 @@ const SLIDES = [
 ];
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 function hero() {
-  const n = SLIDES.length, pad = i => String(i).padStart(2, '0');
+  const n = SLIDES.length;
   return `<section class="hx" aria-roledescription="carousel" aria-label="Featured collections" id="hero">
       <h1 class="hx-h1 shell">Chappals, sandals and shoes online in Pakistan</h1>
       ${SLIDES.map((s, i) => `
@@ -264,8 +264,7 @@ function hero() {
         </div></div>
       </div>`).join('')}
       <div class="shell hx-ctl">
-        <span class="hx-count" id="slide-n" aria-hidden="true">${pad(1)} / ${pad(n)}</span>
-        <div class="hx-dots">${SLIDES.map((s, i) => `<button data-act="slide-to" data-i="${i}" aria-label="Show slide ${i + 1}" aria-current="${!i}"><span aria-hidden="true">${i + 1}</span></button>`).join('')}</div>
+        <div class="hx-dots">${SLIDES.map((s, i) => `<button data-act="slide-to" data-i="${i}" aria-label="Show slide ${i + 1}" ${i === 0 ? 'aria-current="true"' : ''}><span aria-hidden="true"></span></button>`).join('')}</div>
         <button class="hx-btn" data-act="slide" data-d="-1" aria-label="Previous slide">←</button>
         <button class="hx-btn" data-act="slide" data-d="1" aria-label="Next slide">→</button>
       </div>
@@ -377,11 +376,16 @@ function heroSync() {
   }
 }
 function showSlide(i) {
-  const el = document.querySelectorAll('#hero .hx-slide'); if (!el.length) return;
-  slideI = (i + el.length) % el.length;
-  el.forEach((s, n) => { s.hidden = n !== slideI; });
-  $('#slide-n').textContent = `${String(slideI + 1).padStart(2, '0')} / ${String(el.length).padStart(2, '0')}`;
-  document.querySelectorAll('.hx-dots button').forEach((d, n) => d.setAttribute('aria-current', n === slideI));
+  const hero = $('#hero');
+  if (!hero) return;
+
+  const slides = hero.querySelectorAll('.hx-slide');
+  slideI = (i + slides.length) % slides.length;
+  slides.forEach((slide, index) => { slide.hidden = index !== slideI; });
+  hero.querySelectorAll('[data-act="slide-to"]').forEach(button => {
+    if (Number(button.dataset.i) === slideI) button.setAttribute('aria-current', 'true');
+    else button.removeAttribute('aria-current');
+  });
   heroSync();
 }
 const heroMq = matchMedia('(max-width:899px)');

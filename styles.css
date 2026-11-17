@@ -30,6 +30,7 @@ button,input,select{font:inherit;color:inherit}
 .muted{color:var(--muted)} .small{font-size:.875rem}
 .eyebrow{font-size:.75rem;letter-spacing:var(--label-tracking);text-transform:uppercase;color:var(--muted);font-weight:600;margin:0 0 .5rem}
 .ribbon{margin:0;background:var(--espresso);color:#f7eee2;text-align:center;font-size:.78rem;padding:.4rem 1rem;letter-spacing:.02em}
+@media(max-width:480px){.ribbon{font-size:clamp(.57rem,2.7vw,.78rem);padding-inline:.35rem;letter-spacing:0;white-space:nowrap}}
 .only-desktop{display:none}
 @media(min-width:900px){.only-desktop{display:flex}.only-mobile{display:none!important}}
 
@@ -440,17 +441,15 @@ body.has-sticky{padding-bottom:78px}
 .hx-actions .btn{padding-inline:1.5rem}
 .hx-cod{font-size:.82rem;color:rgba(247,238,226,.78)}
 .hx-ctl{position:absolute;z-index:4;left:0;right:0;bottom:14px;display:flex;align-items:center;gap:.35rem;margin:0 auto}
-.hx-count{font-size:.78rem;letter-spacing:var(--label-tracking);color:rgba(247,238,226,.8);font-variant-numeric:tabular-nums;white-space:nowrap;margin-right:.4rem}
 .hx-dots{display:flex;margin-right:auto}
 .hx-dots button{width:40px;height:44px;border:0;background:none;color:var(--cream);cursor:pointer;display:grid;place-items:center;padding:0;font:600 .8rem var(--body)}
-.hx-dots button span{display:grid;place-items:center;width:27px;height:27px;border-radius:50%;border:1px solid rgba(247,238,226,.55);background:rgba(31,20,17,.65)}
-.hx-dots button[aria-current="true"] span{background:var(--cream);color:var(--espresso);border-color:var(--cream)}
+.hx-dots button span{display:grid;place-items:center;width:8px;height:8px;border-radius:99px;background:rgba(247,238,226,.62)}
+.hx-dots button[aria-current="true"] span{width:24px;background:var(--cream)}
 .hx-btn{width:44px;height:44px;border-radius:50%;border:1px solid rgba(247,238,226,.4);background:rgba(31,20,17,.3);color:var(--cream);cursor:pointer;font-size:.95rem;backdrop-filter:blur(6px)}
 .hx-btn:hover{background:rgba(247,238,226,.16)}
-@media(max-width:420px){.hx-count{display:none}}
 @media(max-width:899px){
   .hx-slide{min-height:clamp(390px,64svh,540px)}
-  .hx-h1{position:static;padding:10px 16px 8px;font-size:.66rem;line-height:1.4}
+  .hx-h1{position:static;padding:10px 16px 8px;font-size:clamp(.49rem,2.45vw,.66rem);letter-spacing:.04em;white-space:nowrap;line-height:1.4}
   .hx-media img,.hx-media video{
     object-fit:cover;object-position:50% 38%;-webkit-mask-image:none;mask-image:none
   }
