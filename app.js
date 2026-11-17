@@ -6,12 +6,14 @@ const range = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => String(a + i
 
 const DELIVERY = { code: 'flatrate', title: 'Standard delivery', note: 'Flat rate across Pakistan. Delivery time to be confirmed.', fee: 150 };
 const CATS = {
-  all: { name: 'All footwear', note: 'Every pair in the VeraSole catalog.' },
-  chappals: { name: 'Chappals', note: 'Peshawari classics and easy slides.' },
-  sandals: { name: 'Sandals', note: 'Open styles for warmer days.' },
-  shoes: { name: 'Shoes', note: 'Knit slip-ons for everyday wear.' },
-  'school-shoes': { name: 'School shoes', note: 'Black school shoes in a range of sizes.' },
+  all: { name: 'All footwear', h1: 'Footwear for men, women and kids', note: 'Every pair in the VeraSole catalog, delivered across Pakistan with cash on delivery.', img: 'trail-sandal-khaki' },
+  chappals: { name: 'Chappals', h1: 'Peshawari chappals and slides', note: 'Peshawari classics for men and padded slides for women, in EU sizes 36–45.', img: 'peshawari-coffee' },
+  sandals: { name: 'Sandals', h1: 'Sandals for men and women', note: 'Strap sandals for everyday walking and beaded styles for evenings out.', img: 'beaded-heel-black' },
+  shoes: { name: 'Shoes', h1: 'Knit slip-on shoes', note: 'Breathable knit uppers on cushioned soles for work, travel and daily walks.', img: 'knit-slipon-navy' },
+  'school-shoes': { name: 'School shoes', h1: 'Black school shoes for kids', note: 'Uniform-ready black school shoes in sizes 1–9.', img: '' },
+  sale: { name: 'Sale', h1: 'Footwear on sale', note: 'Selected styles at reduced prices. Sample prices in this prototype.', img: 'embossed-slide-black' },
 };
+const inCat = (p, slug) => slug === 'all' || (slug === 'sale' ? !!p.was : p.cat === slug);
 const HEX = { Black: '#222222', Brown: '#684536', Coffee: '#513a32', Camel: '#bc8958', Khaki: '#9b7a4e', Tan: '#ac784c', Navy: '#24344d', Pink: '#d9a79c', Taupe: '#9a8274' };
 
 const img = (n, alt) => ({ src: `img/${n}.jpg`, card: `img/${n}-card.jpg`, alt });
@@ -84,7 +86,8 @@ const priceHTML = (p, s, mult = 1) => {
 };
 const saving = () => S.cart.reduce((n, l) => { const p = byId(l.id); return n + (wasOf(p, l.size) ? (wasOf(p, l.size) - priceOf(p, l.size)) * l.qty : 0); }, 0);
 const PRICE_BANDS = { lo: ['Under Rs 2,000', p => p.price < 2000], mid: ['Rs 2,000 – 3,499', p => p.price >= 2000 && p.price < 3500], hi: ['Rs 3,500 and over', p => p.price >= 3500] };
-const SORTS = { featured: 'Featured', 'price-asc': 'Price: low to high', 'price-desc': 'Price: high to low', name: 'Name: A to Z' };
+const SORTS = { featured: 'Featured', newest: 'Newest', discount: 'Biggest discount', 'price-asc': 'Price: low to high', 'price-desc': 'Price: high to low', name: 'Name: A to Z' };
+const PAGE = 8;
 const POPULAR = ['peshawari', 'sandals', 'black', 'slip-on', 'Wej'];
 const SYN = { slipper: 'chappal', slippers: 'chappal', slide: 'chappal slide', slides: 'chappal slide', sneaker: 'shoes', sneakers: 'shoes', joggers: 'shoes', ladies: 'women', mens: 'men', kheri: 'peshawari', school: 'school-shoes' };
 
@@ -224,10 +227,10 @@ const media = (p, c = p.colors[0], which = 'card') => c.imgs[0]
 function card(p) {
   const out = !anyStock(p);
   return `<article class="card">
-    <div class="card-media">${media(p)}${wishBtn(p)}${out ? '<span class="badges"><span class="badge out">Sold out</span></span>' : p.was ? `<span class="badges"><span class="badge sale">−${pctOff(p)}%</span><span class="badge sale-tag">Sale</span></span>` : ''}</div>
+    <div class="card-media">${media(p)}${p.colors[0].imgs[1] ? `<img class="alt" src="${p.colors[0].imgs[1].card}" alt="" aria-hidden="true" loading="lazy" width="640" height="800">` : ''}${wishBtn(p)}${out ? '<span class="badges"><span class="badge out">Sold out</span></span>' : p.was ? `<span class="badges"><span class="badge sale">−${pctOff(p)}%</span><span class="badge sale-tag">Sale</span></span>` : ''}</div>
     <div class="card-body">
       <span class="brand">${esc(p.brand || CATS[p.cat].name)}</span>
-      <a href="#/p/${p.id}">${esc(p.name)}</a>
+      <a href="#/p/${p.id}" data-key="card-${p.id}">${esc(p.name)}</a>
       ${priceHTML(p)}
       <span class="dots">${p.colors.map(c => `<i class="dot" style="background:${HEX[c.name]}" title="${c.name}"></i>`).join('')} ${p.colors.length > 1 ? p.colors.length + ' colours' : p.colors[0].name} · ${p.sizes[0]}–${p.sizes.at(-1)}</span>
     </div></article>`;
@@ -259,7 +262,7 @@ function hero() {
       <div class="hx-slide" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${n}" ${i ? 'hidden' : ''}>
         <div class="hx-media" aria-hidden="true">${s.video
           ? `<video id="hero-video" muted loop playsinline preload="metadata" data-name="${s.video}"></video>`
-          : `<picture><source media="(max-width:479px)" srcset="img/hero-${s.bg}-tall.jpg"><img src="img/hero-${s.bg}-wide.jpg" alt="" width="1920" height="1080" loading="lazy"></picture>`}</div>
+          : `<picture><source media="(max-width:479px), (min-width:600px) and (max-width:899px)" srcset="img/hero-${s.bg}-tall.jpg"><img src="img/hero-${s.bg}-wide.jpg" alt="" width="1920" height="1080" loading="lazy"></picture>`}</div>
         <div class="shell hx-in"><div class="hx-copy" ${s0.seq ? 'id="hx-seq" aria-live="off"' : ''}>
           <p class="eyebrow">${s.kicker}</p>
           <p class="hx-title">${s.title}</p>
@@ -384,7 +387,7 @@ function showSlide(i) {
   document.querySelectorAll('.hx-dots button').forEach((d, n) => d.setAttribute('aria-current', n === slideI));
   heroSync();
 }
-const heroMq = matchMedia('(max-width:479px)');
+const heroMq = matchMedia('(max-width:479px), (min-width:600px) and (max-width:899px)');
 function heroSrc() {
   const v = $('#hero-video'); if (!v) return;
   const base = `img/${v.dataset.name}-${heroMq.matches ? 'tall' : 'wide'}`;
@@ -438,36 +441,46 @@ function listing({ kind, slug, q }) {
   const query = (q.get('q') || '').trim();
   const who = q.get('who');
   const audience = ['Men', 'Women', 'Kids'].includes(who) ? who : '';
+  const possessive = { Men: 'Men’s', Women: 'Women’s', Kids: 'Kids’' }[audience];
   const categoryTitle = audience
     ? slug === 'all' ? audience + ' footwear' : audience + ' · ' + CATS[slug].name
     : CATS[slug]?.name;
+  const heading = audience ? `${possessive} ${slug === 'all' ? 'footwear' : CATS[slug].name.toLowerCase()}` : CATS[slug]?.h1;
   const base = kind === 'cat'
-    ? P.filter(p => (slug === 'all' || p.cat === slug) && (!audience || p.who === audience))
+    ? P.filter(p => inCat(p, slug) && (!audience || p.who === audience))
     : searchProducts(query);
-  const sel = { size: (q.get('size') || '').split(',').filter(Boolean), color: (q.get('color') || '').split(',').filter(Boolean), price: (q.get('price') || '').split(',').filter(Boolean) };
+  const list = k => (q.get(k) || '').split(',').filter(Boolean);
+  const sel = { size: list('size'), color: list('color'), price: list('price'), avail: list('avail') };
+  const AVAIL = { stock: ['In stock', p => anyStock(p)], sale: ['On sale', p => !!p.was] };
   const sort = SORTS[q.get('sort')] ? q.get('sort') : 'featured';
   const match = (p, skip) =>
     (skip === 'size' || !sel.size.length || sel.size.some(s => p.sizes.includes(s))) &&
     (skip === 'color' || !sel.color.length || sel.color.some(c => p.colors.some(x => x.name === c))) &&
-    (skip === 'price' || !sel.price.length || sel.price.some(b => PRICE_BANDS[b][1](p)));
+    (skip === 'price' || !sel.price.length || sel.price.some(b => PRICE_BANDS[b][1](p))) &&
+    (skip === 'avail' || sel.avail.every(a => AVAIL[a]?.[1](p)));
   let items = base.filter(p => match(p));
   if (sort === 'price-asc') items.sort((a, b) => a.price - b.price);
   if (sort === 'price-desc') items.sort((a, b) => b.price - a.price);
   if (sort === 'name') items.sort((a, b) => a.name.localeCompare(b.name));
+  if (sort === 'newest') items.sort((a, b) => P.indexOf(b) - P.indexOf(a));
+  if (sort === 'discount') items.sort((a, b) => pctOff(b) - pctOff(a));
+  const shown = Math.max(PAGE, Math.min(items.length, +q.get('n') || PAGE));
   const sizes = [...new Set(base.flatMap(p => p.sizes))].sort((a, b) => a - b);
   const colors = [...new Set(base.flatMap(p => p.colors.map(c => c.name)))].sort();
-  const n = (k, v) => base.filter(p => match(p, k) && (k === 'size' ? p.sizes.includes(v) : k === 'color' ? p.colors.some(c => c.name === v) : PRICE_BANDS[v][1](p))).length;
+  const n = (k, v) => base.filter(p => match(p, k) && (k === 'size' ? p.sizes.includes(v) : k === 'color' ? p.colors.some(c => c.name === v) : k === 'avail' ? AVAIL[v][1](p) : PRICE_BANDS[v][1](p))).length;
   const filters = id => `<form class="filters" aria-label="Filters" data-filters>
     <fieldset><legend>Size</legend><div class="sizes-f">${sizes.map(s => `<label class="pill-check"><input type="checkbox" data-f="size" value="${s}" data-key="${id}-size-${s}" ${sel.size.includes(s) ? 'checked' : ''} aria-label="Size ${s}"><span>${s}</span></label>`).join('')}</div></fieldset>
     <fieldset><legend>Colour</legend>${colors.map(c => `<label class="check"><input type="checkbox" data-f="color" value="${c}" data-key="${id}-color-${c}" ${sel.color.includes(c) ? 'checked' : ''}><i class="dot" style="background:${HEX[c]}"></i>${c}<span class="n">${n('color', c)}</span></label>`).join('')}</fieldset>
     <fieldset><legend>Price</legend>${Object.entries(PRICE_BANDS).map(([k, [l]]) => `<label class="check"><input type="checkbox" data-f="price" value="${k}" data-key="${id}-price-${k}" ${sel.price.includes(k) ? 'checked' : ''}>${l}<span class="n">${n('price', k)}</span></label>`).join('')}</fieldset>
+    <fieldset><legend>Availability</legend>${Object.entries(AVAIL).filter(([k]) => !(k === 'sale' && slug === 'sale')).map(([k, [l]]) => `<label class="check"><input type="checkbox" data-f="avail" value="${k}" data-key="${id}-avail-${k}" ${sel.avail.includes(k) ? 'checked' : ''}>${l}<span class="n">${n('avail', k)}</span></label>`).join('')}</fieldset>
   </form>`;
-  const active = [...sel.size.map(v => ['size', v, 'Size ' + v]), ...sel.color.map(v => ['color', v, v]), ...sel.price.map(v => ['price', v, PRICE_BANDS[v]?.[0] || v])];
+  const active = [...sel.size.map(v => ['size', v, 'Size ' + v]), ...sel.color.map(v => ['color', v, v]), ...sel.price.map(v => ['price', v, PRICE_BANDS[v]?.[0] || v]), ...sel.avail.map(v => ['avail', v, AVAIL[v]?.[0] || v])];
   const chips = active.length ? `<div class="active-filters" aria-label="Active filters">${active.map(([k, v, l]) => `<button class="chip active" data-act="rm-filter" data-k="${k}" data-v="${v}" aria-label="Remove filter: ${l}">${l} <span aria-hidden="true">✕</span></button>`).join('')}<button class="link" data-act="clear-filters" data-key="clear">Clear all</button></div>` : '';
   const cnt = `${items.length} style${items.length === 1 ? '' : 's'}`;
   const head = kind === 'cat'
     ? `<nav class="crumb" aria-label="Breadcrumb"><a href="#/">Home</a><span aria-hidden="true">/</span><span>${categoryTitle}</span></nav>
-       <header class="list-head"><h1>${categoryTitle}</h1><p>${CATS[slug].note}</p></header>`
+       <header class="list-head"><h1>${heading}</h1><p>${CATS[slug].note}</p></header>
+       ${catStrip(slug, audience)}`
     : `<header class="list-head" style="padding-top:1.5rem"><p class="eyebrow">Search results</p><h1>${query ? `“${esc(query)}”` : 'Search'}</h1>
        <form class="q-inline" data-search-inline role="search"><label class="sr" for="q2">Search footwear</label><input id="q2" type="search" value="${esc(query)}" placeholder="Search footwear"><button class="btn">Search</button></form></header>`;
   const cats = `<div class="chips">${Object.entries(CATS).filter(([s]) => s !== 'all').map(([s, c]) => `<a class="chip" href="#/c/${s}${audience ? '?who=' + audience : ''}">${c.name}</a>`).join('')}</div>`;
@@ -479,7 +492,8 @@ function listing({ kind, slug, q }) {
       <p class="eyebrow" style="margin-top:1.5rem">Or browse a category</p>${cats}</div>
       <section class="section" style="padding-top:0"><h2 style="margin-bottom:1rem">Popular right now</h2>${grid(['peshawari-camel', 'trail-strap-sandal', 'go-ran-knit-slip-on', 'beaded-block-heel-sandal'].map(byId), 'four')}</section></div>`;
   }
-  const body = items.length ? grid(items) : `<div class="empty"><h2>No styles match those filters</h2><p class="muted">Try removing a filter, or clear them all to see ${base.length} styles${kind === 'search' ? ' for this search' : ' in ' + CATS[slug].name}.</p><button class="btn" data-act="clear-filters">Clear all filters</button></div>`;
+  const more = items.length > shown ? `<div class="more"><p class="muted small">Showing ${shown} of ${items.length} styles</p><span class="more-bar" aria-hidden="true"><i style="width:${(shown / items.length) * 100}%"></i></span><button class="btn ghost" data-act="more" data-n="${shown + PAGE}" data-next="${items[shown].id}">Load more</button></div>` : items.length > PAGE ? `<p class="more muted small">Showing all ${items.length} styles</p>` : '';
+  const body = items.length ? grid(items.slice(0, shown)) + more : `<div class="empty"><h2>No styles match those filters</h2><p class="muted">Try removing a filter, or clear them all to see ${base.length} styles${kind === 'search' ? ' for this search' : ' in ' + CATS[slug].name}.</p><button class="btn" data-act="clear-filters">Clear all filters</button></div>`;
   return `<div class="shell">${head}
     <div class="toolbar">
       <button class="btn ghost only-mobile" data-act="open-filters" data-key="open-filters" style="min-height:44px;padding:.4rem 1.1rem">Filters${active.length ? ` (${active.length})` : ''}</button>
@@ -493,6 +507,13 @@ function listing({ kind, slug, q }) {
       ${filters('m')}
       <div class="drawer-foot"><button class="btn ghost" data-act="clear-filters" ${active.length ? '' : 'disabled'}>Clear all</button><button class="btn" data-act="close-filters">Show ${cnt}</button></div>
     </dialog></div>`;
+}
+
+function catStrip(slug, audience) {
+  const keys = ['all', 'chappals', 'sandals', 'shoes', 'school-shoes', 'sale'];
+  return `<nav class="cat-strip" aria-label="Categories">${keys.map(k => { const c = CATS[k], n = P.filter(p => inCat(p, k) && (!audience || p.who === audience)).length; return `<a href="#/c/${k}${audience && k !== 'sale' ? '?who=' + audience : ''}" ${k === slug ? 'aria-current="page"' : ''}>
+      <span class="cs-img ${k === 'sale' ? 'is-sale' : ''}">${c.img ? `<img src="img/${c.img}-studio-card.jpg" alt="" width="640" height="800" loading="lazy">` : '<svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 44V22c8 0 12-10 22-10 6 0 8 8 18 12l40 10c14 3 22 6 24 12v6H8Z M8 44h104"/></svg>'}${k === 'sale' ? '<b>%</b>' : ''}</span>
+      <span class="cs-name">${c.name}</span><span class="cs-n">${n}</span></a>`; }).join('')}</nav>`;
 }
 
 /* ---------- product ---------- */
@@ -763,19 +784,22 @@ function page(slug) {
 /* ---------- SEO: per-page meta, structured data, category copy ---------- */
 const SITE = 'https://verasole.github.io/verasole-prototype/';
 const CAT_SEO = {
-  all: { h: 'Shop footwear online in Pakistan', p: ['Browse every VeraSole style in one place: Peshawari chappals, everyday slides, sandals, knit slip-on shoes and black school shoes. Every price is in Pakistani rupees and every order is cash on delivery.', 'Filter by size, colour and price to narrow the list, or sort by price to compare. Each product page shows the sizes in stock for the colour you choose.'],
+  sale: { h: 'Footwear on sale', care: 'Sale pairs are the same quality as full-price ones, so the same care applies: wipe uppers clean, air-dry away from sun and store pairs in their box.', p: ['Selected VeraSole chappals, sandals and slides at reduced prices. The original price is shown struck through on every sale item, with the percentage saved.', 'Sale stock is limited by size and colour, so filter by your size first. Prices in this prototype are sample prices.'],
+    tips: ['Filter by your size first; sale sizes sell out fastest.', 'The saving shown is against the original VeraSole price.', 'Cash on delivery applies to sale orders too.'],
+    faq: [['Are sale items final?', 'Exchange terms for sale items will be confirmed before launch and shown here.'], ['How do I see the discount?', 'Each sale card shows the percentage off, the sale price and the original price struck through.'], ['Can I pay cash on delivery for sale items?', 'Yes. Sale orders are cash on delivery like every other order.']] },
+  all: { h: 'Shop footwear online in Pakistan', care: 'Wipe leather and faux-leather uppers with a damp cloth, air-dry pairs away from direct sun, and rotate between two pairs so each one has a day to dry out.', p: ['Browse every VeraSole style in one place: Peshawari chappals, everyday slides, sandals, knit slip-on shoes and black school shoes. Every price is in Pakistani rupees and every order is cash on delivery.', 'Filter by size, colour and price to narrow the list, or sort by price to compare. Each product page shows the sizes in stock for the colour you choose.'],
     tips: ['Men’s styles run EU 39–45 and women’s EU 36–41.', 'School shoes use sizes 1–9; check the number inside a pair that fits.', 'Sale prices are shown with the original price struck through.'],
     faq: [['How do I pay?', 'Pay in cash when your order arrives. Check your parcel before you pay the courier.'], ['How much is delivery?', `Standard delivery is ${rs(DELIVERY.fee)} per order and is shown before you place it.`], ['Can I filter by size?', 'Yes. Choose one or more sizes in the filters and only styles available in those sizes are shown.']] },
-  chappals: { h: 'Peshawari chappals and slides', p: ['VeraSole chappals range from the classic Peshawari, with its crossover upper, welt stitching and buckled heel strap, to soft slides for everyday wear at home and out.', 'Peshawari chappals pair with shalwar kameez for Eid, weddings and Friday prayers, while padded slides are made for long days on your feet.'],
+  chappals: { h: 'Peshawari chappals and slides', care: 'Brush dust off Peshawari uppers after wear and use a neutral cream polish every few weeks. Keep suede-finish pairs away from water, and let slides dry naturally if they get wet.', p: ['VeraSole chappals range from the classic Peshawari, with its crossover upper, welt stitching and buckled heel strap, to soft slides for everyday wear at home and out.', 'Peshawari chappals pair with shalwar kameez for Eid, weddings and Friday prayers, while padded slides are made for long days on your feet.'],
     tips: ['A Peshawari should feel snug at first; the upper softens with wear.', 'Choose your usual EU size; if you are between sizes, go one up.', 'Slides with a buckle strap can be loosened for a wider foot.'],
     faq: [['What size Peshawari chappal should I buy?', 'Order your usual EU size. Peshawari uppers are firm at first and ease with wear, so go up one size only if you are between sizes.'], ['Are the chappals suitable for formal wear?', 'Yes. Classic Peshawari chappals in coffee or camel suit shalwar kameez for Eid, weddings and other occasions.'], ['Do you have women’s chappals?', 'Yes. Women’s slides come in EU 36–41; use the Women menu or filter by size.']] },
-  sandals: { h: 'Sandals for men and women', p: ['From strap sandals with adjustable buckles for everyday walking to beaded and ruched sandals for evenings out, VeraSole sandals are made for warm days across Pakistan.', 'Open styles keep feet cool in summer, and cushioned footbeds make them comfortable for errands, travel and family events.'],
+  sandals: { h: 'Sandals for men and women', care: 'Wipe straps with a damp cloth and let them dry away from direct sun. Store beaded and embellished sandals in their box so the trim doesn’t snag.', p: ['From strap sandals with adjustable buckles for everyday walking to beaded and ruched sandals for evenings out, VeraSole sandals are made for warm days across Pakistan.', 'Open styles keep feet cool in summer, and cushioned footbeds make them comfortable for errands, travel and family events.'],
     tips: ['Adjustable straps help sandals fit a range of foot widths.', 'For heeled sandals, choose your usual size; the ankle strap keeps your foot in place.', 'Wipe straps with a damp cloth and let them dry away from direct sun.'],
     faq: [['Are the sandals comfortable for long walks?', 'Strap sandals with cushioned footbeds are designed for everyday walking. Dressier styles suit shorter wear such as events.'], ['What sizes do women’s sandals come in?', 'Women’s sandals come in EU 36–41. Each product page shows which sizes are in stock.'], ['Can I check the sandals before paying?', 'Yes. All orders are cash on delivery and you can check your parcel before paying the courier.']] },
-  shoes: { h: 'Knit slip-on shoes', p: ['VeraSole knit slip-ons combine a breathable knit upper with a cushioned sole, so they are easy to pull on for work, travel and daily walks.', 'Their light weight and flexible sole make them a comfortable alternative to joggers for everyday wear.'],
+  shoes: { h: 'Knit slip-on shoes', care: 'Hand-wash knit uppers with mild soap and a soft brush, then stuff with paper and air-dry. Avoid the washing machine and dryer, which can loosen the knit and warp the sole.', p: ['VeraSole knit slip-ons combine a breathable knit upper with a cushioned sole, so they are easy to pull on for work, travel and daily walks.', 'Their light weight and flexible sole make them a comfortable alternative to joggers for everyday wear.'],
     tips: ['Knit uppers stretch slightly; if you are between sizes, choose the smaller one.', 'Some sizes cost a little more; the price updates when you pick a size.', 'Air-dry knit shoes after washing; avoid a machine dryer.'],
     faq: [['Are knit slip-ons good for office wear?', 'They suit smart-casual offices and daily commuting. For formal dress codes, choose a closed leather style.'], ['Do knit shoes stretch?', 'Yes, the knit upper gives slightly with wear, so a snug first fit is normal.'], ['Which colours are available?', 'Current styles come in navy, taupe and black. Use the colour filter to see them together.']] },
-  'school-shoes': { h: 'Black school shoes', p: ['Black school shoes from Bata in sizes 1–9, made to meet uniform rules and stand up to the school week.', 'Buy before the new term to get the right size in stock, and check the size printed inside a pair that already fits your child.'],
+  'school-shoes': { h: 'Black school shoes', care: 'Polish black school shoes once a week, clean off mud the same day, and loosen laces fully before taking them off to protect the heel counter.', p: ['Black school shoes from Bata in sizes 1–9, made to meet uniform rules and stand up to the school week.', 'Buy before the new term to get the right size in stock, and check the size printed inside a pair that already fits your child.'],
     tips: ['Leave about a thumb’s width at the toe for growing feet.', 'Check the size inside your child’s current shoes before ordering.', 'Polish regularly to keep black leather looking smart.'],
     faq: [['What sizes do school shoes come in?', 'School shoes come in sizes 1–9, as printed inside the shoe and on the box.'], ['How much room should I leave for growth?', 'About a thumb’s width at the toe is a good guide for growing feet.'], ['Why is there no photo for some school shoes?', 'We show the article number until we have photographed that model.']] },
 };
@@ -795,6 +819,8 @@ function catSeo(slug, audience) {
   return `<section class="cat-seo" aria-labelledby="cat-seo-t">
     <div class="cat-seo-copy"><p class="eyebrow">${audience ? audience + ' · ' : ''}Buying guide</p><h2 id="cat-seo-t">${c.h}</h2>${c.p.map(t => `<p>${t}</p>`).join('')}
       <h3>Before you choose</h3><ul class="tick-list">${c.tips.map(t => `<li>${t}</li>`).join('')}</ul>
+      <h3>Care</h3><p>${c.care}</p>
+      <h3>Orders, delivery and exchanges</h3><p>Every order is cash on delivery across Pakistan: check your parcel, then pay the courier. Standard delivery is ${rs(DELIVERY.fee)} per order and is shown before you place it. Delivery times and exchange terms will be published once confirmed.</p>
       <h3>Shop more</h3><p class="chips">${related.map(([k, v]) => `<a class="chip" href="#/c/${k}">${v.name}</a>`).join('')}<a class="chip" href="#/page/size-guide">Size guide</a></p></div>
     <div><p class="eyebrow">Questions</p><h2>${CATS[slug]?.name || 'Footwear'} FAQs</h2><div class="notes">${c.faq.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('')}</div></div>
     ${ld(faqLD(c.faq))}
@@ -811,7 +837,7 @@ function pageSeo(r, html) {
   }
   if (a === 'c' && CATS[b]) {
     const who = ['Men', 'Women', 'Kids'].includes(q.get('who')) ? q.get('who') : '', name = (who ? who + ' ' : '') + CATS[b].name.toLowerCase();
-    const items = P.filter(p => (b === 'all' || p.cat === b) && (!who || p.who === who));
+    const items = P.filter(p => inCat(p, b) && (!who || p.who === who));
     setMeta(CATS[b].name, `Shop ${name} online in Pakistan at VeraSole. ${items.length} styles in PKR with size and colour filters and cash on delivery.`);
     return html + ld(crumbsLD([['Home', ''], [CATS[b].name, '#/c/' + b]])) + ld({ '@context': 'https://schema.org', '@type': 'ItemList', itemListElement: items.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + '#/p/' + p.id, name: p.name })) });
   }
@@ -850,7 +876,8 @@ document.addEventListener('click', e => {
     case 'open-filters': S.drawer = true; $('#filter-drawer').showModal(); break;
     case 'close-filters': S.drawer = false; $('#filter-drawer').close(); $('[data-key="open-filters"]')?.focus(); break;
     case 'rm-filter': setParams(toggleFilter(el.dataset.k, el.dataset.v), 'clear'); break;
-    case 'clear-filters': { const q = r.q; ['size', 'color', 'price'].forEach(k => q.delete(k)); setParams(q, 'open-filters'); break; }
+    case 'clear-filters': { const q = r.q; ['size', 'color', 'price', 'avail', 'n'].forEach(k => q.delete(k)); setParams(q, 'open-filters'); break; }
+    case 'more': { const q = r.q; q.set('n', el.dataset.n); setParams(q, 'card-' + el.dataset.next); break; }
     case 'img': st.img = +el.dataset.i; re(); break;
     case 'color': st.color = el.dataset.v; st.img = 0; st.touched = true; re(); break;
     case 'size': if (el.getAttribute('aria-disabled') === 'true') break; st.size = el.dataset.v; st.err = false; re(); break;
