@@ -388,7 +388,7 @@ const heroMq = matchMedia('(max-width:479px)');
 function heroSrc() {
   const v = $('#hero-video'); if (!v) return;
   const base = `img/${v.dataset.name}-${heroMq.matches ? 'tall' : 'wide'}`;
-  if (!v.getAttribute('src') || !v.getAttribute('src').startsWith(base)) { v.poster = base + '.jpg'; v.src = base + '.mp4'; }
+  if (!v.getAttribute('src') || !v.getAttribute('src').startsWith(base)) { v.poster = base + '.jpg?v=2'; v.src = base + '.mp4?v=2'; }
 }
 heroMq.addEventListener('change', () => { heroSrc(); heroSync(); });
 let heroSeg = 0;
