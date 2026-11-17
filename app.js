@@ -135,7 +135,7 @@ let lastPath = null;
 function render(keepScroll) {
   const r = route(), [a, b] = r.parts; let html, title = 'VeraSole';
   document.body.classList.remove('has-sticky');
-  if (!a) html = home();
+  if (!a) { html = home(); title = 'True comfort. Every step.'; }
   else if (a === 'c' && CATS[b]) { html = listing({ kind: 'cat', slug: b, q: r.q }); title = CATS[b].name; }
   else if (a === 'search') { html = listing({ kind: 'search', q: r.q }); title = 'Search'; }
   else if (a === 'p' && byId(b)) { html = pdp(byId(b), r.q); title = byId(b).name; }
@@ -239,7 +239,7 @@ const grid = (items, cls = '') => `<div class="grid ${cls}">${items.map(card).jo
 /* ---------- home ---------- */
 const SLIDES = [
   { video: 'hero-promo', seg: 2, seq: [
-    { kicker: 'Men · Peshawari chappals', title: 'Made for<br>every step.', text: 'Suede-finish Peshawari with hand-stitched welts and a buckled heel strap.', cta: ['Shop Peshawari chappals', '#/p/peshawari-camel'] },
+    { kicker: 'Men · Peshawari chappals', title: 'True comfort.<br>Every step.', text: 'Suede-finish Peshawari with hand-stitched welts and a buckled heel strap.', cta: ['Shop Peshawari chappals', '#/p/peshawari-camel'] },
     { kicker: 'Men · Knit slip-ons', title: 'Slip on.<br>Head out.', text: 'Breathable knit uppers on a cushioned sole, in navy, taupe and black.', cta: ['Shop knit slip-ons', '#/p/go-ran-knit-slip-on'] },
     { kicker: 'Women · Evening sandals', title: 'Dressed up,<br>still easy.', text: 'Beaded toe band and a low block heel for weddings and evenings out.', cta: ['Shop evening sandals', '#/p/beaded-block-heel-sandal'] },
     { kicker: 'Men · Everyday sandals', title: 'Strap in.<br>Walk all day.', text: 'Woven adjustable straps on a contoured footbed. Now 40% off.', cta: ['Shop strap sandals', '#/p/trail-strap-sandal'] },
@@ -803,7 +803,7 @@ function catSeo(slug, audience) {
 function pageSeo(r, html) {
   const [a, b] = r.parts, q = r.q;
   if (!a) {
-    setMeta('Chappals, sandals and shoes online in Pakistan', 'Shop Peshawari chappals, sandals, knit slip-ons and school shoes online in Pakistan. Prices in PKR, cash on delivery, check your parcel before you pay.');
+    setMeta('True comfort. Every step.', 'True comfort. Every step. Shop Peshawari chappals, sandals, knit slip-ons and school shoes online in Pakistan. Prices in PKR, cash on delivery, check your parcel before you pay.');
     return html + ld({ '@context': 'https://schema.org', '@graph': [
       { '@type': 'Organization', name: 'VeraSole', url: SITE, logo: SITE + 'img/logo.svg', areaServed: 'PK' },
       { '@type': 'WebSite', name: 'VeraSole', url: SITE, potentialAction: { '@type': 'SearchAction', target: SITE + '#/search?q={search_term_string}', 'query-input': 'required name=search_term_string' } },
