@@ -227,7 +227,7 @@ const media = (p, c = p.colors[0], which = 'card') => c.imgs[0]
 function card(p) {
   const out = !anyStock(p);
   return `<article class="card">
-    <div class="card-media">${media(p)}${p.colors[0].imgs[1] ? `<img class="alt" src="${p.colors[0].imgs[1].card}" alt="" aria-hidden="true" loading="lazy" width="640" height="800">` : ''}${wishBtn(p)}${out ? '<span class="badges"><span class="badge out">Sold out</span></span>' : p.was ? `<span class="badges"><span class="badge sale">−${pctOff(p)}%</span><span class="badge sale-tag">Sale</span></span>` : ''}</div>
+    <div class="card-media">${media(p)}${p.colors[0].imgs[1] ? `<img class="alt" src="${p.colors[0].imgs[1].card}" alt="" aria-hidden="true" loading="lazy" width="640" height="800">` : ''}${wishBtn(p)}${out ? '<span class="badges"><span class="badge out">Sold out</span></span>' : p.was ? `<span class="badges"><span class="badge sale">−${pctOff(p)}%</span></span>` : ''}</div>
     <div class="card-body">
       <span class="brand">${esc(p.brand || CATS[p.cat].name)}</span>
       <a href="#/p/${p.id}" data-key="card-${p.id}">${esc(p.name)}</a>
@@ -241,14 +241,7 @@ const grid = (items, cls = '') => `<div class="grid ${cls}">${items.map(card).jo
 
 /* ---------- home ---------- */
 const SLIDES = [
-  { video: 'hero-promo', seg: 2, seq: [
-    { kicker: 'Men · Peshawari chappals', title: 'True comfort.<br>Every step.', text: 'Suede-finish Peshawari with hand-stitched welts and a buckled heel strap.', cta: ['Shop Peshawari chappals', '#/p/peshawari-camel'] },
-    { kicker: 'Men · Knit slip-ons', title: 'Slip on.<br>Head out.', text: 'Breathable knit uppers on a cushioned sole, in navy, taupe and black.', cta: ['Shop knit slip-ons', '#/p/go-ran-knit-slip-on'] },
-    { kicker: 'Women · Evening sandals', title: 'Dressed up,<br>still easy.', text: 'Beaded toe band and a low block heel for weddings and evenings out.', cta: ['Shop evening sandals', '#/p/beaded-block-heel-sandal'] },
-    { kicker: 'Men · Everyday sandals', title: 'Strap in.<br>Walk all day.', text: 'Woven adjustable straps on a contoured footbed. Now 40% off.', cta: ['Shop strap sandals', '#/p/trail-strap-sandal'] },
-    { kicker: 'Women · Easy slides', title: 'Soft straps,<br>easy days.', text: 'Padded crossover slide with a gold-tone buckle.', cta: ['Shop slides', '#/p/crossover-buckle-slide'] },
-    { kicker: 'Cash on delivery · across Pakistan', title: 'Check first,<br>pay at the door.', text: 'Chappals, sandals and shoes delivered nationwide. Pay the courier only after you check your parcel.', cta: ['Shop all footwear', '#/c/all'] },
-  ] },
+  { video: 'hero-promo', kicker: 'VeraSole footwear', title: 'True comfort.<br>Every step.', text: 'Shop chappals, sandals and everyday shoes.', cta: ['Shop all footwear', '#/c/all'] },
   { bg: 'peshawari-camel', kicker: 'Men · Peshawari chappals', title: 'The Peshawari,<br>made for every day.', text: 'Hand-stitched welts, buckled heel straps and soft uppers in camel and coffee.', cta: ['Shop chappals', '#/c/chappals'] },
   { bg: 'beaded-heel-black', kicker: 'Women · Sandals', title: 'Dressed up,<br>still easy.', text: 'Beaded bands, ruched straps and low block heels for evenings out.', cta: ['Shop sandals', '#/c/sandals'] },
   { bg: 'knit-slipon-navy', kicker: 'Men · Knit slip-ons', title: 'Slip on.<br>Head out.', text: 'Breathable knit uppers on a cushioned sole, in navy, taupe and black.', cta: ['Shop shoes', '#/c/shoes'] },
@@ -258,24 +251,23 @@ function hero() {
   const n = SLIDES.length, pad = i => String(i).padStart(2, '0');
   return `<section class="hx" aria-roledescription="carousel" aria-label="Featured collections" id="hero">
       <h1 class="hx-h1 shell">Chappals, sandals and shoes online in Pakistan</h1>
-      ${SLIDES.map((s0, i) => { const s = s0.seq ? { ...s0, ...s0.seq[0] } : s0; return `
+      ${SLIDES.map((s, i) => `
       <div class="hx-slide" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${n}" ${i ? 'hidden' : ''}>
         <div class="hx-media" aria-hidden="true">${s.video
           ? `<video id="hero-video" muted loop playsinline preload="metadata" data-name="${s.video}"></video>`
-          : `<picture><source media="(max-width:479px), (min-width:600px) and (max-width:899px)" srcset="img/hero-${s.bg}-tall.jpg"><img src="img/hero-${s.bg}-wide.jpg" alt="" width="1920" height="1080" loading="lazy"></picture>`}</div>
-        <div class="shell hx-in"><div class="hx-copy" ${s0.seq ? 'id="hx-seq" aria-live="off"' : ''}>
+          : `<picture><source media="(max-width:899px)" srcset="img/hero-${s.bg}-tall.jpg"><img src="img/hero-${s.bg}-wide.jpg" alt="" width="1920" height="1080" loading="lazy"></picture>`}</div>
+        <div class="shell hx-in"><div class="hx-copy">
           <p class="eyebrow">${s.kicker}</p>
           <p class="hx-title">${s.title}</p>
           <p class="hx-text">${s.text}</p>
           <div class="hx-actions"><a class="btn gold" href="${s.cta[1]}"><span class="hx-cta">${s.cta[0]}</span> <span aria-hidden="true">→</span></a><span class="hx-cod">Cash on delivery · check your parcel before you pay</span></div>
         </div></div>
-      </div>`; }).join('')}
+      </div>`).join('')}
       <div class="shell hx-ctl">
         <span class="hx-count" id="slide-n" aria-hidden="true">${pad(1)} / ${pad(n)}</span>
-        <div class="hx-dots">${SLIDES.map((s, i) => `<button data-act="slide-to" data-i="${i}" aria-label="Show slide ${i + 1}" aria-current="${!i}"></button>`).join('')}</div>
+        <div class="hx-dots">${SLIDES.map((s, i) => `<button data-act="slide-to" data-i="${i}" aria-label="Show slide ${i + 1}" aria-current="${!i}"><span aria-hidden="true">${i + 1}</span></button>`).join('')}</div>
         <button class="hx-btn" data-act="slide" data-d="-1" aria-label="Previous slide">←</button>
         <button class="hx-btn" data-act="slide" data-d="1" aria-label="Next slide">→</button>
-        <button class="hx-btn" data-act="hero-pause" id="hero-pause" aria-label="Pause banner motion">❚❚</button>
       </div>
     </section>`;
 }
@@ -366,18 +358,23 @@ function home() {
       </div>
     </div></section>`;
 }
-const HERO_RATE = 0.65, HERO_STILL_MS = 8000;
-let slideI = 0, heroPaused = false, heroT = 0;
+const HERO_RATE = 0.65, HERO_STILL_MS = 10000, HERO_VIDEO_MS = 20000;
+let slideI = 0, heroT = 0;
+
 function heroSync() {
-  const h = $('#hero'); if (!h) return;
-  const v = $('#hero-video'), b = $('#hero-pause');
-  if (v) { v.defaultPlaybackRate = v.playbackRate = HERO_RATE; if (!heroPaused && slideI === 0) v.play().catch(() => {}); else v.pause(); }
-  b.textContent = heroPaused ? '▶' : '❚❚';
-  b.setAttribute('aria-label', heroPaused ? 'Play banner motion' : 'Pause banner motion');
   clearTimeout(heroT);
-  if (!heroPaused) heroT = setTimeout(() => {
-    if (h.matches(':hover') || h.contains(document.activeElement)) heroSync(); else showSlide(slideI + 1);
-  }, slideI === 0 ? Math.round(12000 / HERO_RATE) : HERO_STILL_MS);
+  if (!$('#hero')) return;
+
+  const reducedMotion = still();
+  const video = $('#hero-video');
+  if (video) {
+    video.defaultPlaybackRate = video.playbackRate = HERO_RATE;
+    if (!reducedMotion && slideI === 0) video.play().catch(() => {});
+    else video.pause();
+  }
+  if (!reducedMotion) {
+    heroT = setTimeout(() => showSlide(slideI + 1), slideI === 0 ? HERO_VIDEO_MS : HERO_STILL_MS);
+  }
 }
 function showSlide(i) {
   const el = document.querySelectorAll('#hero .hx-slide'); if (!el.length) return;
@@ -387,29 +384,18 @@ function showSlide(i) {
   document.querySelectorAll('.hx-dots button').forEach((d, n) => d.setAttribute('aria-current', n === slideI));
   heroSync();
 }
-const heroMq = matchMedia('(max-width:479px), (min-width:600px) and (max-width:899px)');
+const heroMq = matchMedia('(max-width:899px)');
 function heroSrc() {
   const v = $('#hero-video'); if (!v) return;
   const base = `img/${v.dataset.name}-${heroMq.matches ? 'tall' : 'wide'}`;
   if (!v.getAttribute('src') || !v.getAttribute('src').startsWith(base)) { v.poster = base + '.jpg?v=2'; v.src = base + '.mp4?v=2'; }
 }
 heroMq.addEventListener('change', () => { heroSrc(); heroSync(); });
-let heroSeg = 0;
-function heroSeq(k) {
-  const box = $('#hx-seq'), seq = SLIDES[0].seq; if (!box || !seq || k === heroSeg) return;
-  heroSeg = k; const c = seq[k];
-  box.classList.remove('swap'); void box.offsetWidth; box.classList.add('swap');
-  box.querySelector('.eyebrow').textContent = c.kicker;
-  box.querySelector('.hx-title').innerHTML = c.title;
-  box.querySelector('.hx-text').textContent = c.text;
-  box.querySelector('.btn.gold').setAttribute('href', c.cta[1]);
-  box.querySelector('.hx-cta').textContent = c.cta[0];
-}
 function heroInit() {
-  clearTimeout(heroT); slideI = 0; heroSeg = 0; if (!$('#hero')) return; heroSrc(); if (still()) heroPaused = true;
-  const v = $('#hero-video'), seq = SLIDES[0].seq;
-  if (v && seq) v.addEventListener('timeupdate', () => heroSeq(Math.min(seq.length - 1, Math.floor(v.currentTime / SLIDES[0].seg))));
-  heroSync();
+  clearTimeout(heroT);
+  if (!$('#hero')) return;
+  heroSrc();
+  showSlide(0);
 }
 /* ---------- search ---------- */
 function searchProducts(query) {
@@ -868,7 +854,6 @@ document.addEventListener('click', e => {
   switch (act) {
     case 'slide': showSlide(slideI + +el.dataset.d); break;
     case 'slide-to': showSlide(+el.dataset.i); break;
-    case 'hero-pause': heroPaused = !heroPaused; heroSync(); break;
     case 'open-menu': $('#menu').showModal(); break;
     case 'close-dialog': el.closest('dialog').close(); break;
     case 'open-search': toggleSearch($('#searchbar').hidden); break;
