@@ -259,7 +259,7 @@ function hero() {
       <div class="hx-slide" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${n}" ${i ? 'hidden' : ''}>
         <div class="hx-media" aria-hidden="true">${s.video
           ? `<video id="hero-video" muted loop playsinline preload="metadata" data-name="${s.video}"></video>`
-          : `<picture><source media="(max-width:699px)" srcset="img/hero-${s.bg}-tall.jpg"><img src="img/hero-${s.bg}-wide.jpg" alt="" width="1920" height="1080" loading="lazy"></picture>`}</div>
+          : `<picture><source media="(max-width:479px)" srcset="img/hero-${s.bg}-tall.jpg"><img src="img/hero-${s.bg}-wide.jpg" alt="" width="1920" height="1080" loading="lazy"></picture>`}</div>
         <div class="shell hx-in"><div class="hx-copy" ${s0.seq ? 'id="hx-seq" aria-live="off"' : ''}>
           <p class="eyebrow">${s.kicker}</p>
           <p class="hx-title">${s.title}</p>
@@ -384,7 +384,7 @@ function showSlide(i) {
   document.querySelectorAll('.hx-dots button').forEach((d, n) => d.setAttribute('aria-current', n === slideI));
   heroSync();
 }
-const heroMq = matchMedia('(max-width:699px)');
+const heroMq = matchMedia('(max-width:479px)');
 function heroSrc() {
   const v = $('#hero-video'); if (!v) return;
   const base = `img/${v.dataset.name}-${heroMq.matches ? 'tall' : 'wide'}`;
