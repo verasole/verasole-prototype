@@ -166,36 +166,29 @@ const grid = (items, cls = '') => `<div class="grid ${cls}">${items.map(card).jo
 /* ---------- home ---------- */
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const WAVES = `<svg class="hx-waves" viewBox="0 0 1440 360" preserveAspectRatio="none" aria-hidden="true"><path class="w1" d="M-40 230C180 120 330 120 520 190s360 120 560 40 300-150 400-110"/><path class="w2" d="M-40 290C200 200 360 230 560 270s380 40 560-50 260-110 360-80"/></svg>`;
+const SLIDES = [
+  { file: 'leather', title: 'A refined everyday.', text: 'Leather shoes for work and beyond.', cat: 'casual-shoes', alt: 'Brown leather casual slip-on on warm sandstone steps' },
+  { file: 'sneakers', title: 'Move through your day.', text: 'Knit and mesh sneakers for every step.', cat: 'sneakers', alt: 'Taupe and grey knit sneakers in a dark studio' },
+  { file: 'leather-and-sneakers', title: 'Your next favourite pair.', text: 'Leather classics and everyday sneakers.', cat: 'all', alt: 'Leather slip-on and knit sneaker on warm sandstone steps' },
+];
 function hero() {
-  // Set mobile to img/heroes/hero-<name>-mobile.webp when a portrait asset is supplied.
-  const slides = [
-    {file:'leather', mobile:null, title:'A refined everyday.', text:'Discover leather shoes for work and beyond.', cat:'casual-shoes', alt:'Brown leather casual slip-on on warm sandstone steps'},
-    {file:'sneakers', mobile:null, title:'Move through your day.', text:'Discover our knit and mesh sneaker collection.', cat:'sneakers', alt:'Taupe and grey knit sneakers in a dark studio'},
-    {file:'leather-and-sneakers', mobile:null, title:'Your next favourite pair.', text:'Leather classics and everyday sneakers. Find your style.', cat:'all', alt:'Leather slip-on and knit sneaker on warm sandstone steps'},
-  ];
-  const count = c => P.filter(p => c === 'all' || p.cat === c).length;
-  return `<section class="pyx" id="hero" aria-roledescription="carousel" aria-label="Featured collections">
-    <div class="shell pyx-top"><h1 class="pyx-kicker">Casual shoes, loafers, formal shoes, sandals and sneakers</h1></div>
-    ${slides.map((s, i) => `<div class="hx-slide pyx-slide campaign-${s.file}" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${slides.length}" ${i ? 'hidden' : ''}>
-      <div class="shell pyx-copy">
-        <p class="pyx-title">${s.title}</p>
-        <p class="pyx-text">${s.text}</p>
-        <div class="pyx-actions"><a class="btn gold" href="#/c/${s.cat}">Shop collection</a><a class="btn line" href="#/c/all">All footwear</a></div>
-      </div>
-      <div class="pyx-stage">
-        <div class="pyx-wavebox" aria-hidden="true">${WAVES}</div>
-        <div class="pyx-card">
-          <picture>${s.mobile ? `<source media="(max-width:699px)" srcset="${s.mobile}">` : ''}<img src="img/heroes/hero-${s.file}.webp?v=campaign-v2" alt="${s.alt}" width="1672" height="941" ${i ? 'loading="lazy"' : 'fetchpriority="high"'}></picture>
-          <a class="pyx-chip" href="#/c/${s.cat}"><span><small>Collection</small>${CATS[s.cat]?.name || 'All footwear'}</span><b>${count(s.cat)} styles</b><i aria-hidden="true">→</i></a>
-        </div>
+  const n = SLIDES.length;
+  return `<section class="mv" id="hero" aria-roledescription="carousel" aria-label="Featured collections">
+    <h1 class="sr">Casual shoes, loafers, formal shoes, sandals and sneakers online in Pakistan</h1>
+    ${SLIDES.map((s, i) => `<div class="hx-slide mv-slide mv-${s.file}" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${n}" ${i ? 'hidden' : ''}>
+      <img class="mv-img" src="img/heroes/hero-${s.file}.webp?v=campaign-v2" alt="${s.alt}" width="1672" height="941" ${i ? '' : 'fetchpriority="high"'}>
+      <div class="shell mv-copy">
+        <p class="mv-title">${s.title}</p>
+        <p class="mv-text">${s.text}</p>
+        <a class="btn gold" href="#/c/${s.cat}">Shop now</a>
       </div>
     </div>`).join('')}
-    <div class="pyx-rail" aria-hidden="false">
-      <button class="pyx-arrow prev" data-act="slide" data-d="-1" aria-label="Previous collection">←</button>
-      <button class="pyx-arrow next" data-act="slide" data-d="1" aria-label="Next collection">→</button>
-      <a class="pyx-stat" href="#/c/all"><b>${P.length}+</b><span>styles across ${Object.keys(CATS).length - 1} categories</span></a>
+    <div class="shell mv-ctl">
+      <div class="mv-dots">${SLIDES.map((s, i) => `<button data-act="slide-to" data-i="${i}" aria-label="Show slide ${i + 1}" ${i ? '' : 'aria-current="true"'}><span aria-hidden="true"></span></button>`).join('')}</div>
+      <button class="mv-btn" data-act="slide" data-d="-1" aria-label="Previous slide">←</button>
+      <button class="mv-btn" data-act="slide" data-d="1" aria-label="Next slide">→</button>
+      <button class="mv-btn" data-act="hero-pause" id="hero-pause" aria-label="Pause slideshow"></button>
     </div>
-    <div class="hx-ctl pyx-ctl"><div class="hx-dots">${slides.map((s, i) => `<button data-act="slide-to" data-i="${i}" aria-label="Show collection ${i + 1}" ${i ? '' : 'aria-current="true"'}><span aria-hidden="true"></span></button>`).join('')}</div><button class="hx-pause" data-act="hero-pause" id="hero-pause" aria-label="Pause slideshow"></button></div>
   </section>`;
 }
 
