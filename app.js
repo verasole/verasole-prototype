@@ -6,79 +6,23 @@ const range = (a, b) => Array.from({ length: b - a + 1 }, (_, i) => String(a + i
 
 const DELIVERY = { code: 'flatrate', title: 'Standard delivery', note: 'Flat rate across Pakistan. Delivery time to be confirmed.', fee: 150 };
 const CATS = {
-  all: { name: 'All footwear', h1: 'Footwear for men, women and kids', note: 'Every pair in the VeraSole catalog, delivered across Pakistan with cash on delivery.', img: 'trail-sandal-khaki' },
-  chappals: { name: 'Chappals', h1: 'Peshawari chappals and slides', note: 'Peshawari classics for men and padded slides for women, in EU sizes 36–45.', img: 'peshawari-coffee' },
-  sandals: { name: 'Sandals', h1: 'Sandals for men and women', note: 'Strap sandals for everyday walking and beaded styles for evenings out.', img: 'beaded-heel-black' },
-  shoes: { name: 'Shoes', h1: 'Knit slip-on shoes', note: 'Breathable knit uppers on cushioned soles for work, travel and daily walks.', img: 'knit-slipon-navy' },
-  'school-shoes': { name: 'School shoes', h1: 'Black school shoes for kids', note: 'Uniform-ready black school shoes from Bata in kids’ sizes 1–9.', img: 'img/catalog/bata3216146-reference.jpg' },
-  sale: { name: 'Sale', h1: 'Footwear on sale', note: 'Selected styles at reduced prices. Sample prices in this prototype.', img: 'embossed-slide-black' },
+ all: { name:'All footwear', h1:'Shoes and sandals for every day', note:'Explore our photographed collection of casual shoes, loafers, formal shoes, sandals and sneakers.', img:'' },
+ 'casual-shoes': {name:'Casual Shoes',h1:'Casual shoes',note:'Everyday slip-ons in distinct designs and colours.',img:''},
+ loafers: {name:'Loafers',h1:'Loafers',note:'Penny, tassel and textured styles.',img:''},
+ 'formal-shoes': {name:'Formal Shoes',h1:'Formal shoes',note:'Refined shoes for work and occasions.',img:''},
+ sandals: {name:'Sandals',h1:'Sandals',note:'Open styles with distinctive straps and buckles.',img:''},
+ sneakers: {name:'Sneakers',h1:'Sneakers',note:'Explore knit and mesh slip-ons.',img:''},
 };
 const inCat = (p, slug) => slug === 'all' || (slug === 'sale' ? !!p.was : p.cat === slug);
-const HEX = { Black: '#222222', Brown: '#684536', Coffee: '#513a32', Camel: '#bc8958', Khaki: '#9b7a4e', Tan: '#ac784c', Navy: '#24344d', Pink: '#d9a79c', Taupe: '#9a8274', Beige: '#d4c1a4', Blue: '#355d92', Cream: '#f5e9cd', Fawn: '#bd9d78', Grey: '#80838a', Mehendi: '#686c3f', Mehroon: '#782e40', Mustard: '#b58726', Red: '#b23842', White: '#ffffff', Yellow: '#ebca54' };
+const HEX = { Maroon:'#713630', Olive:'#78715c', 'Dark Brown':'#49332d', 'Light Grey':'#d1d2d0', Black: '#222222', Brown: '#684536', Coffee: '#513a32', Camel: '#bc8958', Khaki: '#9b7a4e', Tan: '#ac784c', Navy: '#24344d', Pink: '#d9a79c', Taupe: '#9a8274', Beige: '#d4c1a4', Blue: '#355d92', Cream: '#f5e9cd', Fawn: '#bd9d78', Grey: '#80838a', Mehendi: '#686c3f', Mehroon: '#782e40', Mustard: '#b58726', Red: '#b23842', White: '#ffffff', Yellow: '#ebca54' };
 
 const img = (n, alt) => ({ src: `img/${n}.jpg`, card: `img/${n}-card.jpg`, alt });
 const shots = (n, d) => [img(`${n}-studio`, `${d}, on a light studio backdrop`), img(`${n}-noir`, `${d}, on a dark studio backdrop`), img(`${n}-close`, `Close-up: ${d}`)];
-const P = [
-  { id: 'peshawari-camel', sku: 'VS-PSH-02', name: 'Suede-Finish Peshawari Chappal', brand: '', cat: 'chappals', who: 'Men', price: 4000, was: 5000, sizes: range(40, 45),
-    desc: 'A Peshawari chappal with a soft suede-finish upper, contrast stitching along the welt and a buckled heel strap.',
-    colors: [{ name: 'Camel', imgs: shots('peshawari-camel', 'Camel suede-finish Peshawari chappal with buckled heel strap, side view') }],
-    stock: { 'Camel|45': 0, 'Camel|42': 2 } },
-  { id: 'peshawari-coffee', sku: 'VS-PSH-01', name: 'Classic Peshawari Chappal', brand: '', cat: 'chappals', who: 'Men', price: 4000, sizes: range(40, 45),
-    desc: 'The classic crossover Peshawari shape in a smooth coffee finish, with yellow welt stitching and an adjustable buckle.',
-    colors: [{ name: 'Coffee', imgs: shots('peshawari-coffee', 'Coffee brown Peshawari chappal with crossover upper, side view') }],
-    stock: {} },
-  { id: 'trail-strap-sandal', sku: 'VS-MF-SND-01', name: 'Trail Strap Sandal', brand: 'Marks Fairwale', cat: 'sandals', who: 'Men', price: 1360, was: 2260, sizes: range(39, 45),
-    desc: 'A lightweight sandal with woven adjustable straps, a contoured footbed and a cushioned white sole.',
-    colors: [{ name: 'Khaki', imgs: shots('trail-sandal-khaki', 'Khaki woven-strap sandal with contoured footbed, top view') }],
-    stock: { 'Khaki|39': 0, 'Khaki|45': 1 } },
-  { id: 'go-ran-knit-slip-on', sku: 'VS-MF-SHO-01', name: 'Go Ran Knit Slip-On', brand: 'Marks', cat: 'shoes', who: 'Men', price: 4000, sizes: range(39, 45), adj: { 44: 200, 45: 200 },
-    desc: 'A breathable knit slip-on with a stretch collar, heel pull tab and a ridged white sole.',
-    colors: [
-      { name: 'Navy', imgs: shots('knit-slipon-navy', 'Navy knit slip-on shoe with white sole, side view') },
-      { name: 'Taupe', imgs: shots('knit-slipon-taupe', 'Taupe knit slip-on shoe with white sole, side view') },
-    ],
-    stock: { 'Navy|40': 0, 'Navy|41': 2, 'Taupe|43': 0, 'Taupe|44': 1 } },
-  { id: 'beaded-block-heel-sandal', sku: 'VS-WJ-SND-01', name: 'Beaded Block-Heel Sandal', brand: 'Wej', cat: 'sandals', who: 'Women', price: 3500, sizes: range(36, 41),
-    desc: 'A dressy ankle-strap sandal with a beaded toe band in pearl, black and gold tones on a low block heel.',
-    colors: [{ name: 'Black', imgs: shots('beaded-heel-black', 'Black block-heel sandal with beaded toe band and ankle strap') }],
-    stock: { 'Black|36': 0, 'Black|41': 0, 'Black|38': 2 } },
-  { id: 'ruched-slingback-sandal', sku: 'VS-WJ-SND-02', name: 'Ruched Slingback Sandal', brand: 'Wej', cat: 'sandals', who: 'Women', price: 2800, was: 3500, sizes: range(36, 41),
-    desc: 'A tan slingback with a ruched toe band edged in sparkle trim and an elastic strap over the foot.',
-    colors: [{ name: 'Tan', imgs: shots('ruched-slingback-tan', 'Tan slingback sandal with ruched toe band and sparkle trim') }],
-    stock: { 'Tan|38': 1 } },
-  { id: 'double-strap-comfort-slide', sku: 'VS-MF-CHP-01', name: 'Double-Strap Comfort Slide', brand: 'Marks Fairwale', cat: 'chappals', who: 'Men', price: 1300, was: 1860, sizes: range(39, 45),
-    desc: 'An easy two-strap slide with a metal buckle, a soft padded footbed and a thick cushioned sole.',
-    colors: [{ name: 'Brown', imgs: shots('comfort-slide-brown', 'Brown double-strap slide with metal buckle and cream sole') }],
-    stock: { 'Brown|42': 2 } },
-  { id: 'crossover-buckle-slide', sku: 'VS-WJ-CHP-01', name: 'Crossover Buckle Slide', brand: 'Wej', cat: 'chappals', who: 'Women', price: 2200, sizes: range(36, 41),
-    desc: 'A soft pink slide with padded crossover straps and a gold-tone buckle.',
-    colors: [{ name: 'Pink', imgs: shots('crossover-slide-pink', 'Pink slide with padded crossover straps and gold-tone buckle') }],
-    stock: {} },
-  { id: 'embossed-buckle-slide', sku: 'VS-WJ-CHP-02', name: 'Embossed Buckle Slide', brand: 'Wej', cat: 'chappals', who: 'Women', price: 2400, was: 3200, sizes: range(36, 41),
-    desc: 'A black slide with an embossed toe strap, an oversized buckle and a chunky white sole.',
-    colors: [{ name: 'Black', imgs: shots('embossed-slide-black', 'Black slide with embossed toe strap, large buckle and white sole') }],
-    stock: { 'Black|37': 0 } },
-  { id: 'm-knit-slip-on', sku: 'VS-MF-SHO-02', name: 'M Knit Slip-On', brand: 'Marks Fairwale', cat: 'shoes', who: 'Men', price: 4000, sizes: range(39, 45),
-    desc: 'An all-black knit slip-on with a reinforced toe, an embroidered M logo and a layered cushioned sole.',
-    colors: [{ name: 'Black', imgs: shots('m-knit-black', 'All-black knit slip-on shoe with embroidered M logo') }],
-    stock: { 'Black|39': 0 } },
-  { id: 'bata-school-321-6146', sku: '321 6146', name: 'Bata 321 6146 School Shoe', brand: 'Bata', cat: 'school-shoes', who: 'Kids', price: 3300, sizes: range(1, 9),
-    desc: 'A black school shoe for uniform days. Product photo pending.',
-    colors: [{ name: 'Black', imgs: [] }], stock: {} },
-  { id: 'bata-school-321-6181', sku: '321 6181', name: 'Bata 321 6181 School Shoe', brand: 'Bata', cat: 'school-shoes', who: 'Kids', price: 1800, sizes: range(1, 9),
-    desc: 'A black school shoe for uniform days. Product photo pending.',
-    colors: [{ name: 'Black', imgs: [] }], stock: 'none' },
-];
+const P = typeof PRODUCTION_CATALOG === 'undefined' ? [] : PRODUCTION_CATALOG;
 const byId = id => P.find(p => p.id === id);
-if (typeof CATALOG !== 'undefined') {
-  P.push(...CATALOG);
-  for (const [id, f] of Object.entries(CATALOG_PHOTOS || {})) {
-    const p = byId(id); if (!p) continue;
-    p.colors[0].imgs = [{ src: `img/catalog/${f}.jpg`, card: `img/catalog/${f}.jpg`, alt: `${p.name}, supplier product photo`, sup: true }];
-    p.desc = p.desc.replace(' Product photo pending.', '');
-  }
-}
-const sizeLabel = p => (p.sizeSys || (p.cat === 'school-shoes' ? 'kids' : 'EU')) === 'EU' ? ' (EU)' : '';
+for (const p of P) if (!CATS[p.cat].img) CATS[p.cat].img = p.colors[0].imgs[0].card;
+if (P.length) CATS.all.img = P[0].colors[0].imgs[0].card;
+const sizeLabel = p => (p.sizeSys || 'EU') === 'EU' ? ' (EU)' : '';
 const sizeSort = (a, b) => (a.startsWith('UK') - b.startsWith('UK')) || parseFloat(a.replace('UK ', '')) - parseFloat(b.replace('UK ', ''));
 const stockOf = (p, c, s) => p.stock === 'none' ? 0 : (p.stock[`${c}|${s}`] ?? 5);
 const priceOf = (p, s) => p.price + ((p.adj || {})[s] || 0);
@@ -98,29 +42,25 @@ const saving = () => S.cart.reduce((n, l) => { const p = byId(l.id); return n + 
 const PRICE_BANDS = { lo: ['Under Rs 2,000', p => p.price < 2000], mid: ['Rs 2,000 – 3,499', p => p.price >= 2000 && p.price < 3500], hi: ['Rs 3,500 and over', p => p.price >= 3500] };
 const SORTS = { featured: 'Featured', newest: 'Newest', discount: 'Biggest discount', 'price-asc': 'Price: low to high', 'price-desc': 'Price: high to low', name: 'Name: A to Z' };
 const PAGE = 12;
-const POPULAR = ['peshawari', 'sandals', 'black', 'slip-on', 'Wej'];
-const SYN = { slipper: 'chappal', slippers: 'chappal', slide: 'chappal slide', slides: 'chappal slide', sneaker: 'shoes', sneakers: 'shoes', joggers: 'shoes', ladies: 'women', mens: 'men', kheri: 'peshawari', school: 'school-shoes' };
+const POPULAR = ['casual shoes', 'loafers', 'formal shoes', 'sandals', 'sneakers'];
+const SYN = { sneaker:'sneaker', sneakers:'sneaker', joggers:'sneaker', loafers:'loafer', formals:'formal', mens:'men' };
 
 /* ---------- state ---------- */
 const store = { get(k, d) { try { return JSON.parse(sessionStorage.getItem(k)) ?? d; } catch { return d; } }, set(k, v) { try { sessionStorage.setItem(k, JSON.stringify(v)); } catch {} } };
 const S = { cart: store.get('vs-cart', []), pdp: {}, co: store.get('vs-co', { step: 1, f: { province: '' }, errors: {} }), order: store.get('vs-order', null), drawer: false, focusKey: null };
-const SAMPLE_ORDERS = [
-  { no: 'VS-2977', date: '12 Nov 2026', status: 2, sample: true, f: { first: 'Sana', last: 'Khan', phone: '0300 1234567', address: 'House 12, Street 4, Gulberg III', city: 'Lahore', province: 'Punjab', postcode: '54660' },
-    lines: [{ id: 'trail-strap-sandal', name: 'Trail Strap Sandal', color: 'Khaki', size: '42', qty: 1, total: 1360 }, { id: 'crossover-buckle-slide', name: 'Crossover Buckle Slide', color: 'Pink', size: '38', qty: 1, total: 2200 }], sub: 3560, total: 3710 },
-  { no: 'VS-2841', date: '2 Nov 2026', status: 3, sample: true, f: { first: 'Sana', last: 'Khan', phone: '0300 1234567', address: 'House 12, Street 4, Gulberg III', city: 'Lahore', province: 'Punjab', postcode: '54660' },
-    lines: [{ id: 'peshawari-coffee', name: 'Classic Peshawari Chappal', color: 'Coffee', size: '42', qty: 1, total: 4000 }], sub: 4000, total: 4150 },
-];
+const SAMPLE_ORDERS = [];
 const SAMPLE_ADDR = [
   { label: 'Home', name: 'Sana Khan', phone: '0300 1234567', address: 'House 12, Street 4, Gulberg III', city: 'Lahore', province: 'Punjab', postcode: '54660' },
   { label: 'Office', name: 'Sana Khan', phone: '0300 1234567', address: 'Plot 5, Block 6, PECHS', city: 'Karachi', province: 'Sindh', postcode: '75400' },
 ];
 Object.assign(S, {
-  wish: store.get('vs-wish', ['beaded-block-heel-sandal', 'peshawari-camel', 'm-knit-slip-on']),
-  orders: store.get('vs-orders', SAMPLE_ORDERS),
+  wish: store.get('vs-wish', []).filter(id => byId(id)),
+  orders: store.get('vs-orders', SAMPLE_ORDERS).filter(o => o.lines.every(l => byId(l.id))),
   addr: store.get('vs-addr', SAMPLE_ADDR),
   profile: store.get('vs-profile', { name: 'Sana Khan', phone: '0300 1234567', email: '', whatsapp: true }),
   addrForm: null, addrErr: {},
 });
+S.cart = S.cart.filter(l => { const p = byId(l.id); return p && p.colors.some(c => c.name === l.color) && p.sizes.includes(l.size); });
 const saveCart = () => { store.set('vs-cart', S.cart); bag(); };
 const saveWish = () => { store.set('vs-wish', S.wish); bag(); };
 const cartQty = () => S.cart.reduce((n, l) => n + l.qty, 0);
@@ -168,37 +108,10 @@ function render(keepScroll) {
   lastPath = r.path;
   heroInit();
 }
-const shopGroups = [
-  ['Men', 'Men', ['chappals', 'sandals', 'shoes'], 'peshawari-camel'],
-  ['Women', 'Women', ['chappals', 'sandals'], 'ruched-slingback-sandal'],
-  ['Kids', 'Kids', ['school-shoes'], null, 'img/catalog/bata4511128-reference.jpg'],
-  ['School shoes', '', [], null, 'img/catalog/bata3216146-reference.jpg'],
-];
-
 function navs(r) {
-  const [routeType, category] = r.parts;
-  const link = (label, slug, who = '') => {
-    const href = `#/c/${slug}${who ? '?who=' + who : ''}`;
-    const current = routeType === 'c' && category === slug && (r.q.get('who') || '') === who;
-    return `<a href="${href}" ${current ? 'aria-current="page"' : ''}>${label}</a>`;
-  };
-  const groups = shopGroups.map(([label, who, categories, featuredId, fitImg]) => {
-    const items = who
-      ? [link('All ' + label.toLowerCase() + ' footwear', 'all', who), ...categories.map(slug => link(CATS[slug].name, slug, who))]
-      : [link('All school shoes', 'school-shoes'), '<a href="#/page/size-guide">School shoe size guide</a>'];
-    const product = featuredId && byId(featuredId);
-    const feature = product
-      ? `<a class="menu-feature" href="#/p/${product.id}">
-           <img src="${product.colors[0].imgs[0].card}" alt="" width="640" height="800" loading="lazy">
-           <span><small>Featured pair</small><strong>${esc(product.name)}</strong><span>${rs(product.price)}${product.was ? ` <s>${rs(product.was)}</s>` : ''} →</span></span>
-         </a>`
-      : `<a class="menu-feature menu-fit" href="#/page/size-guide"><img class="sup" src="${fitImg}" alt="" width="640" height="800" loading="lazy"><span><small>${who ? 'Kids’ sizing' : 'School shoe sizing'}</small><strong>Find the right fit</strong><span>Open size guide →</span></span></a>`;
-    return `<details class="shop-group"><summary>${label}</summary>
-      <div class="shop-submenu"><div class="shop-submenu-inner shell"><div class="submenu-categories"><span class="submenu-title">Shop ${label.toLowerCase()}</span>${items.join('')}</div>${feature}</div></div>
-    </details>`;
-  }).join('');
-  $('#nav').innerHTML = groups + link('All footwear', 'all');
-  $('#menu-links').innerHTML = groups + link('All footwear', 'all') + '<a href="#/page/size-guide">Size guide</a><a href="#/page/delivery">Delivery</a>';
+ const links=Object.entries(CATS).map(([slug,c])=>`<a href="#/c/${slug}" ${r.parts[0]==='c'&&r.parts[1]===slug?'aria-current="page"':''}>${c.name}</a>`).join('');
+ $('#nav').innerHTML=links;
+ $('#menu-links').innerHTML=links+'<a href="#/page/size-guide">Size guide</a><a href="#/page/delivery">Delivery</a>';
 }
 
 const desktopNav = $('#nav');
@@ -251,122 +164,94 @@ const wishBtn = (p, cls = 'wish') => { const on = S.wish.includes(p.id); return 
 const grid = (items, cls = '') => `<div class="grid ${cls}">${items.map(card).join('')}</div>`;
 
 /* ---------- home ---------- */
-const SLIDES = [
-  { cut: 'peshawari-camel', pid: 'peshawari-camel', color: 'Camel' },
-  { cut: 'knit-slipon-navy', pid: 'go-ran-knit-slip-on', color: 'Navy' },
-  { cut: 'peshawari-coffee', pid: 'peshawari-coffee', color: 'Coffee' },
-  { cut: 'knit-slipon-taupe', pid: 'go-ran-knit-slip-on', color: 'Taupe' },
-];
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
 const WAVES = `<svg class="hx-waves" viewBox="0 0 1440 360" preserveAspectRatio="none" aria-hidden="true"><path class="w1" d="M-40 230C180 120 330 120 520 190s360 120 560 40 300-150 400-110"/><path class="w2" d="M-40 290C200 200 360 230 560 270s380 40 560-50 260-110 360-80"/></svg>`;
 function hero() {
-  const n = SLIDES.length, total = P.length;
-  return `<section class="hx" aria-roledescription="carousel" aria-label="Featured pairs" id="hero">
-      <div class="hx-head"><div class="shell hx-head-in">
-        <h1 class="hx-h1">Chappals, sandals and shoes online in Pakistan</h1>
-        <p class="hx-title">True comfort. Every step.</p>
-        <p class="hx-text">Peshawari chappals, sandals and knit slip-ons, delivered across Pakistan. Check your parcel, then pay.</p>
-        <div class="hx-actions"><a class="btn gold" href="#/c/all">Shop now</a><a class="btn line" href="#/c/sale">Explore sale</a></div>
-      </div></div>
-      <div class="hx-stage">
-        <div class="hx-wavebox" aria-hidden="true">${WAVES}</div>
-        <button class="hx-arrow prev" data-act="slide" data-d="-1" aria-label="Previous pair">←</button>
-        ${SLIDES.map((s, i) => { const p = byId(s.pid); return `
-        <div class="hx-slide" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${n}: ${esc(p.name)}, ${s.color}" ${i ? 'hidden' : ''}>
-          <div class="hx-pair"><a class="hx-shoe" href="#/p/${p.id}?color=${s.color}" tabindex="-1" aria-hidden="true"><img src="img/hero-cut-${s.cut}.webp" alt="" width="1030" height="500" ${i ? '' : 'fetchpriority="high"'}></a>
-          <a class="hx-tag" href="#/p/${p.id}?color=${s.color}"><span class="hx-tag-name">${esc(p.name)}<small>${s.color}</small></span><span class="hx-tag-price">${p.was ? `<s>${rs(p.was)}</s>` : ''}${rs(p.price)}</span><span class="hx-tag-bag" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h14l1 13H4L5 8Z M9 9V6a3 3 0 0 1 6 0v3"/></svg></span></a></div>
-        </div>`; }).join('')}
-        <button class="hx-arrow next" data-act="slide" data-d="1" aria-label="Next pair">→</button>
-        <a class="hx-stat" href="#/c/all"><b>${total}+</b><span>styles across chappals, sandals and shoes</span></a>
+  // Set mobile to img/heroes/hero-<name>-mobile.webp when a portrait asset is supplied.
+  const slides = [
+    {file:'leather', mobile:null, title:'A refined everyday.', text:'Discover leather shoes for work and beyond.', cat:'casual-shoes', alt:'Brown leather casual slip-on on warm sandstone steps'},
+    {file:'sneakers', mobile:null, title:'Move through your day.', text:'Discover our knit and mesh sneaker collection.', cat:'sneakers', alt:'Taupe and grey knit sneakers in a dark studio'},
+    {file:'leather-and-sneakers', mobile:null, title:'Your next favourite pair.', text:'Leather classics and everyday sneakers. Find your style.', cat:'all', alt:'Leather slip-on and knit sneaker on warm sandstone steps'},
+  ];
+  const count = c => P.filter(p => c === 'all' || p.cat === c).length;
+  return `<section class="pyx" id="hero" aria-roledescription="carousel" aria-label="Featured collections">
+    <div class="shell pyx-top"><h1 class="pyx-kicker">Casual shoes, loafers, formal shoes, sandals and sneakers</h1></div>
+    ${slides.map((s, i) => `<div class="hx-slide pyx-slide campaign-${s.file}" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${slides.length}" ${i ? 'hidden' : ''}>
+      <div class="shell pyx-copy">
+        <p class="pyx-title">${s.title}</p>
+        <p class="pyx-text">${s.text}</p>
+        <div class="pyx-actions"><a class="btn gold" href="#/c/${s.cat}">Shop collection</a><a class="btn line" href="#/c/all">All footwear</a></div>
       </div>
-      <div class="hx-ctl">
-        <div class="hx-dots">${SLIDES.map((s, i) => `<button data-act="slide-to" data-i="${i}" aria-label="Show pair ${i + 1}" ${i === 0 ? 'aria-current="true"' : ''}><span aria-hidden="true"></span></button>`).join('')}</div>
-        <button class="hx-pause" data-act="hero-pause" id="hero-pause" aria-label="Pause slideshow"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z" fill="currentColor"/></svg></button>
+      <div class="pyx-stage">
+        <div class="pyx-wavebox" aria-hidden="true">${WAVES}</div>
+        <div class="pyx-card">
+          <picture>${s.mobile ? `<source media="(max-width:699px)" srcset="${s.mobile}">` : ''}<img src="img/heroes/hero-${s.file}.webp?v=campaign-v2" alt="${s.alt}" width="1672" height="941" ${i ? 'loading="lazy"' : 'fetchpriority="high"'}></picture>
+          <a class="pyx-chip" href="#/c/${s.cat}"><span><small>Collection</small>${CATS[s.cat]?.name || 'All footwear'}</span><b>${count(s.cat)} styles</b><i aria-hidden="true">→</i></a>
+        </div>
       </div>
-    </section>`;
+    </div>`).join('')}
+    <div class="pyx-rail" aria-hidden="false">
+      <button class="pyx-arrow prev" data-act="slide" data-d="-1" aria-label="Previous collection">←</button>
+      <button class="pyx-arrow next" data-act="slide" data-d="1" aria-label="Next collection">→</button>
+      <a class="pyx-stat" href="#/c/all"><b>${P.length}+</b><span>styles across ${Object.keys(CATS).length - 1} categories</span></a>
+    </div>
+    <div class="hx-ctl pyx-ctl"><div class="hx-dots">${slides.map((s, i) => `<button data-act="slide-to" data-i="${i}" aria-label="Show collection ${i + 1}" ${i ? '' : 'aria-current="true"'}><span aria-hidden="true"></span></button>`).join('')}</div><button class="hx-pause" data-act="hero-pause" id="hero-pause" aria-label="Pause slideshow"></button></div>
+  </section>`;
 }
+
 const FAQ = [
   ['Do you offer cash on delivery?', 'Yes. Every VeraSole order is cash on delivery. You pay in cash when your order arrives and no card details are needed.'],
   ['What does delivery cost?', 'You’ll see the delivery charge before placing your order.'],
-  ['What shoe sizes do you stock?', 'Men’s styles run from EU 39 to 45 and women’s from EU 36 to 41. School shoes use sizes 1 to 9. Each product page lists the sizes available for that style.'],
+  ['What shoe sizes do you stock?', 'Size ranges shown in this prototype are samples. Confirmed sizes will be listed for each article before launch.'],
   ['How do I work out my size?', 'Check the size on a pair you already own, or measure your foot from heel to longest toe and compare it with our size guide.'],
   ['What if my pair is out of stock?', 'We’ll contact you if a pair is unavailable. You can wait for a restock or order another style.'],
-  ['Why do some products have no photos?', 'We show the article number until we have a photo of that model.'],
-];
-const REVIEWS = [
-  { name: 'Hamza R.', city: 'Lahore', rating: 5, pid: 'peshawari-camel', date: 'Oct 2026', text: 'Stitching is neat and the sole feels solid. Size 42 fit exactly like my old pair. Checked it at the door before paying, which made it easy to trust.' },
-  { name: 'Mehwish A.', city: 'Karachi', rating: 5, pid: 'beaded-block-heel-sandal', date: 'Oct 2026', text: 'Wore them to a mehndi and they were comfortable all evening. The beads look better in person than in the photos.' },
-  { name: 'Usman T.', city: 'Islamabad', rating: 4, pid: 'go-ran-knit-slip-on', date: 'Nov 2026', text: 'Light and breathable for daily office walks. Runs slightly snug, so I would go one size up if you are between sizes.' },
-  { name: 'Ayesha S.', city: 'Faisalabad', rating: 5, pid: 'crossover-buckle-slide', date: 'Nov 2026', text: 'Soft straps, no rubbing on the first day. Delivery came on time and the courier waited while I checked the box.' },
-  { name: 'Bilal K.', city: 'Peshawar', rating: 4, pid: 'trail-strap-sandal', date: 'Sep 2026', text: 'Good grip and the straps adjust well. Great value at the sale price.' },
-  { name: 'Fatima Z.', city: 'Multan', rating: 5, pid: 'ruched-slingback-sandal', date: 'Oct 2026', text: 'The tan colour is lovely and goes with everything. Easy exchange process for a different size.' },
+  ['Does each colour have its own photos?', 'Yes. Select a colour on the product page to see its individual shoe images and available views.'],
 ];
 const stars = (n, size = 16) => `<span class="stars" role="img" aria-label="Rated ${n} out of 5">${[1, 2, 3, 4, 5].map(i => `<svg viewBox="0 0 24 24" width="${size}" height="${size}" aria-hidden="true" class="${i <= n ? 'on' : ''}"><path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8Z"/></svg>`).join('')}</span>`;
-function reviewsSection() {
-  const avg = (REVIEWS.reduce((n, r) => n + r.rating, 0) / REVIEWS.length).toFixed(1);
-  const dist = [5, 4, 3, 2, 1].map(k => [k, REVIEWS.filter(r => r.rating === k).length]);
-  return `<section class="section reviews" aria-labelledby="rev-t">
-    <div class="section-head"><div><p class="eyebrow">Customer reviews</p><h2 id="rev-t">Loved on every step</h2></div><span class="sample-note">Sample reviews · prototype</span></div>
-    <div class="reviews-in">
-      <div class="rev-summary">
-        <p class="rev-avg">${avg}<small>/5</small></p>${stars(Math.round(avg), 20)}
-        <p class="muted small">Based on ${REVIEWS.length} reviews</p>
-        <ul class="rev-dist">${dist.map(([k, n]) => `<li><span>${k}★</span><i style="--w:${(n / REVIEWS.length) * 100}%"></i><span>${n}</span></li>`).join('')}</ul>
-      </div>
-      <div class="rev-track" tabindex="0" aria-label="Customer reviews, scroll for more">${REVIEWS.map(r => { const p = byId(r.pid); return `
-        <article class="rev-card">
-          <div class="rev-top">${stars(r.rating)}<span class="muted small">${r.date}</span></div>
-          <p class="rev-text">“${esc(r.text)}”</p>
-          <a class="rev-product" href="#/p/${p.id}"><img src="${p.colors[0].imgs[0].card}" alt="" width="640" height="800" loading="lazy"><span>${esc(p.name)}</span></a>
-          <p class="rev-by"><span class="avatar" aria-hidden="true">${r.name[0]}</span><span><b>${esc(r.name)}</b>${esc(r.city)} · <span class="verified">Verified buyer</span></span></p>
-        </article>`; }).join('')}</div>
-    </div>
-  </section>`;
-}
 const row = (id, kicker, title, href, items) => `<section class="section" aria-labelledby="${id}">
   <div class="section-head"><div><p class="eyebrow">${kicker}</p><h2 id="${id}">${title}</h2></div><a class="link" href="${href}">View all</a></div>${grid(items, 'four')}</section>`;
 function home() {
-  const tiles = [['chappals', 'peshawari-coffee'], ['sandals', 'trail-strap-sandal'], ['shoes', 'go-ran-knit-slip-on'], ['school-shoes', 'bata-school-321-6146']];
+  const tiles = ['casual-shoes','loafers','formal-shoes','sandals','sneakers'].map(cat => [cat, P.find(p => p.id.startsWith('vs-') && p.cat === cat)?.id]);
   const count = s => P.filter(p => p.cat === s).length;
   const ids = a => a.map(byId);
   return `${hero()}
-    <div class="trustbar"><ul class="shell" aria-label="How ordering works"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></svg><span><b>Cash on delivery</b>Check your parcel before you pay</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg><span><b>Prices in PKR</b>Delivery fee shown at checkout</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17v-5c3 0 4-4 7-4 1.5 0 2 2.5 5 3.5l4 1.3c1.4.5 2 1.4 2 2.7V17z"/><path d="M3 17v2h18v-2"/></svg><span><b>Your size, your colour</b>EU 36–45 and school sizes 1–9</span></li></ul></div>
+    <div class="trustbar"><ul class="shell" aria-label="How ordering works"><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></svg><span><b>Cash on delivery</b>Check your parcel before you pay</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg><span><b>Prices in PKR</b>Delivery fee shown at checkout</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17v-5c3 0 4-4 7-4 1.5 0 2 2.5 5 3.5l4 1.3c1.4.5 2 1.4 2 2.7V17z"/><path d="M3 17v2h18v-2"/></svg><span><b>Your size, your colour</b>Explore each article and colour</span></li></ul></div>
     <div class="shell">
     <section class="section" aria-labelledby="cat-title">
       <div class="section-head"><div><p class="eyebrow">Find the right pair</p><h2 id="cat-title">Shop by category</h2></div><a class="link" href="#/c/all">View all footwear</a></div>
       <div class="cats">${tiles.map(([s, pid]) => pid
-        ? `<a class="cat" href="#/c/${s}"><img src="${byId(pid).colors[0].imgs[0].card.replace('-studio-card', '-noir-card')}" alt="" loading="lazy" width="640" height="800"><span class="cat-label"><strong>${CATS[s].name}</strong><span>${count(s)} styles</span></span></a>`
+        ? `<a class="cat" href="#/c/${s}"><span class="cat-image"><img src="${byId(pid).colors[0].imgs[0].card}" alt="" loading="lazy" width="640" height="640"></span><span class="cat-label"><strong>${CATS[s].name}</strong><span>${count(s)} styles</span></span></a>`
         : `<a class="cat art" href="#/c/${s}"><svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 44V22c8 0 12-10 22-10 6 0 8 8 18 12l40 10c14 3 22 6 24 12v6H8Z M8 44h104"/></svg><span class="cat-label"><strong>${CATS[s].name}</strong><span>${count(s)} styles</span></span></a>`).join('')}</div>
     </section>
-    ${row('new-t', 'Just in', 'New arrivals', '#/c/all', ids(['trail-strap-sandal', 'go-ran-knit-slip-on', 'ruched-slingback-sandal', 'peshawari-coffee']))}
+    ${row('new-t', 'Just in', 'New arrivals', '#/c/all', ['casual-shoes','loafers','sandals','sneakers'].map(cat=>P.find(p=>p.cat===cat)).filter(Boolean))}
     <section class="section collection-edit" aria-labelledby="collection-edit-title">
       <div class="section-head"><div><p class="eyebrow">Curated edits</p><h2 id="collection-edit-title">Shop by collection</h2></div><a class="link" href="#/c/all">View all</a></div>
       <div class="collection-edit-grid">
-        <a class="collection-tile collection-tile-women" href="#/c/all?who=Women">
-          <img src="img/crossover-slide-pink-studio-card.jpg" alt="" width="640" height="800" loading="lazy">
-          <div class="collection-tile-copy"><h3>Slides &amp; sandals by Wej</h3><span>Shop women’s <span aria-hidden="true">↗</span></span></div>
+        <a class="collection-tile collection-tile-women" href="#/c/casual-shoes">
+          <img src="img/heroes/hero-leather.webp" alt="" width="640" height="800" loading="lazy">
+          <div class="collection-tile-copy"><h3>Leather for every day</h3><span>Shop leather <span aria-hidden="true">↗</span></span></div>
         </a>
-        <a class="collection-tile collection-tile-men" href="#/c/shoes?who=Men">
-          <img src="img/m-knit-black-studio-card.jpg" alt="" width="640" height="800" loading="lazy">
-          <div class="collection-tile-copy"><h3>Everyday knit slip-ons</h3><span>Shop men’s shoes <span aria-hidden="true">↗</span></span></div>
+        <a class="collection-tile collection-tile-men" href="#/c/sneakers">
+          <img src="img/heroes/hero-sneakers.webp" alt="" width="640" height="800" loading="lazy">
+          <div class="collection-tile-copy"><h3>Everyday sneakers</h3><span>Shop men’s shoes <span aria-hidden="true">↗</span></span></div>
         </a>
       </div>
     </section>
-    ${row('chp-t', 'Everyday classics', 'Chappals collection', '#/c/chappals', ids(['peshawari-camel', 'double-strap-comfort-slide', 'crossover-buckle-slide', 'embossed-buckle-slide']))}
-    ${reviewsSection()}
+    ${row('chp-t', 'Everyday classics', 'Formal shoes', '#/c/formal-shoes', P.filter(p=>p.cat==='formal-shoes').slice(0,4))}
+
     </div>
     <section class="seo" aria-labelledby="seo-t"><div class="shell seo-in">
       <div class="seo-copy">
         <p class="eyebrow">About VeraSole</p>
-        <h2 id="seo-t">Footwear for men, women and kids in Pakistan</h2>
-        <p>VeraSole is an online footwear store for Pakistan. We stock <a href="#/c/chappals">Peshawari chappals and slides</a>, <a href="#/c/sandals">sandals</a>, <a href="#/c/shoes">knit slip-on shoes</a> and <a href="#/c/school-shoes">black school shoes</a>, with every price shown in Pakistani rupees.</p>
-        <p>Each style comes in a choice of sizes and colours. Men’s pairs run from EU 39 to EU 45, women’s from EU 36 to EU 41, and school shoes from size 1 to 9. If you’re between sizes, the <a href="#/page/size-guide">size guide</a> shows how to measure your foot at home.</p>
+        <h2 id="seo-t">Shoes for every day in Pakistan</h2>
+        <p>Explore VeraSole’s <a href="#/c/casual-shoes">casual shoes</a>, <a href="#/c/loafers">loafers</a>, <a href="#/c/formal-shoes">formal shoes</a>, <a href="#/c/sandals">sandals</a> and <a href="#/c/sneakers">sneakers</a>. Each article and colour is photographed individually.</p>
+        <p>Each style comes in a choice of sizes and colours. Sizes and availability shown here are prototype samples and will be confirmed before launch. If you’re between sizes, the <a href="#/page/size-guide">size guide</a> shows how to measure your foot at home.</p>
         <p>Ordering is simple: choose your pair, tell us where to send it and <a href="#/page/payment">pay cash on delivery</a>. The <a href="#/page/delivery">delivery charge</a> is shown before you place your order.</p>
         <h3>Popular right now</h3>
-        <p class="chips">${[['Peshawari chappals', 'peshawari'], ['Black sandals', 'black sandal'], ['Slip-on shoes', 'slip-on'], ['Women’s slides', 'women chappal'], ['School shoes', 'school']].map(([l, q]) => `<a class="chip" href="#/search?q=${encodeURIComponent(q)}">${l}</a>`).join('')}</p>
+        <p class="chips">${[['Casual shoes','casual'],['Loafers','loafer'],['Formal shoes','formal'],['Sandals','sandal'],['Sneakers','sneaker']].map(([l, q]) => `<a class="chip" href="#/search?q=${encodeURIComponent(q)}">${l}</a>`).join('')}</p>
       </div>
       <figure class="seo-media">
-        <img src="img/peshawari-coffee-noir.jpg" alt="Classic Peshawari chappal in coffee on a dark studio backdrop" width="1200" height="1500" loading="lazy">
+        <img src="img/heroes/hero-leather-and-sneakers.webp" alt="Leather shoe and knit sneaker on warm stone platforms" width="1200" height="1500" loading="lazy">
         <figcaption><b>Cash on delivery</b><span>Check your parcel, then pay the courier. Delivered across Pakistan.</span></figcaption>
       </figure>
     </div></section>
@@ -483,7 +368,7 @@ function listing({ kind, slug, q }) {
       <p class="muted">${query ? 'Check the spelling, try a shorter word, or search by brand, colour or style.' : 'Search by style, brand or colour.'}</p>
       <p class="eyebrow" style="margin-top:1.5rem">Try searching for</p><div class="chips">${POPULAR.map(t => `<a class="chip" href="#/search?q=${encodeURIComponent(t)}">${t}</a>`).join('')}</div>
       <p class="eyebrow" style="margin-top:1.5rem">Or browse a category</p>${cats}</div>
-      <section class="section" style="padding-top:0"><h2 style="margin-bottom:1rem">Popular right now</h2>${grid(['peshawari-camel', 'trail-strap-sandal', 'go-ran-knit-slip-on', 'beaded-block-heel-sandal'].map(byId), 'four')}</section></div>`;
+      <section class="section" style="padding-top:0"><h2 style="margin-bottom:1rem">Popular right now</h2>${grid(P.slice(0,4), 'four')}</section></div>`;
   }
   const pager = pages > 1 ? `<div class="more">
       <p class="muted small" aria-live="polite">Showing ${start + 1}–${end} of ${items.length} styles</p>
@@ -512,7 +397,7 @@ function listing({ kind, slug, q }) {
 }
 
 function catStrip(slug, audience) {
-  const keys = ['all', 'chappals', 'sandals', 'shoes', 'school-shoes', 'sale'];
+  const keys = Object.keys(CATS);
   return `<nav class="cat-strip" aria-label="Categories">${keys.map(k => { const c = CATS[k], n = P.filter(p => inCat(p, k) && (!audience || p.who === audience)).length; return `<a href="#/c/${k}${audience && k !== 'sale' ? '?who=' + audience : ''}" ${k === slug ? 'aria-current="page"' : ''}>
       <span class="cs-img ${k === 'sale' ? 'is-sale' : ''}">${c.img ? `<img ${c.img.includes('/') ? 'class="sup" ' : ''}src="${c.img.includes('/') ? c.img : `img/${c.img}-studio-card.jpg`}" alt="" width="640" height="800" loading="lazy">` : '<svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 44V22c8 0 12-10 22-10 6 0 8 8 18 12l40 10c14 3 22 6 24 12v6H8Z M8 44h104"/></svg>'}${k === 'sale' ? '<b>%</b>' : ''}</span>
       <span class="cs-name">${c.name}</span><span class="cs-n">${n}</span></a>`; }).join('')}</nav>`;
@@ -785,26 +670,12 @@ function page(slug) {
 
 /* ---------- SEO: per-page meta, structured data, category copy ---------- */
 const SITE = 'https://verasole.github.io/verasole-prototype/';
-const CAT_SEO = {
-  sale: { h: 'Footwear on sale', care: 'Sale pairs are the same quality as full-price ones, so the same care applies: wipe uppers clean, air-dry away from sun and store pairs in their box.', p: ['Selected VeraSole chappals, sandals and slides at reduced prices. The original price is shown struck through on every sale item, with the percentage saved.', 'Sale stock is limited by size and colour, so filter by your size first. Prices in this prototype are sample prices.'],
-    tips: ['Filter by your size first; sale sizes sell out fastest.', 'The saving shown is against the original VeraSole price.', 'Cash on delivery applies to sale orders too.'],
-    faq: [['Are sale items final?', 'Exchange terms for sale items will be confirmed before launch and shown here.'], ['How do I see the discount?', 'Each sale card shows the percentage off, the sale price and the original price struck through.'], ['Can I pay cash on delivery for sale items?', 'Yes. Sale orders are cash on delivery like every other order.']] },
-  all: { h: 'Shop footwear online in Pakistan', care: 'Wipe leather and faux-leather uppers with a damp cloth, air-dry pairs away from direct sun, and rotate between two pairs so each one has a day to dry out.', p: ['Browse every VeraSole style in one place: Peshawari chappals, everyday slides, sandals, knit slip-on shoes and black school shoes. Every price is in Pakistani rupees and every order is cash on delivery.', 'Filter by size, colour and price to narrow the list, or sort by price to compare. Each product page shows the sizes in stock for the colour you choose.'],
-    tips: ['Men’s styles run EU 39–45 and women’s EU 36–41.', 'School shoes use sizes 1–9; check the number inside a pair that fits.', 'Sale prices are shown with the original price struck through.'],
-    faq: [['How do I pay?', 'Pay in cash when your order arrives. Check your parcel before you pay the courier.'], ['How much is delivery?', `Standard delivery is ${rs(DELIVERY.fee)} per order and is shown before you place it.`], ['Can I filter by size?', 'Yes. Choose one or more sizes in the filters and only styles available in those sizes are shown.']] },
-  chappals: { h: 'Peshawari chappals and slides', care: 'Brush dust off Peshawari uppers after wear and use a neutral cream polish every few weeks. Keep suede-finish pairs away from water, and let slides dry naturally if they get wet.', p: ['VeraSole chappals range from the classic Peshawari, with its crossover upper, welt stitching and buckled heel strap, to soft slides for everyday wear at home and out.', 'Peshawari chappals pair with shalwar kameez for Eid, weddings and Friday prayers, while padded slides are made for long days on your feet.'],
-    tips: ['A Peshawari should feel snug at first; the upper softens with wear.', 'Choose your usual EU size; if you are between sizes, go one up.', 'Slides with a buckle strap can be loosened for a wider foot.'],
-    faq: [['What size Peshawari chappal should I buy?', 'Order your usual EU size. Peshawari uppers are firm at first and ease with wear, so go up one size only if you are between sizes.'], ['Are the chappals suitable for formal wear?', 'Yes. Classic Peshawari chappals in coffee or camel suit shalwar kameez for Eid, weddings and other occasions.'], ['Do you have women’s chappals?', 'Yes. Women’s slides come in EU 36–41; use the Women menu or filter by size.']] },
-  sandals: { h: 'Sandals for men and women', care: 'Wipe straps with a damp cloth and let them dry away from direct sun. Store beaded and embellished sandals in their box so the trim doesn’t snag.', p: ['From strap sandals with adjustable buckles for everyday walking to beaded and ruched sandals for evenings out, VeraSole sandals are made for warm days across Pakistan.', 'Open styles keep feet cool in summer, and cushioned footbeds make them comfortable for errands, travel and family events.'],
-    tips: ['Adjustable straps help sandals fit a range of foot widths.', 'For heeled sandals, choose your usual size; the ankle strap keeps your foot in place.', 'Wipe straps with a damp cloth and let them dry away from direct sun.'],
-    faq: [['Are the sandals comfortable for long walks?', 'Strap sandals with cushioned footbeds are designed for everyday walking. Dressier styles suit shorter wear such as events.'], ['What sizes do women’s sandals come in?', 'Women’s sandals come in EU 36–41. Each product page shows which sizes are in stock.'], ['Can I check the sandals before paying?', 'Yes. All orders are cash on delivery and you can check your parcel before paying the courier.']] },
-  shoes: { h: 'Knit slip-on shoes', care: 'Hand-wash knit uppers with mild soap and a soft brush, then stuff with paper and air-dry. Avoid the washing machine and dryer, which can loosen the knit and warp the sole.', p: ['VeraSole knit slip-ons combine a breathable knit upper with a cushioned sole, so they are easy to pull on for work, travel and daily walks.', 'Their light weight and flexible sole make them a comfortable alternative to joggers for everyday wear.'],
-    tips: ['Knit uppers stretch slightly; if you are between sizes, choose the smaller one.', 'Some sizes cost a little more; the price updates when you pick a size.', 'Air-dry knit shoes after washing; avoid a machine dryer.'],
-    faq: [['Are knit slip-ons good for office wear?', 'They suit smart-casual offices and daily commuting. For formal dress codes, choose a closed leather style.'], ['Do knit shoes stretch?', 'Yes, the knit upper gives slightly with wear, so a snug first fit is normal.'], ['Which colours are available?', 'Current styles come in navy, taupe and black. Use the colour filter to see them together.']] },
-  'school-shoes': { h: 'Black school shoes', care: 'Polish black school shoes once a week, clean off mud the same day, and loosen laces fully before taking them off to protect the heel counter.', p: ['Black school shoes from Bata in sizes 1–9, made to meet uniform rules and stand up to the school week.', 'Buy before the new term to get the right size in stock, and check the size printed inside a pair that already fits your child.'],
-    tips: ['Leave about a thumb’s width at the toe for growing feet.', 'Check the size inside your child’s current shoes before ordering.', 'Polish regularly to keep black leather looking smart.'],
-    faq: [['What sizes do school shoes come in?', 'School shoes come in sizes 1–9, as printed inside the shoe and on the box.'], ['How much room should I leave for growth?', 'About a thumb’s width at the toe is a good guide for growing feet.'], ['Why is there no photo for some school shoes?', 'We show the article number until we have photographed that model.']] },
-};
+const CAT_SEO = Object.fromEntries(Object.entries(CATS).map(([slug,c]) => [slug, {
+ h:c.h1, p:[c.note,'Browse individual colour options and the available photographed views on each product page.'],
+ tips:['Compare the available colours.','Use the product gallery to inspect the design.','Prices and sizes are prototype samples pending confirmation.'],
+ care:'Follow the care instructions supplied with your pair. Allow shoes to air-dry away from direct heat.',
+ faq:[['Are the product photos specific to each colour?','Yes. Each colour has its own gallery of individual shoe images.'],['How do I choose a size?','Use the size guide. Actual availability will be confirmed before launch.']]
+}]));
 const ld = obj => `<script type="application/ld+json">${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`;
 const crumbsLD = items => ({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: items.map(([name, path], i) => ({ '@type': 'ListItem', position: i + 1, name, item: SITE + path })) });
 const faqLD = faq => ({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq.map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } })) });
@@ -831,7 +702,7 @@ function catSeo(slug, audience) {
 function pageSeo(r, html) {
   const [a, b] = r.parts, q = r.q;
   if (!a) {
-    setMeta('True comfort. Every step.', 'True comfort. Every step. Shop Peshawari chappals, sandals, knit slip-ons and school shoes online in Pakistan. Prices in PKR, cash on delivery, check your parcel before you pay.');
+    setMeta('True comfort. Every step.', 'True comfort. Every step. Shop casual shoes, loafers, formal shoes, sandals and sneakers online in Pakistan. Prices in PKR, cash on delivery, check your parcel before you pay.');
     return html + ld({ '@context': 'https://schema.org', '@graph': [
       { '@type': 'Organization', name: 'VeraSole', url: SITE, logo: SITE + 'img/logo.svg', areaServed: 'PK' },
       { '@type': 'WebSite', name: 'VeraSole', url: SITE, potentialAction: { '@type': 'SearchAction', target: SITE + '#/search?q={search_term_string}', 'query-input': 'required name=search_term_string' } },
