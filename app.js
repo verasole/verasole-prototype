@@ -171,8 +171,8 @@ function render(keepScroll) {
 const shopGroups = [
   ['Men', 'Men', ['chappals', 'sandals', 'shoes'], 'peshawari-camel'],
   ['Women', 'Women', ['chappals', 'sandals'], 'ruched-slingback-sandal'],
-  ['Kids', 'Kids', ['school-shoes']],
-  ['School shoes', '', []],
+  ['Kids', 'Kids', ['school-shoes'], null, 'img/catalog/bata4511128-reference.jpg'],
+  ['School shoes', '', [], null, 'img/catalog/bata3216146-reference.jpg'],
 ];
 
 function navs(r) {
@@ -182,7 +182,7 @@ function navs(r) {
     const current = routeType === 'c' && category === slug && (r.q.get('who') || '') === who;
     return `<a href="${href}" ${current ? 'aria-current="page"' : ''}>${label}</a>`;
   };
-  const groups = shopGroups.map(([label, who, categories, featuredId]) => {
+  const groups = shopGroups.map(([label, who, categories, featuredId, fitImg]) => {
     const items = who
       ? [link('All ' + label.toLowerCase() + ' footwear', 'all', who), ...categories.map(slug => link(CATS[slug].name, slug, who))]
       : [link('All school shoes', 'school-shoes'), '<a href="#/page/size-guide">School shoe size guide</a>'];
@@ -192,7 +192,7 @@ function navs(r) {
            <img src="${product.colors[0].imgs[0].card}" alt="" width="640" height="800" loading="lazy">
            <span><small>Featured pair</small><strong>${esc(product.name)}</strong><span>${rs(product.price)}${product.was ? ` <s>${rs(product.was)}</s>` : ''} →</span></span>
          </a>`
-      : '<a class="menu-feature menu-fit" href="#/page/size-guide"><span><small>School shoe sizing</small><strong>Find the right fit</strong><span>Open size guide →</span></span></a>';
+      : `<a class="menu-feature menu-fit" href="#/page/size-guide"><img class="sup" src="${fitImg}" alt="" width="640" height="800" loading="lazy"><span><small>${who ? 'Kids’ sizing' : 'School shoe sizing'}</small><strong>Find the right fit</strong><span>Open size guide →</span></span></a>`;
     return `<details class="shop-group"><summary>${label}</summary>
       <div class="shop-submenu"><div class="shop-submenu-inner shell"><div class="submenu-categories"><span class="submenu-title">Shop ${label.toLowerCase()}</span>${items.join('')}</div>${feature}</div></div>
     </details>`;
@@ -252,32 +252,36 @@ const grid = (items, cls = '') => `<div class="grid ${cls}">${items.map(card).jo
 
 /* ---------- home ---------- */
 const SLIDES = [
-  { video: 'hero-promo', kicker: 'VeraSole footwear', title: 'True comfort.<br>Every step.', text: 'Shop chappals, sandals and everyday shoes.', cta: ['Shop all footwear', '#/c/all'] },
-  { bg: 'peshawari-camel', kicker: 'Men · Peshawari chappals', title: 'The Peshawari,<br>made for every day.', text: 'Hand-stitched welts, buckled heel straps and soft uppers in camel and coffee.', cta: ['Shop chappals', '#/c/chappals'] },
-  { bg: 'beaded-heel-black', kicker: 'Women · Sandals', title: 'Dressed up,<br>still easy.', text: 'Beaded bands, ruched straps and low block heels for evenings out.', cta: ['Shop sandals', '#/c/sandals'] },
-  { bg: 'knit-slipon-navy', kicker: 'Men · Knit slip-ons', title: 'Slip on.<br>Head out.', text: 'Breathable knit uppers on a cushioned sole, in navy, taupe and black.', cta: ['Shop shoes', '#/c/shoes'] },
+  { cut: 'peshawari-camel', pid: 'peshawari-camel', color: 'Camel' },
+  { cut: 'knit-slipon-navy', pid: 'go-ran-knit-slip-on', color: 'Navy' },
+  { cut: 'peshawari-coffee', pid: 'peshawari-coffee', color: 'Coffee' },
+  { cut: 'knit-slipon-taupe', pid: 'go-ran-knit-slip-on', color: 'Taupe' },
 ];
 const still = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+const WAVES = `<svg class="hx-waves" viewBox="0 0 1440 360" preserveAspectRatio="none" aria-hidden="true"><path class="w1" d="M-40 230C180 120 330 120 520 190s360 120 560 40 300-150 400-110"/><path class="w2" d="M-40 290C200 200 360 230 560 270s380 40 560-50 260-110 360-80"/></svg>`;
 function hero() {
-  const n = SLIDES.length;
-  return `<section class="hx" aria-roledescription="carousel" aria-label="Featured collections" id="hero">
-      <h1 class="hx-h1 shell">Chappals, sandals and shoes online in Pakistan</h1>
-      ${SLIDES.map((s, i) => `
-      <div class="hx-slide" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${n}" ${i ? 'hidden' : ''}>
-        <div class="hx-media" aria-hidden="true">${s.video
-          ? `<video id="hero-video" muted loop playsinline preload="metadata" data-name="${s.video}"></video>`
-          : `<picture><source media="(max-width:899px)" srcset="img/hero-${s.bg}-tall.jpg"><img src="img/hero-${s.bg}-wide.jpg" alt="" width="1920" height="1080" loading="lazy"></picture>`}</div>
-        <div class="shell hx-in"><div class="hx-copy">
-          <p class="eyebrow">${s.kicker}</p>
-          <p class="hx-title">${s.title}</p>
-          <p class="hx-text">${s.text}</p>
-          <div class="hx-actions"><a class="btn gold" href="${s.cta[1]}"><span class="hx-cta">${s.cta[0]}</span> <span aria-hidden="true">→</span></a><span class="hx-cod">Cash on delivery · check your parcel before you pay</span></div>
-        </div></div>
-      </div>`).join('')}
-      <div class="shell hx-ctl">
-        <div class="hx-dots">${SLIDES.map((s, i) => `<button data-act="slide-to" data-i="${i}" aria-label="Show slide ${i + 1}" ${i === 0 ? 'aria-current="true"' : ''}><span aria-hidden="true"></span></button>`).join('')}</div>
-        <button class="hx-btn" data-act="slide" data-d="-1" aria-label="Previous slide">←</button>
-        <button class="hx-btn" data-act="slide" data-d="1" aria-label="Next slide">→</button>
+  const n = SLIDES.length, total = P.length;
+  return `<section class="hx" aria-roledescription="carousel" aria-label="Featured pairs" id="hero">
+      <div class="hx-head"><div class="shell hx-head-in">
+        <h1 class="hx-h1">Chappals, sandals and shoes online in Pakistan</h1>
+        <p class="hx-title">True comfort. Every step.</p>
+        <p class="hx-text">Peshawari chappals, sandals and knit slip-ons, delivered across Pakistan. Check your parcel, then pay.</p>
+        <div class="hx-actions"><a class="btn gold" href="#/c/all">Shop now</a><a class="btn line" href="#/c/sale">Explore sale</a></div>
+      </div></div>
+      <div class="hx-stage">
+        <div class="hx-wavebox" aria-hidden="true">${WAVES}</div>
+        <button class="hx-arrow prev" data-act="slide" data-d="-1" aria-label="Previous pair">←</button>
+        ${SLIDES.map((s, i) => { const p = byId(s.pid); return `
+        <div class="hx-slide" role="group" aria-roledescription="slide" aria-label="${i + 1} of ${n}: ${esc(p.name)}, ${s.color}" ${i ? 'hidden' : ''}>
+          <div class="hx-pair"><a class="hx-shoe" href="#/p/${p.id}?color=${s.color}" tabindex="-1" aria-hidden="true"><img src="img/hero-cut-${s.cut}.webp" alt="" width="1030" height="500" ${i ? '' : 'fetchpriority="high"'}></a>
+          <a class="hx-tag" href="#/p/${p.id}?color=${s.color}"><span class="hx-tag-name">${esc(p.name)}<small>${s.color}</small></span><span class="hx-tag-price">${p.was ? `<s>${rs(p.was)}</s>` : ''}${rs(p.price)}</span><span class="hx-tag-bag" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 8h14l1 13H4L5 8Z M9 9V6a3 3 0 0 1 6 0v3"/></svg></span></a></div>
+        </div>`; }).join('')}
+        <button class="hx-arrow next" data-act="slide" data-d="1" aria-label="Next pair">→</button>
+        <a class="hx-stat" href="#/c/all"><b>${total}+</b><span>styles across chappals, sandals and shoes</span></a>
+      </div>
+      <div class="hx-ctl">
+        <div class="hx-dots">${SLIDES.map((s, i) => `<button data-act="slide-to" data-i="${i}" aria-label="Show pair ${i + 1}" ${i === 0 ? 'aria-current="true"' : ''}><span aria-hidden="true"></span></button>`).join('')}</div>
+        <button class="hx-pause" data-act="hero-pause" id="hero-pause" aria-label="Pause slideshow"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z" fill="currentColor"/></svg></button>
       </div>
     </section>`;
 }
@@ -352,7 +356,7 @@ function home() {
     ${reviewsSection()}
     </div>
     <section class="seo" aria-labelledby="seo-t"><div class="shell seo-in">
-      <div>
+      <div class="seo-copy">
         <p class="eyebrow">About VeraSole</p>
         <h2 id="seo-t">Footwear for men, women and kids in Pakistan</h2>
         <p>VeraSole is an online footwear store for Pakistan. We stock <a href="#/c/chappals">Peshawari chappals and slides</a>, <a href="#/c/sandals">sandals</a>, <a href="#/c/shoes">knit slip-on shoes</a> and <a href="#/c/school-shoes">black school shoes</a>, with every price shown in Pakistani rupees.</p>
@@ -361,57 +365,39 @@ function home() {
         <h3>Popular right now</h3>
         <p class="chips">${[['Peshawari chappals', 'peshawari'], ['Black sandals', 'black sandal'], ['Slip-on shoes', 'slip-on'], ['Women’s slides', 'women chappal'], ['School shoes', 'school']].map(([l, q]) => `<a class="chip" href="#/search?q=${encodeURIComponent(q)}">${l}</a>`).join('')}</p>
       </div>
-      <div>
+      <figure class="seo-media">
+        <img src="img/peshawari-coffee-noir.jpg" alt="Classic Peshawari chappal in coffee on a dark studio backdrop" width="1200" height="1500" loading="lazy">
+        <figcaption><b>Cash on delivery</b><span>Check your parcel, then pay the courier. Delivered across Pakistan.</span></figcaption>
+      </figure>
+    </div></section>
+    <section class="faq-sec" aria-labelledby="faq-t"><div class="shell faq-in">
+      <div class="faq-head">
         <p class="eyebrow">Help &amp; ordering</p>
         <h2 id="faq-t">Before you order</h2>
-        <div class="notes" style="margin-top:1rem">${FAQ.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('')}</div>
+        <p class="muted">Quick answers on payment, delivery, sizing and stock. Still unsure? We’re happy to help.</p>
+        <a class="btn ghost" href="#/page/contact">Contact us</a>
       </div>
+      <div class="notes">${FAQ.map(([q, a]) => `<details><summary>${q}</summary><p>${a}</p></details>`).join('')}</div>
     </div></section>`;
 }
-const HERO_RATE = 0.65, HERO_STILL_MS = 10000, HERO_VIDEO_MS = 20000;
-let slideI = 0, heroT = 0;
-
+let slideI = 0, heroT = 0, heroPaused = false;
+const HERO_MS = 5500;
 function heroSync() {
   clearTimeout(heroT);
-  if (!$('#hero')) return;
-
-  const reducedMotion = still();
-  const video = $('#hero-video');
-  if (video) {
-    video.defaultPlaybackRate = video.playbackRate = HERO_RATE;
-    if (!reducedMotion && slideI === 0) video.play().catch(() => {});
-    else video.pause();
-  }
-  if (!reducedMotion) {
-    heroT = setTimeout(() => showSlide(slideI + 1), slideI === 0 ? HERO_VIDEO_MS : HERO_STILL_MS);
-  }
+  const h = $('#hero'); if (!h) return;
+  const b = $('#hero-pause');
+  if (b) { b.setAttribute('aria-label', heroPaused ? 'Play slideshow' : 'Pause slideshow'); b.innerHTML = heroPaused ? '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>' : '<svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path d="M7 5h3v14H7zM14 5h3v14h-3z" fill="currentColor"/></svg>'; }
+  if (!heroPaused && !still()) heroT = setTimeout(() => { if (h.matches(':hover') || h.contains(document.activeElement)) heroSync(); else showSlide(slideI + 1); }, HERO_MS);
 }
 function showSlide(i) {
-  const hero = $('#hero');
-  if (!hero) return;
-
-  const slides = hero.querySelectorAll('.hx-slide');
+  const h = $('#hero'); if (!h) return;
+  const slides = h.querySelectorAll('.hx-slide');
   slideI = (i + slides.length) % slides.length;
-  slides.forEach((slide, index) => { slide.hidden = index !== slideI; });
-  hero.querySelectorAll('[data-act="slide-to"]').forEach(button => {
-    if (Number(button.dataset.i) === slideI) button.setAttribute('aria-current', 'true');
-    else button.removeAttribute('aria-current');
-  });
+  slides.forEach((s, n) => { s.hidden = n !== slideI; });
+  h.querySelectorAll('[data-act="slide-to"]').forEach(b => b.toggleAttribute('aria-current', +b.dataset.i === slideI));
   heroSync();
 }
-const heroMq = matchMedia('(max-width:899px)');
-function heroSrc() {
-  const v = $('#hero-video'); if (!v) return;
-  const base = `img/${v.dataset.name}-${heroMq.matches ? 'tall' : 'wide'}`;
-  if (!v.getAttribute('src') || !v.getAttribute('src').startsWith(base)) { v.poster = base + '.jpg?v=2'; v.src = base + '.mp4?v=2'; }
-}
-heroMq.addEventListener('change', () => { heroSrc(); heroSync(); });
-function heroInit() {
-  clearTimeout(heroT);
-  if (!$('#hero')) return;
-  heroSrc();
-  showSlide(0);
-}
+function heroInit() { clearTimeout(heroT); if (!$('#hero')) return; showSlide(0); }
 /* ---------- search ---------- */
 function searchProducts(query) {
   const toks = query.toLowerCase().replace(/[^\w\s-]/g, ' ').split(/\s+/).filter(Boolean).map(t => SYN[t] || t);
@@ -572,7 +558,7 @@ function pdp(p, q) {
         </fieldset>
         <div class="buy">
           <div class="stepper" role="group" aria-label="Quantity"><button data-act="qty" data-d="-1" data-key="q-" aria-label="Decrease quantity" ${st.qty <= 1 || soldOut ? 'disabled' : ''}>−</button><output aria-live="polite">${st.qty}</output><button data-act="qty" data-d="1" data-key="q+" aria-label="Increase quantity" ${soldOut || (left && st.qty >= left) || st.qty >= 5 ? 'disabled' : ''}>+</button></div>
-          <button class="btn" data-act="add" data-key="add" ${soldOut ? 'disabled' : ''}>${soldOut ? 'Out of stock' : 'Add to bag · ' + rs(price * st.qty)}</button>
+          <button class="btn" data-act="add" data-key="add" ${soldOut ? 'disabled' : ''}>${soldOut ? 'Out of stock' : `Add to bag<span class="buy-price"> · ${rs(price * st.qty)}</span>`}</button>
           ${wishBtn(p, 'wish-lg')}
         </div>
         ${soldOut ? '<p class="muted small" style="margin-top:.8rem">This style is currently unavailable in every size.</p>' : ''}
@@ -885,6 +871,7 @@ document.addEventListener('click', e => {
   switch (act) {
     case 'slide': showSlide(slideI + +el.dataset.d); break;
     case 'slide-to': showSlide(+el.dataset.i); break;
+    case 'hero-pause': heroPaused = !heroPaused; heroSync(); break;
     case 'open-menu': $('#menu').showModal(); break;
     case 'close-dialog': el.closest('dialog').close(); break;
     case 'open-search': toggleSearch($('#searchbar').hidden); break;
