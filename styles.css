@@ -12,6 +12,9 @@
   --r:14px; --r-sm:10px;
 }
 *{box-sizing:border-box}
+html{-webkit-tap-highlight-color:transparent}
+a:active,button:active{opacity:.85}
+.wordmark:active{opacity:.7}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--body);-webkit-font-smoothing:antialiased}
 img{max-width:100%;display:block}
@@ -44,7 +47,7 @@ button,input,select{font:inherit;color:inherit}
 .link{background:none;border:0;padding:0;color:var(--accent-ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;cursor:pointer;font-weight:500;transition:color var(--t) var(--ease),text-decoration-color var(--t) var(--ease)}
 .link:hover{color:var(--accent);text-decoration-thickness:2px}
 .icon-btn{display:inline-grid;place-items:center;min-width:44px;height:44px;border-radius:999px;border:0;background:none;cursor:pointer;position:relative;text-decoration:none;transition:background-color var(--t) var(--ease),color var(--t) var(--ease)}
-.icon-btn:hover{background:var(--sand);color:var(--accent-ink)}
+@media(hover:hover){.icon-btn:hover{background:var(--sand);color:var(--accent-ink)}}
 
 /* header */
 .header{position:sticky;top:0;z-index:20;background:rgba(247,242,234,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
