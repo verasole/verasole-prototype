@@ -10,11 +10,11 @@ const CATS = {
   chappals: { name: 'Chappals', h1: 'Peshawari chappals and slides', note: 'Peshawari classics for men and padded slides for women, in EU sizes 36–45.', img: 'peshawari-coffee' },
   sandals: { name: 'Sandals', h1: 'Sandals for men and women', note: 'Strap sandals for everyday walking and beaded styles for evenings out.', img: 'beaded-heel-black' },
   shoes: { name: 'Shoes', h1: 'Knit slip-on shoes', note: 'Breathable knit uppers on cushioned soles for work, travel and daily walks.', img: 'knit-slipon-navy' },
-  'school-shoes': { name: 'School shoes', h1: 'Black school shoes for kids', note: 'Uniform-ready black school shoes in sizes 1–9.', img: '' },
+  'school-shoes': { name: 'School shoes', h1: 'Black school shoes for kids', note: 'Uniform-ready black school shoes from Bata in kids’ sizes 1–9.', img: 'img/catalog/bata3216146-reference.jpg' },
   sale: { name: 'Sale', h1: 'Footwear on sale', note: 'Selected styles at reduced prices. Sample prices in this prototype.', img: 'embossed-slide-black' },
 };
 const inCat = (p, slug) => slug === 'all' || (slug === 'sale' ? !!p.was : p.cat === slug);
-const HEX = { Black: '#222222', Brown: '#684536', Coffee: '#513a32', Camel: '#bc8958', Khaki: '#9b7a4e', Tan: '#ac784c', Navy: '#24344d', Pink: '#d9a79c', Taupe: '#9a8274' };
+const HEX = { Black: '#222222', Brown: '#684536', Coffee: '#513a32', Camel: '#bc8958', Khaki: '#9b7a4e', Tan: '#ac784c', Navy: '#24344d', Pink: '#d9a79c', Taupe: '#9a8274', Beige: '#d4c1a4', Blue: '#355d92', Cream: '#f5e9cd', Fawn: '#bd9d78', Grey: '#80838a', Mehendi: '#686c3f', Mehroon: '#782e40', Mustard: '#b58726', Red: '#b23842', White: '#ffffff', Yellow: '#ebca54' };
 
 const img = (n, alt) => ({ src: `img/${n}.jpg`, card: `img/${n}-card.jpg`, alt });
 const shots = (n, d) => [img(`${n}-studio`, `${d}, on a light studio backdrop`), img(`${n}-noir`, `${d}, on a dark studio backdrop`), img(`${n}-close`, `Close-up: ${d}`)];
@@ -70,6 +70,16 @@ const P = [
     colors: [{ name: 'Black', imgs: [] }], stock: 'none' },
 ];
 const byId = id => P.find(p => p.id === id);
+if (typeof CATALOG !== 'undefined') {
+  P.push(...CATALOG);
+  for (const [id, f] of Object.entries(CATALOG_PHOTOS || {})) {
+    const p = byId(id); if (!p) continue;
+    p.colors[0].imgs = [{ src: `img/catalog/${f}.jpg`, card: `img/catalog/${f}.jpg`, alt: `${p.name}, supplier product photo`, sup: true }];
+    p.desc = p.desc.replace(' Product photo pending.', '');
+  }
+}
+const sizeLabel = p => (p.sizeSys || (p.cat === 'school-shoes' ? 'kids' : 'EU')) === 'EU' ? ' (EU)' : '';
+const sizeSort = (a, b) => (a.startsWith('UK') - b.startsWith('UK')) || parseFloat(a.replace('UK ', '')) - parseFloat(b.replace('UK ', ''));
 const stockOf = (p, c, s) => p.stock === 'none' ? 0 : (p.stock[`${c}|${s}`] ?? 5);
 const priceOf = (p, s) => p.price + ((p.adj || {})[s] || 0);
 const maxPrice = p => Math.max(...p.sizes.map(s => priceOf(p, s)));
@@ -87,7 +97,7 @@ const priceHTML = (p, s, mult = 1) => {
 const saving = () => S.cart.reduce((n, l) => { const p = byId(l.id); return n + (wasOf(p, l.size) ? (wasOf(p, l.size) - priceOf(p, l.size)) * l.qty : 0); }, 0);
 const PRICE_BANDS = { lo: ['Under Rs 2,000', p => p.price < 2000], mid: ['Rs 2,000 – 3,499', p => p.price >= 2000 && p.price < 3500], hi: ['Rs 3,500 and over', p => p.price >= 3500] };
 const SORTS = { featured: 'Featured', newest: 'Newest', discount: 'Biggest discount', 'price-asc': 'Price: low to high', 'price-desc': 'Price: high to low', name: 'Name: A to Z' };
-const PAGE = 8;
+const PAGE = 12;
 const POPULAR = ['peshawari', 'sandals', 'black', 'slip-on', 'Wej'];
 const SYN = { slipper: 'chappal', slippers: 'chappal', slide: 'chappal slide', slides: 'chappal slide', sneaker: 'shoes', sneakers: 'shoes', joggers: 'shoes', ladies: 'women', mens: 'men', kheri: 'peshawari', school: 'school-shoes' };
 
@@ -154,6 +164,7 @@ function render(keepScroll) {
   if (S.drawer && $('#filter-drawer')) $('#filter-drawer').showModal(); else S.drawer = false;
   if (S.focusKey) { const el = document.querySelector(`[data-key="${CSS.escape(S.focusKey)}"]`); if (el) el.focus({ preventScroll: true }); S.focusKey = null; }
   else if (!keepScroll && lastPath !== null && lastPath !== r.path) { window.scrollTo(0, 0); }
+  if (S.toList) { S.toList = false; const t = $('.toolbar'); if (t) window.scrollTo(0, t.getBoundingClientRect().top + window.scrollY - 90); const first = $('.grid .card-body a'); first && first.focus({ preventScroll: true }); }
   lastPath = r.path;
   heroInit();
 }
@@ -222,7 +233,7 @@ document.addEventListener('click', event => {
 
 /* ---------- shared pieces ---------- */
 const media = (p, c = p.colors[0], which = 'card') => c.imgs[0]
-  ? `<img src="${c.imgs[0][which]}" alt="${esc(c.imgs[0].alt)}" loading="lazy" width="640" height="800">`
+  ? `<img ${c.imgs[0].sup ? 'class="sup" ' : ''}src="${c.imgs[0][which]}" alt="${esc(c.imgs[0].alt)}" loading="lazy" width="640" height="800">`
   : `<span class="ph"><span><b>${esc(p.sku)}</b>Product photo pending</span></span>`;
 function card(p) {
   const out = !anyStock(p);
@@ -311,7 +322,7 @@ function reviewsSection() {
 const row = (id, kicker, title, href, items) => `<section class="section" aria-labelledby="${id}">
   <div class="section-head"><div><p class="eyebrow">${kicker}</p><h2 id="${id}">${title}</h2></div><a class="link" href="${href}">View all</a></div>${grid(items, 'four')}</section>`;
 function home() {
-  const tiles = [['chappals', 'peshawari-coffee'], ['sandals', 'trail-strap-sandal'], ['shoes', 'go-ran-knit-slip-on'], ['school-shoes', null]];
+  const tiles = [['chappals', 'peshawari-coffee'], ['sandals', 'trail-strap-sandal'], ['shoes', 'go-ran-knit-slip-on'], ['school-shoes', 'bata-school-321-6146']];
   const count = s => P.filter(p => p.cat === s).length;
   const ids = a => a.map(byId);
   return `${hero()}
@@ -454,8 +465,14 @@ function listing({ kind, slug, q }) {
   if (sort === 'name') items.sort((a, b) => a.name.localeCompare(b.name));
   if (sort === 'newest') items.sort((a, b) => P.indexOf(b) - P.indexOf(a));
   if (sort === 'discount') items.sort((a, b) => pctOff(b) - pctOff(a));
-  const shown = Math.max(PAGE, Math.min(items.length, +q.get('n') || PAGE));
-  const sizes = [...new Set(base.flatMap(p => p.sizes))].sort((a, b) => a - b);
+  items.sort((a, b) => anyStock(b) - anyStock(a));
+  const pages = Math.max(1, Math.ceil(items.length / PAGE));
+  const page = Math.min(pages, Math.max(1, parseInt(q.get('page')) || 1));
+  const from = Math.min(page, Math.max(1, parseInt(q.get('from')) || page));
+  const start = (from - 1) * PAGE, end = Math.min(items.length, page * PAGE);
+  const pageHref = k => { const p2 = new URLSearchParams(q); p2.delete('from'); k > 1 ? p2.set('page', k) : p2.delete('page'); const qs = p2.toString(); return '#/' + (kind === 'cat' ? 'c/' + slug : 'search') + (qs ? '?' + qs : ''); };
+  const nums = [...new Set([1, page - 1, page, page + 1, pages])].filter(k => k >= 1 && k <= pages).sort((a, b) => a - b);
+  const sizes = [...new Set(base.flatMap(p => p.sizes))].sort(sizeSort);
   const colors = [...new Set(base.flatMap(p => p.colors.map(c => c.name)))].sort();
   const n = (k, v) => base.filter(p => match(p, k) && (k === 'size' ? p.sizes.includes(v) : k === 'color' ? p.colors.some(c => c.name === v) : k === 'avail' ? AVAIL[v][1](p) : PRICE_BANDS[v][1](p))).length;
   const filters = id => `<form class="filters" aria-label="Filters" data-filters>
@@ -482,8 +499,17 @@ function listing({ kind, slug, q }) {
       <p class="eyebrow" style="margin-top:1.5rem">Or browse a category</p>${cats}</div>
       <section class="section" style="padding-top:0"><h2 style="margin-bottom:1rem">Popular right now</h2>${grid(['peshawari-camel', 'trail-strap-sandal', 'go-ran-knit-slip-on', 'beaded-block-heel-sandal'].map(byId), 'four')}</section></div>`;
   }
-  const more = items.length > shown ? `<div class="more"><p class="muted small">Showing ${shown} of ${items.length} styles</p><span class="more-bar" aria-hidden="true"><i style="width:${(shown / items.length) * 100}%"></i></span><button class="btn ghost" data-act="more" data-n="${shown + PAGE}" data-next="${items[shown].id}">Load more</button></div>` : items.length > PAGE ? `<p class="more muted small">Showing all ${items.length} styles</p>` : '';
-  const body = items.length ? grid(items.slice(0, shown)) + more : `<div class="empty"><h2>No styles match those filters</h2><p class="muted">Try removing a filter, or clear them all to see ${base.length} styles${kind === 'search' ? ' for this search' : ' in ' + CATS[slug].name}.</p><button class="btn" data-act="clear-filters">Clear all filters</button></div>`;
+  const pager = pages > 1 ? `<div class="more">
+      <p class="muted small" aria-live="polite">Showing ${start + 1}–${end} of ${items.length} styles</p>
+      <span class="more-bar" aria-hidden="true"><i style="width:${(end / items.length) * 100}%"></i></span>
+      ${page < pages ? `<button class="btn ghost" data-act="more" data-page="${page + 1}" data-from="${from}" data-next="${items[end].id}">Load ${Math.min(PAGE, items.length - end)} more</button>` : ''}
+      <nav class="pager" aria-label="Pages">
+        ${page > 1 ? `<a class="pg-arrow" href="${pageHref(page - 1)}" data-page-link rel="prev" aria-label="Previous page">←</a>` : '<span class="pg-arrow" aria-hidden="true">←</span>'}
+        ${nums.map((k, i) => `${i && k - nums[i - 1] > 1 ? '<span class="pg-gap" aria-hidden="true">…</span>' : ''}<a href="${pageHref(k)}" data-page-link ${k >= from && k <= page ? 'aria-current="page"' : ''} aria-label="Page ${k}">${k}</a>`).join('')}
+        ${page < pages ? `<a class="pg-arrow" href="${pageHref(page + 1)}" data-page-link rel="next" aria-label="Next page">→</a>` : '<span class="pg-arrow" aria-hidden="true">→</span>'}
+      </nav>
+    </div>` : '';
+  const body = items.length ? grid(items.slice(start, end)) + pager : `<div class="empty"><h2>No styles match those filters</h2><p class="muted">Try removing a filter, or clear them all to see ${base.length} styles${kind === 'search' ? ' for this search' : ' in ' + CATS[slug].name}.</p><button class="btn" data-act="clear-filters">Clear all filters</button></div>`;
   return `<div class="shell">${head}
     <div class="toolbar">
       <button class="btn ghost only-mobile" data-act="open-filters" data-key="open-filters" style="min-height:44px;padding:.4rem 1.1rem">Filters${active.length ? ` (${active.length})` : ''}</button>
@@ -502,7 +528,7 @@ function listing({ kind, slug, q }) {
 function catStrip(slug, audience) {
   const keys = ['all', 'chappals', 'sandals', 'shoes', 'school-shoes', 'sale'];
   return `<nav class="cat-strip" aria-label="Categories">${keys.map(k => { const c = CATS[k], n = P.filter(p => inCat(p, k) && (!audience || p.who === audience)).length; return `<a href="#/c/${k}${audience && k !== 'sale' ? '?who=' + audience : ''}" ${k === slug ? 'aria-current="page"' : ''}>
-      <span class="cs-img ${k === 'sale' ? 'is-sale' : ''}">${c.img ? `<img src="img/${c.img}-studio-card.jpg" alt="" width="640" height="800" loading="lazy">` : '<svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 44V22c8 0 12-10 22-10 6 0 8 8 18 12l40 10c14 3 22 6 24 12v6H8Z M8 44h104"/></svg>'}${k === 'sale' ? '<b>%</b>' : ''}</span>
+      <span class="cs-img ${k === 'sale' ? 'is-sale' : ''}">${c.img ? `<img ${c.img.includes('/') ? 'class="sup" ' : ''}src="${c.img.includes('/') ? c.img : `img/${c.img}-studio-card.jpg`}" alt="" width="640" height="800" loading="lazy">` : '<svg viewBox="0 0 120 60" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 44V22c8 0 12-10 22-10 6 0 8 8 18 12l40 10c14 3 22 6 24 12v6H8Z M8 44h104"/></svg>'}${k === 'sale' ? '<b>%</b>' : ''}</span>
       <span class="cs-name">${c.name}</span><span class="cs-n">${n}</span></a>`; }).join('')}</nav>`;
 }
 
@@ -527,7 +553,7 @@ function pdp(p, q) {
     <nav class="crumb" aria-label="Breadcrumb"><a href="#/">Home</a><span aria-hidden="true">/</span><a href="#/c/${p.cat}">${CATS[p.cat].name}</a><span aria-hidden="true">/</span><span>${esc(p.name)}</span></nav>
     <div class="pdp">
       <section aria-label="Product photos">
-        <div class="gallery-main">${im ? `<img src="${im.src}" alt="${esc(im.alt)}" width="1200" height="1500">` : `<span class="ph"><span><b>${esc(p.sku)}</b>Product photo pending</span></span>`}</div>
+        <div class="gallery-main">${im ? `<img ${im.sup ? 'class="sup" ' : ''}src="${im.src}" alt="${esc(im.alt)}" width="1200" height="1500">` : `<span class="ph"><span><b>${esc(p.sku)}</b>Product photo pending</span></span>`}</div>
         ${c.imgs.length > 1 ? `<div class="thumbs">${c.imgs.map((x, i) => `<button data-act="img" data-i="${i}" data-key="img-${i}" aria-pressed="${i === st.img}" aria-label="Show photo ${i + 1} of ${c.imgs.length}"><img src="${x.src}" alt="" loading="lazy"></button>`).join('')}</div>` : ''}
       </section>
       <section class="pdp-info" aria-labelledby="pdp-title">
@@ -539,7 +565,7 @@ function pdp(p, q) {
         <fieldset class="opt"><legend>Colour: <span>${c.name}</span></legend>
           <div class="swatches" role="radiogroup" aria-label="Colour">${p.colors.map(x => `<button class="swatch" role="radio" aria-checked="${x.name === c.name}" data-act="color" data-v="${x.name}" data-key="color-${x.name}"><i style="background:${HEX[x.name]}"></i>${x.name}</button>`).join('')}</div>
         </fieldset>
-        <fieldset class="opt ${st.err ? 'invalid' : ''}" id="size-opt"><div class="opt-head"><legend style="width:auto;margin:0">Size${p.cat === 'school-shoes' ? '' : ' (EU)'}: <span>${st.size || 'select one'}</span></legend><button type="button" class="link" data-act="size-guide" data-key="sg">Size guide</button></div>
+        <fieldset class="opt ${st.err ? 'invalid' : ''}" id="size-opt"><div class="opt-head"><legend style="width:auto;margin:0">Size${sizeLabel(p)}: <span>${st.size || 'select one'}</span></legend><button type="button" class="link" data-act="size-guide" data-key="sg">Size guide</button></div>
           <div class="sizes" role="radiogroup" aria-label="Size" ${st.err ? 'aria-describedby="size-err"' : ''}>${p.sizes.map(s => { const n = stockOf(p, c.name, s); return `<button class="size" role="radio" aria-checked="${s === st.size}" ${n < 1 ? 'aria-disabled="true"' : ''} data-act="size" data-v="${s}" data-key="size-${s}" aria-label="Size ${s}${n < 1 ? ', out of stock' : ''}">${s}</button>`; }).join('')}</div>
           ${st.err ? '<p class="field-err" id="size-err" role="alert">Please choose a size before adding to your bag.</p>' : ''}
           ${p.adj ? `<p class="muted small" style="margin:.6rem 0 0">Sizes ${Object.keys(p.adj).join(' and ')} are ${rs(Object.values(p.adj)[0])} more.</p>` : ''}
@@ -553,7 +579,7 @@ function pdp(p, q) {
         <div class="notes">
           <details open><summary>Delivery &amp; payment</summary><p>Check your parcel before paying in cash. ${DELIVERY.title} is ${rs(DELIVERY.fee)} per order, shown again at checkout.</p></details>
           <details><summary>Exchanges</summary><p>Exchange terms will be listed here once confirmed.</p></details>
-          <details open><summary>Product details</summary><dl class="spec"><dt>Article</dt><dd>${esc(p.sku)}</dd>${p.brand ? `<dt>Brand</dt><dd>${esc(p.brand)}</dd>` : ''}<dt>Category</dt><dd>${CATS[p.cat].name}</dd><dt>For</dt><dd>${p.who}</dd><dt>Colours</dt><dd>${p.colors.map(c => c.name).join(', ')}</dd><dt>Sizes</dt><dd>${p.sizes[0]}–${p.sizes.at(-1)}${p.cat === 'school-shoes' ? '' : ' (EU)'}</dd><dt>Payment</dt><dd>Cash on delivery</dd></dl><p class="chips pdp-links"><a class="chip" href="#/c/${p.cat}">More ${CATS[p.cat].name.toLowerCase()}</a><a class="chip" href="#/c/all?who=${p.who}">${p.who}’s footwear</a><a class="chip" href="#/page/size-guide">Size guide</a></p></details>
+          <details open><summary>Product details</summary><dl class="spec"><dt>Article</dt><dd>${esc(p.sku)}</dd>${p.brand ? `<dt>Brand</dt><dd>${esc(p.brand)}</dd>` : ''}<dt>Category</dt><dd>${CATS[p.cat].name}</dd><dt>For</dt><dd>${p.who}</dd><dt>Colours</dt><dd>${p.colors.map(c => c.name).join(', ')}</dd><dt>Sizes</dt><dd>${p.sizes[0]}–${p.sizes.at(-1)}${sizeLabel(p)}</dd><dt>Payment</dt><dd>Cash on delivery</dd></dl><p class="chips pdp-links"><a class="chip" href="#/c/${p.cat}">More ${CATS[p.cat].name.toLowerCase()}</a><a class="chip" href="#/c/all?who=${p.who}">${p.who}’s footwear</a><a class="chip" href="#/page/size-guide">Size guide</a></p></details>
         </div>
       </section>
     </div>
@@ -847,10 +873,11 @@ function pageSeo(r, html) {
 function toggleFilter(k, v) {
   const q = route().q, cur = (q.get(k) || '').split(',').filter(Boolean), i = cur.indexOf(v);
   i < 0 ? cur.push(v) : cur.splice(i, 1);
-  cur.length ? q.set(k, cur.join(',')) : q.delete(k); return q;
+  cur.length ? q.set(k, cur.join(',')) : q.delete(k); q.delete('page'); q.delete('from'); return q;
 }
 document.addEventListener('click', e => {
   const foc = e.target.closest('[data-focus]'); if (foc) { e.preventDefault(); $('#' + foc.dataset.focus).focus(); return; }
+  if (e.target.closest('[data-page-link]')) S.toList = true;
   if (e.target.closest('a[href^="#/"]')) { document.querySelectorAll('dialog[open]').forEach(d => d.close()); S.drawer = false; toggleSearch(false); $('#toast').hidden = true; return; }
   const el = e.target.closest('[data-act]'); if (!el) return;
   const act = el.dataset.act, r = route(), p = r.parts[0] === 'p' ? byId(r.parts[1]) : null, st = p && S.pdp[p.id], key = el.dataset.key;
@@ -865,8 +892,8 @@ document.addEventListener('click', e => {
     case 'open-filters': S.drawer = true; $('#filter-drawer').showModal(); break;
     case 'close-filters': S.drawer = false; $('#filter-drawer').close(); $('[data-key="open-filters"]')?.focus(); break;
     case 'rm-filter': setParams(toggleFilter(el.dataset.k, el.dataset.v), 'clear'); break;
-    case 'clear-filters': { const q = r.q; ['size', 'color', 'price', 'avail', 'n'].forEach(k => q.delete(k)); setParams(q, 'open-filters'); break; }
-    case 'more': { const q = r.q; q.set('n', el.dataset.n); setParams(q, 'card-' + el.dataset.next); break; }
+    case 'clear-filters': { const q = r.q; ['size', 'color', 'price', 'avail', 'page', 'from'].forEach(k => q.delete(k)); setParams(q, 'open-filters'); break; }
+    case 'more': { const q = r.q; q.set('page', el.dataset.page); q.set('from', el.dataset.from); setParams(q, 'card-' + el.dataset.next); break; }
     case 'img': st.img = +el.dataset.i; re(); break;
     case 'color': st.color = el.dataset.v; st.img = 0; st.touched = true; re(); break;
     case 'size': if (el.getAttribute('aria-disabled') === 'true') break; st.size = el.dataset.v; st.err = false; re(); break;
@@ -905,7 +932,7 @@ document.addEventListener('click', e => {
 document.addEventListener('change', e => {
   const t = e.target;
   if (t.dataset.f) setParams(toggleFilter(t.dataset.f, t.value), t.dataset.key);
-  if ('sort' in t.dataset) { const q = route().q; t.value === 'featured' ? q.delete('sort') : q.set('sort', t.value); setParams(q, 'sort'); }
+  if ('sort' in t.dataset) { const q = route().q; t.value === 'featured' ? q.delete('sort') : q.set('sort', t.value); q.delete('page'); q.delete('from'); setParams(q, 'sort'); }
 });
 document.addEventListener('input', e => {
   const t = e.target;
