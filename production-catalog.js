@@ -1,4 +1,4 @@
-/* Photographed catalog; prices, sizes and availability remain prototype samples. */
+/* Source-photograph catalog; background restyling only. Commercial values remain samples. */
 const PRODUCTION_CATALOG = [
   {
     "id": "vs-formal-plain-toe",
@@ -23,19 +23,19 @@ const PRODUCTION_CATALOG = [
         "name": "Tan",
         "imgs": [
           {
-            "src": "img/products/formal-shoes/formal-plain-toe-tan-angle-01-detail.webp",
-            "card": "img/products/formal-shoes/formal-plain-toe-tan-angle-01-listing.webp",
-            "alt": "Plain-Toe Formal Slip-On in Tan, view 1, white studio background"
+            "src": "img/products/formal-shoes/formal-plain-toe-tan-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/formal-shoes/formal-plain-toe-tan-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Plain-Toe Formal Slip-On in Tan, view 1, warm oak interior"
           },
           {
-            "src": "img/products/formal-shoes/formal-plain-toe-tan-angle-02-detail.webp",
-            "card": "img/products/formal-shoes/formal-plain-toe-tan-angle-02-listing.webp",
-            "alt": "Plain-Toe Formal Slip-On in Tan, view 2, white studio background"
+            "src": "img/products/formal-shoes/formal-plain-toe-tan-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/formal-shoes/formal-plain-toe-tan-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Plain-Toe Formal Slip-On in Tan, view 2, warm oak interior"
           },
           {
-            "src": "img/products/formal-shoes/formal-plain-toe-tan-angle-03-detail.webp",
-            "card": "img/products/formal-shoes/formal-plain-toe-tan-angle-03-listing.webp",
-            "alt": "Plain-Toe Formal Slip-On in Tan, view 3, white studio background"
+            "src": "img/products/formal-shoes/formal-plain-toe-tan-angle-03-detail.webp?v=styled-20261122",
+            "card": "img/products/formal-shoes/formal-plain-toe-tan-angle-03-listing.webp?v=styled-20261122",
+            "alt": "Plain-Toe Formal Slip-On in Tan, view 3, warm oak interior"
           }
         ]
       }
@@ -66,19 +66,19 @@ const PRODUCTION_CATALOG = [
         "name": "Maroon",
         "imgs": [
           {
-            "src": "img/products/formal-shoes/formal-slip-on-burgundy-angle-01-detail.webp",
-            "card": "img/products/formal-shoes/formal-slip-on-burgundy-angle-01-listing.webp",
-            "alt": "Classic Formal Slip-On in Maroon, view 1, white studio background"
+            "src": "img/products/formal-shoes/formal-slip-on-burgundy-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/formal-shoes/formal-slip-on-burgundy-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Classic Formal Slip-On in Maroon, view 1, warm oak interior"
           },
           {
-            "src": "img/products/formal-shoes/formal-slip-on-burgundy-angle-02-detail.webp",
-            "card": "img/products/formal-shoes/formal-slip-on-burgundy-angle-02-listing.webp",
-            "alt": "Classic Formal Slip-On in Maroon, view 2, white studio background"
+            "src": "img/products/formal-shoes/formal-slip-on-burgundy-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/formal-shoes/formal-slip-on-burgundy-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Classic Formal Slip-On in Maroon, view 2, warm oak interior"
           },
           {
-            "src": "img/products/formal-shoes/formal-slip-on-burgundy-angle-03-detail.webp",
-            "card": "img/products/formal-shoes/formal-slip-on-burgundy-angle-03-listing.webp",
-            "alt": "Classic Formal Slip-On in Maroon, view 3, white studio background"
+            "src": "img/products/formal-shoes/formal-slip-on-burgundy-angle-03-detail.webp?v=styled-20261122",
+            "card": "img/products/formal-shoes/formal-slip-on-burgundy-angle-03-listing.webp?v=styled-20261122",
+            "alt": "Classic Formal Slip-On in Maroon, view 3, warm oak interior"
           }
         ]
       }
@@ -109,19 +109,19 @@ const PRODUCTION_CATALOG = [
         "name": "Black",
         "imgs": [
           {
-            "src": "img/products/formal-shoes/formal-buckle-black-angle-03-detail.webp",
-            "card": "img/products/formal-shoes/formal-buckle-black-angle-03-listing.webp",
-            "alt": "Buckle Formal Loafer in Black, view 3, white studio background"
+            "src": "img/products/formal-shoes/formal-buckle-black-angle-03-detail.webp?v=styled-20261122",
+            "card": "img/products/formal-shoes/formal-buckle-black-angle-03-listing.webp?v=styled-20261122",
+            "alt": "Buckle Formal Loafer in Black, view 3, warm oak interior"
           },
           {
-            "src": "img/products/formal-shoes/formal-buckle-black-angle-01-detail.webp",
-            "card": "img/products/formal-shoes/formal-buckle-black-angle-01-listing.webp",
-            "alt": "Buckle Formal Loafer in Black, view 1, white studio background"
+            "src": "img/products/formal-shoes/formal-buckle-black-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/formal-shoes/formal-buckle-black-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Buckle Formal Loafer in Black, view 1, warm oak interior"
           },
           {
-            "src": "img/products/formal-shoes/formal-buckle-black-angle-02-detail.webp",
-            "card": "img/products/formal-shoes/formal-buckle-black-angle-02-listing.webp",
-            "alt": "Buckle Formal Loafer in Black, view 2, white studio background"
+            "src": "img/products/formal-shoes/formal-buckle-black-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/formal-shoes/formal-buckle-black-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Buckle Formal Loafer in Black, view 2, warm oak interior"
           }
         ]
       }
@@ -152,19 +152,19 @@ const PRODUCTION_CATALOG = [
         "name": "Black",
         "imgs": [
           {
-            "src": "img/products/formal-shoes/formal-apron-strap-black-angle-03-detail.webp",
-            "card": "img/products/formal-shoes/formal-apron-strap-black-angle-03-listing.webp",
-            "alt": "Apron-Toe Formal Slip-On in Black, view 3, white studio background"
+            "src": "img/products/formal-shoes/formal-apron-strap-black-angle-03-detail.webp?v=styled-20261122",
+            "card": "img/products/formal-shoes/formal-apron-strap-black-angle-03-listing.webp?v=styled-20261122",
+            "alt": "Apron-Toe Formal Slip-On in Black, view 3, warm oak interior"
           },
           {
-            "src": "img/products/formal-shoes/formal-apron-strap-black-angle-01-detail.webp",
-            "card": "img/products/formal-shoes/formal-apron-strap-black-angle-01-listing.webp",
-            "alt": "Apron-Toe Formal Slip-On in Black, view 1, white studio background"
+            "src": "img/products/formal-shoes/formal-apron-strap-black-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/formal-shoes/formal-apron-strap-black-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Apron-Toe Formal Slip-On in Black, view 1, warm oak interior"
           },
           {
-            "src": "img/products/formal-shoes/formal-apron-strap-black-angle-02-detail.webp",
-            "card": "img/products/formal-shoes/formal-apron-strap-black-angle-02-listing.webp",
-            "alt": "Apron-Toe Formal Slip-On in Black, view 2, white studio background"
+            "src": "img/products/formal-shoes/formal-apron-strap-black-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/formal-shoes/formal-apron-strap-black-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Apron-Toe Formal Slip-On in Black, view 2, warm oak interior"
           }
         ]
       }
@@ -195,19 +195,19 @@ const PRODUCTION_CATALOG = [
         "name": "Black",
         "imgs": [
           {
-            "src": "img/products/casual-shoes/casual-moccasin-black-angle-01-detail.webp",
-            "card": "img/products/casual-shoes/casual-moccasin-black-angle-01-listing.webp",
-            "alt": "Casual Moccasin in Black, view 1, white studio background"
+            "src": "img/products/casual-shoes/casual-moccasin-black-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/casual-shoes/casual-moccasin-black-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Casual Moccasin in Black, view 1, warm oak interior"
           },
           {
-            "src": "img/products/casual-shoes/casual-moccasin-black-angle-02-detail.webp",
-            "card": "img/products/casual-shoes/casual-moccasin-black-angle-02-listing.webp",
-            "alt": "Casual Moccasin in Black, view 2, white studio background"
+            "src": "img/products/casual-shoes/casual-moccasin-black-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/casual-shoes/casual-moccasin-black-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Casual Moccasin in Black, view 2, warm oak interior"
           },
           {
-            "src": "img/products/casual-shoes/casual-moccasin-black-angle-03-detail.webp",
-            "card": "img/products/casual-shoes/casual-moccasin-black-angle-03-listing.webp",
-            "alt": "Casual Moccasin in Black, view 3, white studio background"
+            "src": "img/products/casual-shoes/casual-moccasin-black-angle-03-detail.webp?v=styled-20261122",
+            "card": "img/products/casual-shoes/casual-moccasin-black-angle-03-listing.webp?v=styled-20261122",
+            "alt": "Casual Moccasin in Black, view 3, warm oak interior"
           }
         ]
       }
@@ -238,19 +238,19 @@ const PRODUCTION_CATALOG = [
         "name": "Brown",
         "imgs": [
           {
-            "src": "img/products/casual-shoes/casual-panel-slip-on-brown-angle-02-detail.webp",
-            "card": "img/products/casual-shoes/casual-panel-slip-on-brown-angle-02-listing.webp",
-            "alt": "Casual Panel Slip On in Brown, view 2, white studio background"
+            "src": "img/products/casual-shoes/casual-panel-slip-on-brown-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/casual-shoes/casual-panel-slip-on-brown-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Casual Panel Slip On in Brown, view 2, warm oak interior"
           },
           {
-            "src": "img/products/casual-shoes/casual-panel-slip-on-brown-angle-01-detail.webp",
-            "card": "img/products/casual-shoes/casual-panel-slip-on-brown-angle-01-listing.webp",
-            "alt": "Casual Panel Slip On in Brown, view 1, white studio background"
+            "src": "img/products/casual-shoes/casual-panel-slip-on-brown-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/casual-shoes/casual-panel-slip-on-brown-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Casual Panel Slip On in Brown, view 1, warm oak interior"
           },
           {
-            "src": "img/products/casual-shoes/casual-panel-slip-on-brown-angle-03-detail.webp",
-            "card": "img/products/casual-shoes/casual-panel-slip-on-brown-angle-03-listing.webp",
-            "alt": "Casual Panel Slip On in Brown, view 3, white studio background"
+            "src": "img/products/casual-shoes/casual-panel-slip-on-brown-angle-03-detail.webp?v=styled-20261122",
+            "card": "img/products/casual-shoes/casual-panel-slip-on-brown-angle-03-listing.webp?v=styled-20261122",
+            "alt": "Casual Panel Slip On in Brown, view 3, warm oak interior"
           }
         ]
       }
@@ -281,19 +281,19 @@ const PRODUCTION_CATALOG = [
         "name": "Brown",
         "imgs": [
           {
-            "src": "img/products/casual-shoes/casual-buckle-moccasin-brown-angle-03-detail.webp",
-            "card": "img/products/casual-shoes/casual-buckle-moccasin-brown-angle-03-listing.webp",
-            "alt": "Casual Buckle Moccasin in Brown, view 3, white studio background"
+            "src": "img/products/casual-shoes/casual-buckle-moccasin-brown-angle-03-detail.webp?v=styled-20261122",
+            "card": "img/products/casual-shoes/casual-buckle-moccasin-brown-angle-03-listing.webp?v=styled-20261122",
+            "alt": "Casual Buckle Moccasin in Brown, view 3, warm oak interior"
           },
           {
-            "src": "img/products/casual-shoes/casual-buckle-moccasin-brown-angle-01-detail.webp",
-            "card": "img/products/casual-shoes/casual-buckle-moccasin-brown-angle-01-listing.webp",
-            "alt": "Casual Buckle Moccasin in Brown, view 1, white studio background"
+            "src": "img/products/casual-shoes/casual-buckle-moccasin-brown-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/casual-shoes/casual-buckle-moccasin-brown-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Casual Buckle Moccasin in Brown, view 1, warm oak interior"
           },
           {
-            "src": "img/products/casual-shoes/casual-buckle-moccasin-brown-angle-02-detail.webp",
-            "card": "img/products/casual-shoes/casual-buckle-moccasin-brown-angle-02-listing.webp",
-            "alt": "Casual Buckle Moccasin in Brown, view 2, white studio background"
+            "src": "img/products/casual-shoes/casual-buckle-moccasin-brown-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/casual-shoes/casual-buckle-moccasin-brown-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Casual Buckle Moccasin in Brown, view 2, warm oak interior"
           }
         ]
       }
@@ -324,19 +324,19 @@ const PRODUCTION_CATALOG = [
         "name": "Brown",
         "imgs": [
           {
-            "src": "img/products/casual-shoes/casual-stitched-slip-on-brown-angle-03-detail.webp",
-            "card": "img/products/casual-shoes/casual-stitched-slip-on-brown-angle-03-listing.webp",
-            "alt": "Casual Stitched Slip On in Brown, view 3, white studio background"
+            "src": "img/products/casual-shoes/casual-stitched-slip-on-brown-angle-03-detail.webp?v=styled-20261122",
+            "card": "img/products/casual-shoes/casual-stitched-slip-on-brown-angle-03-listing.webp?v=styled-20261122",
+            "alt": "Casual Stitched Slip On in Brown, view 3, warm oak interior"
           },
           {
-            "src": "img/products/casual-shoes/casual-stitched-slip-on-brown-angle-01-detail.webp",
-            "card": "img/products/casual-shoes/casual-stitched-slip-on-brown-angle-01-listing.webp",
-            "alt": "Casual Stitched Slip On in Brown, view 1, white studio background"
+            "src": "img/products/casual-shoes/casual-stitched-slip-on-brown-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/casual-shoes/casual-stitched-slip-on-brown-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Casual Stitched Slip On in Brown, view 1, warm oak interior"
           },
           {
-            "src": "img/products/casual-shoes/casual-stitched-slip-on-brown-angle-02-detail.webp",
-            "card": "img/products/casual-shoes/casual-stitched-slip-on-brown-angle-02-listing.webp",
-            "alt": "Casual Stitched Slip On in Brown, view 2, white studio background"
+            "src": "img/products/casual-shoes/casual-stitched-slip-on-brown-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/casual-shoes/casual-stitched-slip-on-brown-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Casual Stitched Slip On in Brown, view 2, warm oak interior"
           }
         ]
       }
@@ -367,19 +367,19 @@ const PRODUCTION_CATALOG = [
         "name": "Brown",
         "imgs": [
           {
-            "src": "img/products/loafers/classic-bit-loafer-brown-angle-02-detail.webp",
-            "card": "img/products/loafers/classic-bit-loafer-brown-angle-02-listing.webp",
-            "alt": "Classic Bit Loafer in Brown, view 2, white studio background"
+            "src": "img/products/loafers/classic-bit-loafer-brown-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/loafers/classic-bit-loafer-brown-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Classic Bit Loafer in Brown, view 2, warm oak interior"
           },
           {
-            "src": "img/products/loafers/classic-bit-loafer-brown-angle-01-detail.webp",
-            "card": "img/products/loafers/classic-bit-loafer-brown-angle-01-listing.webp",
-            "alt": "Classic Bit Loafer in Brown, view 1, white studio background"
+            "src": "img/products/loafers/classic-bit-loafer-brown-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/loafers/classic-bit-loafer-brown-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Classic Bit Loafer in Brown, view 1, warm oak interior"
           },
           {
-            "src": "img/products/loafers/classic-bit-loafer-brown-angle-03-detail.webp",
-            "card": "img/products/loafers/classic-bit-loafer-brown-angle-03-listing.webp",
-            "alt": "Classic Bit Loafer in Brown, view 3, white studio background"
+            "src": "img/products/loafers/classic-bit-loafer-brown-angle-03-detail.webp?v=styled-20261122",
+            "card": "img/products/loafers/classic-bit-loafer-brown-angle-03-listing.webp?v=styled-20261122",
+            "alt": "Classic Bit Loafer in Brown, view 3, warm oak interior"
           }
         ]
       },
@@ -387,14 +387,14 @@ const PRODUCTION_CATALOG = [
         "name": "Black",
         "imgs": [
           {
-            "src": "img/products/loafers/classic-bit-loafer-black-angle-01-detail.webp",
-            "card": "img/products/loafers/classic-bit-loafer-black-angle-01-listing.webp",
-            "alt": "Classic Bit Loafer in Black, view 1, white studio background"
+            "src": "img/products/loafers/classic-bit-loafer-black-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/loafers/classic-bit-loafer-black-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Classic Bit Loafer in Black, view 1, warm oak interior"
           },
           {
-            "src": "img/products/loafers/classic-bit-loafer-black-angle-03-detail.webp",
-            "card": "img/products/loafers/classic-bit-loafer-black-angle-03-listing.webp",
-            "alt": "Classic Bit Loafer in Black, view 3, white studio background"
+            "src": "img/products/loafers/classic-bit-loafer-black-angle-03-detail.webp?v=styled-20261122",
+            "card": "img/products/loafers/classic-bit-loafer-black-angle-03-listing.webp?v=styled-20261122",
+            "alt": "Classic Bit Loafer in Black, view 3, warm oak interior"
           }
         ]
       }
@@ -425,9 +425,9 @@ const PRODUCTION_CATALOG = [
         "name": "Olive",
         "imgs": [
           {
-            "src": "img/products/loafers/emblem-loafer-olive-angle-01-detail.webp",
-            "card": "img/products/loafers/emblem-loafer-olive-angle-01-listing.webp",
-            "alt": "Emblem Loafer in Olive, view 1, white studio background"
+            "src": "img/products/loafers/emblem-loafer-olive-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/loafers/emblem-loafer-olive-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Emblem Loafer in Olive, view 1, warm oak interior"
           }
         ]
       }
@@ -458,9 +458,9 @@ const PRODUCTION_CATALOG = [
         "name": "Black",
         "imgs": [
           {
-            "src": "img/products/loafers/textured-bit-loafer-black-angle-02-detail.webp",
-            "card": "img/products/loafers/textured-bit-loafer-black-angle-02-listing.webp",
-            "alt": "Textured Bit Loafer in Black, view 2, white studio background"
+            "src": "img/products/loafers/textured-bit-loafer-black-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/loafers/textured-bit-loafer-black-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Textured Bit Loafer in Black, view 2, warm oak interior"
           }
         ]
       }
@@ -491,9 +491,9 @@ const PRODUCTION_CATALOG = [
         "name": "Tan",
         "imgs": [
           {
-            "src": "img/products/loafers/tassel-moccasin-tan-angle-03-detail.webp",
-            "card": "img/products/loafers/tassel-moccasin-tan-angle-03-listing.webp",
-            "alt": "Tassel Moccasin in Tan, view 3, white studio background"
+            "src": "img/products/loafers/tassel-moccasin-tan-angle-03-detail.webp?v=styled-20261122",
+            "card": "img/products/loafers/tassel-moccasin-tan-angle-03-listing.webp?v=styled-20261122",
+            "alt": "Tassel Moccasin in Tan, view 3, warm oak interior"
           }
         ]
       }
@@ -524,9 +524,9 @@ const PRODUCTION_CATALOG = [
         "name": "Navy",
         "imgs": [
           {
-            "src": "img/products/loafers/tassel-loafer-navy-angle-04-detail.webp",
-            "card": "img/products/loafers/tassel-loafer-navy-angle-04-listing.webp",
-            "alt": "Tassel Loafer in Navy, view 4, white studio background"
+            "src": "img/products/loafers/tassel-loafer-navy-angle-04-detail.webp?v=styled-20261122",
+            "card": "img/products/loafers/tassel-loafer-navy-angle-04-listing.webp?v=styled-20261122",
+            "alt": "Tassel Loafer in Navy, view 4, warm oak interior"
           }
         ]
       }
@@ -557,9 +557,9 @@ const PRODUCTION_CATALOG = [
         "name": "Brown",
         "imgs": [
           {
-            "src": "img/products/loafers/suede-penny-brown-angle-05-detail.webp",
-            "card": "img/products/loafers/suede-penny-brown-angle-05-listing.webp",
-            "alt": "Suede Penny in Brown, view 5, white studio background"
+            "src": "img/products/loafers/suede-penny-brown-angle-05-detail.webp?v=styled-20261122",
+            "card": "img/products/loafers/suede-penny-brown-angle-05-listing.webp?v=styled-20261122",
+            "alt": "Suede Penny in Brown, view 5, warm oak interior"
           }
         ]
       },
@@ -567,9 +567,9 @@ const PRODUCTION_CATALOG = [
         "name": "Olive",
         "imgs": [
           {
-            "src": "img/products/loafers/suede-penny-olive-angle-06-detail.webp",
-            "card": "img/products/loafers/suede-penny-olive-angle-06-listing.webp",
-            "alt": "Suede Penny in Olive, view 6, white studio background"
+            "src": "img/products/loafers/suede-penny-olive-angle-06-detail.webp?v=styled-20261122",
+            "card": "img/products/loafers/suede-penny-olive-angle-06-listing.webp?v=styled-20261122",
+            "alt": "Suede Penny in Olive, view 6, warm oak interior"
           }
         ]
       },
@@ -577,9 +577,9 @@ const PRODUCTION_CATALOG = [
         "name": "Grey",
         "imgs": [
           {
-            "src": "img/products/loafers/suede-penny-grey-angle-07-detail.webp",
-            "card": "img/products/loafers/suede-penny-grey-angle-07-listing.webp",
-            "alt": "Suede Penny in Grey, view 7, white studio background"
+            "src": "img/products/loafers/suede-penny-grey-angle-07-detail.webp?v=styled-20261122",
+            "card": "img/products/loafers/suede-penny-grey-angle-07-listing.webp?v=styled-20261122",
+            "alt": "Suede Penny in Grey, view 7, warm oak interior"
           }
         ]
       }
@@ -610,19 +610,19 @@ const PRODUCTION_CATALOG = [
         "name": "Brown",
         "imgs": [
           {
-            "src": "img/products/sandals/double-strap-brown-angle-03-detail.webp",
-            "card": "img/products/sandals/double-strap-brown-angle-03-listing.webp",
-            "alt": "Double Strap in Brown, view 3, white studio background"
+            "src": "img/products/sandals/double-strap-brown-angle-03-detail.webp?v=styled-20261122",
+            "card": "img/products/sandals/double-strap-brown-angle-03-listing.webp?v=styled-20261122",
+            "alt": "Double Strap in Brown, view 3, light limestone terrace"
           },
           {
-            "src": "img/products/sandals/double-strap-brown-angle-01-detail.webp",
-            "card": "img/products/sandals/double-strap-brown-angle-01-listing.webp",
-            "alt": "Double Strap in Brown, view 1, white studio background"
+            "src": "img/products/sandals/double-strap-brown-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/sandals/double-strap-brown-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Double Strap in Brown, view 1, light limestone terrace"
           },
           {
-            "src": "img/products/sandals/double-strap-brown-angle-02-detail.webp",
-            "card": "img/products/sandals/double-strap-brown-angle-02-listing.webp",
-            "alt": "Double Strap in Brown, view 2, white studio background"
+            "src": "img/products/sandals/double-strap-brown-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/sandals/double-strap-brown-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Double Strap in Brown, view 2, light limestone terrace"
           }
         ]
       },
@@ -630,19 +630,19 @@ const PRODUCTION_CATALOG = [
         "name": "Black",
         "imgs": [
           {
-            "src": "img/products/sandals/double-strap-black-angle-03-detail.webp",
-            "card": "img/products/sandals/double-strap-black-angle-03-listing.webp",
-            "alt": "Double Strap in Black, view 3, white studio background"
+            "src": "img/products/sandals/double-strap-black-angle-03-detail.webp?v=styled-20261122",
+            "card": "img/products/sandals/double-strap-black-angle-03-listing.webp?v=styled-20261122",
+            "alt": "Double Strap in Black, view 3, light limestone terrace"
           },
           {
-            "src": "img/products/sandals/double-strap-black-angle-01-detail.webp",
-            "card": "img/products/sandals/double-strap-black-angle-01-listing.webp",
-            "alt": "Double Strap in Black, view 1, white studio background"
+            "src": "img/products/sandals/double-strap-black-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/sandals/double-strap-black-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Double Strap in Black, view 1, light limestone terrace"
           },
           {
-            "src": "img/products/sandals/double-strap-black-angle-02-detail.webp",
-            "card": "img/products/sandals/double-strap-black-angle-02-listing.webp",
-            "alt": "Double Strap in Black, view 2, white studio background"
+            "src": "img/products/sandals/double-strap-black-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/sandals/double-strap-black-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Double Strap in Black, view 2, light limestone terrace"
           }
         ]
       }
@@ -673,19 +673,19 @@ const PRODUCTION_CATALOG = [
         "name": "Tan",
         "imgs": [
           {
-            "src": "img/products/sandals/textured-strap-sandal-tan-angle-01-detail.webp",
-            "card": "img/products/sandals/textured-strap-sandal-tan-angle-01-listing.webp",
-            "alt": "Textured Strap Sandal in Tan, view 1, white studio background"
+            "src": "img/products/sandals/textured-strap-sandal-tan-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/sandals/textured-strap-sandal-tan-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Textured Strap Sandal in Tan, view 1, light limestone terrace"
           },
           {
-            "src": "img/products/sandals/textured-strap-sandal-tan-angle-02-detail.webp",
-            "card": "img/products/sandals/textured-strap-sandal-tan-angle-02-listing.webp",
-            "alt": "Textured Strap Sandal in Tan, view 2, white studio background"
+            "src": "img/products/sandals/textured-strap-sandal-tan-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/sandals/textured-strap-sandal-tan-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Textured Strap Sandal in Tan, view 2, light limestone terrace"
           },
           {
-            "src": "img/products/sandals/textured-strap-sandal-tan-angle-03-detail.webp",
-            "card": "img/products/sandals/textured-strap-sandal-tan-angle-03-listing.webp",
-            "alt": "Textured Strap Sandal in Tan, view 3, white studio background"
+            "src": "img/products/sandals/textured-strap-sandal-tan-angle-03-detail.webp?v=styled-20261122",
+            "card": "img/products/sandals/textured-strap-sandal-tan-angle-03-listing.webp?v=styled-20261122",
+            "alt": "Textured Strap Sandal in Tan, view 3, light limestone terrace"
           }
         ]
       },
@@ -693,14 +693,14 @@ const PRODUCTION_CATALOG = [
         "name": "Dark Brown",
         "imgs": [
           {
-            "src": "img/products/sandals/textured-strap-sandal-dark-brown-angle-02-detail.webp",
-            "card": "img/products/sandals/textured-strap-sandal-dark-brown-angle-02-listing.webp",
-            "alt": "Textured Strap Sandal in Dark Brown, view 2, white studio background"
+            "src": "img/products/sandals/textured-strap-sandal-dark-brown-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/sandals/textured-strap-sandal-dark-brown-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Textured Strap Sandal in Dark Brown, view 2, light limestone terrace"
           },
           {
-            "src": "img/products/sandals/textured-strap-sandal-dark-brown-angle-03-detail.webp",
-            "card": "img/products/sandals/textured-strap-sandal-dark-brown-angle-03-listing.webp",
-            "alt": "Textured Strap Sandal in Dark Brown, view 3, white studio background"
+            "src": "img/products/sandals/textured-strap-sandal-dark-brown-angle-03-detail.webp?v=styled-20261122",
+            "card": "img/products/sandals/textured-strap-sandal-dark-brown-angle-03-listing.webp?v=styled-20261122",
+            "alt": "Textured Strap Sandal in Dark Brown, view 3, light limestone terrace"
           }
         ]
       }
@@ -731,14 +731,14 @@ const PRODUCTION_CATALOG = [
         "name": "Tan",
         "imgs": [
           {
-            "src": "img/products/sandals/triangle-badge-sandal-tan-angle-01-detail.webp",
-            "card": "img/products/sandals/triangle-badge-sandal-tan-angle-01-listing.webp",
-            "alt": "Triangle Badge Sandal in Tan, view 1, white studio background"
+            "src": "img/products/sandals/triangle-badge-sandal-tan-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/sandals/triangle-badge-sandal-tan-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Triangle Badge Sandal in Tan, view 1, light limestone terrace"
           },
           {
-            "src": "img/products/sandals/triangle-badge-sandal-tan-angle-02-detail.webp",
-            "card": "img/products/sandals/triangle-badge-sandal-tan-angle-02-listing.webp",
-            "alt": "Triangle Badge Sandal in Tan, view 2, white studio background"
+            "src": "img/products/sandals/triangle-badge-sandal-tan-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/sandals/triangle-badge-sandal-tan-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Triangle Badge Sandal in Tan, view 2, light limestone terrace"
           }
         ]
       }
@@ -769,14 +769,14 @@ const PRODUCTION_CATALOG = [
         "name": "Brown",
         "imgs": [
           {
-            "src": "img/products/sandals/contrast-badge-sandal-brown-angle-01-detail.webp",
-            "card": "img/products/sandals/contrast-badge-sandal-brown-angle-01-listing.webp",
-            "alt": "Contrast Badge Sandal in Brown, view 1, white studio background"
+            "src": "img/products/sandals/contrast-badge-sandal-brown-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/sandals/contrast-badge-sandal-brown-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Contrast Badge Sandal in Brown, view 1, light limestone terrace"
           },
           {
-            "src": "img/products/sandals/contrast-badge-sandal-brown-angle-02-detail.webp",
-            "card": "img/products/sandals/contrast-badge-sandal-brown-angle-02-listing.webp",
-            "alt": "Contrast Badge Sandal in Brown, view 2, white studio background"
+            "src": "img/products/sandals/contrast-badge-sandal-brown-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/sandals/contrast-badge-sandal-brown-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Contrast Badge Sandal in Brown, view 2, light limestone terrace"
           }
         ]
       }
@@ -807,14 +807,14 @@ const PRODUCTION_CATALOG = [
         "name": "Taupe",
         "imgs": [
           {
-            "src": "img/products/sneakers/knit-slip-on-taupe-angle-03-detail.webp",
-            "card": "img/products/sneakers/knit-slip-on-taupe-angle-03-listing.webp",
-            "alt": "Knit Slip On in Taupe, view 3, white studio background"
+            "src": "img/products/sneakers/knit-slip-on-taupe-angle-03-detail.webp?v=styled-20261122",
+            "card": "img/products/sneakers/knit-slip-on-taupe-angle-03-listing.webp?v=styled-20261122",
+            "alt": "Knit Slip On in Taupe, view 3, neutral urban paving"
           },
           {
-            "src": "img/products/sneakers/knit-slip-on-taupe-angle-01-detail.webp",
-            "card": "img/products/sneakers/knit-slip-on-taupe-angle-01-listing.webp",
-            "alt": "Knit Slip On in Taupe, view 1, white studio background"
+            "src": "img/products/sneakers/knit-slip-on-taupe-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/sneakers/knit-slip-on-taupe-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Knit Slip On in Taupe, view 1, neutral urban paving"
           }
         ]
       },
@@ -822,14 +822,14 @@ const PRODUCTION_CATALOG = [
         "name": "Grey",
         "imgs": [
           {
-            "src": "img/products/sneakers/knit-slip-on-grey-angle-02-detail.webp",
-            "card": "img/products/sneakers/knit-slip-on-grey-angle-02-listing.webp",
-            "alt": "Knit Slip On in Grey, view 2, white studio background"
+            "src": "img/products/sneakers/knit-slip-on-grey-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/sneakers/knit-slip-on-grey-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Knit Slip On in Grey, view 2, neutral urban paving"
           },
           {
-            "src": "img/products/sneakers/knit-slip-on-grey-angle-01-detail.webp",
-            "card": "img/products/sneakers/knit-slip-on-grey-angle-01-listing.webp",
-            "alt": "Knit Slip On in Grey, view 1, white studio background"
+            "src": "img/products/sneakers/knit-slip-on-grey-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/sneakers/knit-slip-on-grey-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Knit Slip On in Grey, view 1, neutral urban paving"
           }
         ]
       }
@@ -860,19 +860,19 @@ const PRODUCTION_CATALOG = [
         "name": "Light Grey",
         "imgs": [
           {
-            "src": "img/products/sneakers/mesh-slip-on-light-grey-angle-01-detail.webp",
-            "card": "img/products/sneakers/mesh-slip-on-light-grey-angle-01-listing.webp",
-            "alt": "Mesh Slip On in Light Grey, view 1, white studio background"
+            "src": "img/products/sneakers/mesh-slip-on-light-grey-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/sneakers/mesh-slip-on-light-grey-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Mesh Slip On in Light Grey, view 1, neutral urban paving"
           },
           {
-            "src": "img/products/sneakers/mesh-slip-on-light-grey-angle-02-detail.webp",
-            "card": "img/products/sneakers/mesh-slip-on-light-grey-angle-02-listing.webp",
-            "alt": "Mesh Slip On in Light Grey, view 2, white studio background"
+            "src": "img/products/sneakers/mesh-slip-on-light-grey-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/sneakers/mesh-slip-on-light-grey-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Mesh Slip On in Light Grey, view 2, neutral urban paving"
           },
           {
-            "src": "img/products/sneakers/mesh-slip-on-light-grey-angle-03-detail.webp",
-            "card": "img/products/sneakers/mesh-slip-on-light-grey-angle-03-listing.webp",
-            "alt": "Mesh Slip On in Light Grey, view 3, white studio background"
+            "src": "img/products/sneakers/mesh-slip-on-light-grey-angle-03-detail.webp?v=styled-20261122",
+            "card": "img/products/sneakers/mesh-slip-on-light-grey-angle-03-listing.webp?v=styled-20261122",
+            "alt": "Mesh Slip On in Light Grey, view 3, neutral urban paving"
           }
         ]
       },
@@ -880,14 +880,14 @@ const PRODUCTION_CATALOG = [
         "name": "Navy",
         "imgs": [
           {
-            "src": "img/products/sneakers/mesh-slip-on-navy-angle-01-detail.webp",
-            "card": "img/products/sneakers/mesh-slip-on-navy-angle-01-listing.webp",
-            "alt": "Mesh Slip On in Navy, view 1, white studio background"
+            "src": "img/products/sneakers/mesh-slip-on-navy-angle-01-detail.webp?v=styled-20261122",
+            "card": "img/products/sneakers/mesh-slip-on-navy-angle-01-listing.webp?v=styled-20261122",
+            "alt": "Mesh Slip On in Navy, view 1, neutral urban paving"
           },
           {
-            "src": "img/products/sneakers/mesh-slip-on-navy-angle-02-detail.webp",
-            "card": "img/products/sneakers/mesh-slip-on-navy-angle-02-listing.webp",
-            "alt": "Mesh Slip On in Navy, view 2, white studio background"
+            "src": "img/products/sneakers/mesh-slip-on-navy-angle-02-detail.webp?v=styled-20261122",
+            "card": "img/products/sneakers/mesh-slip-on-navy-angle-02-listing.webp?v=styled-20261122",
+            "alt": "Mesh Slip On in Navy, view 2, neutral urban paving"
           }
         ]
       }

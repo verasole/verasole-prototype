@@ -710,8 +710,8 @@ select:focus-visible{outline:0;border-color:var(--accent);box-shadow:0 0 0 3px v
 @media(min-width:900px){.faq-sec{padding:4.5rem 0}.faq-in{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:4rem;align-items:start}.faq-head{position:sticky;top:110px}}
 .faq-sec .notes{margin-top:0}
 
-/* Preserve the full white-background product frame. */
-.card-media img[src*="img/products/"],.gallery-main img[src*="img/products/"],.thumbs img[src*="img/products/"],.cat img[src*="img/products/"]{object-fit:contain;background:#fff}
+/* Preserve full product frames and their category-specific photographed settings. */
+.card-media img[src*="img/products/"],.gallery-main img[src*="img/products/"],.thumbs img[src*="img/products/"],.cat img[src*="img/products/"]{object-fit:contain;background:var(--sand)}
 
 
 
@@ -764,3 +764,8 @@ select:focus-visible{outline:0;border-color:var(--accent);box-shadow:0 0 0 3px v
 }
 @media(min-width:700px) and (max-width:1023px){.mv-title{font-size:clamp(2.2rem,5vw,2.8rem)}.mv-text{max-width:22ch;font-size:.98rem}.mv-slide::after{background:linear-gradient(90deg,rgba(31,20,17,.88) 0,rgba(31,20,17,.6) 36%,rgba(31,20,17,0) 60%)}}
 @media(prefers-reduced-motion:reduce){.mv-img,.mv-copy .btn{animation:none}}
+
+/* Square product scenes fill cards and galleries without white letterboxing. */
+.card-media:has(img[src*="img/products/"]),.gallery-main:has(img[src*="img/products/"]),.thumbs button:has(img[src*="img/products/"]),.thumb:has(img[src*="img/products/"]){aspect-ratio:1;background:var(--sand)}
+.sug-item img[src*="img/products/"]{height:44px;object-fit:contain}
+.cs-img img[src*="img/products/"]{object-fit:contain;transform:none}
